@@ -1,0 +1,13 @@
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\bin\Debug\MetroFramework test at a new project.exe.config
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\bin\Debug\MetroFramework test at a new project.exe
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\bin\Debug\MetroFramework test at a new project.pdb
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\bin\Debug\MetroFramework.Design.dll
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\bin\Debug\MetroFramework.dll
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\bin\Debug\MetroFramework.Fonts.dll
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework test at a new project.csprojResolveAssemblyReference.cache
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework_test_at_a_new_project.Form1.resources
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework_test_at_a_new_project.Properties.Resources.resources
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework test at a new project.csproj.GenerateResource.Cache
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework test at a new project.csproj.CoreCompileInputs.cache
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework test at a new project.exe
+c:\users\home\source\repos\MetroFramework test at a new project\MetroFramework test at a new project\obj\Debug\MetroFramework test at a new project.pdb

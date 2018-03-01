@@ -1,0 +1,14 @@
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\MetroFramework test at a new project.exe.config
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\MetroFramework test at a new project.exe
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\MetroFramework test at a new project.pdb
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\MetroFramework.Design.dll
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\MetroFramework.dll
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\Prime Numbers.csprojResolveAssemblyReference.cache
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework_test_at_a_new_project.Form1.resources
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\ГДК.PanelRegistration.resources
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework_test_at_a_new_project.Properties.Resources.resources
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\Prime Numbers.csproj.GenerateResource.Cache
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\Prime Numbers.csproj.CoreCompileInputs.cache
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework test at a new project.exe
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework test at a new project.pdb
