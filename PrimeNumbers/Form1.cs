@@ -1,6 +1,7 @@
 ﻿namespace MetroFramework_test_at_a_new_project
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Windows.Forms;
@@ -62,11 +63,12 @@
             }
         }
 
-        private void MetroTabPage1_Click(object sender, EventArgs e) { }
+        private void MetroTabPage1_Click(object sender, EventArgs e) {}
 
         private void BoxNumber_KeyDown(object sender, KeyEventArgs e)
         {
-            if (! char.IsDigit((char)e.KeyValue) && ! char.IsControl((char)e.KeyValue))
+            if (! char.IsDigit((char)e.KeyValue)
+                && ! char.IsControl((char)e.KeyValue))
             {
                 if (e.KeyValue == 13)
                 {
@@ -160,7 +162,7 @@
         {
             var dialog = new FolderBrowserDialog
                              {
-                                 RootFolder = Environment.SpecialFolder.MyComputer
+                                RootFolder = Environment.SpecialFolder.MyComputer
                              };
             if (dialog.ShowDialog() == DialogResult.OK)
             {

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Windows.Forms;
 
@@ -53,7 +54,7 @@
         /// Загружает данные из бинарного файла
         /// </summary>
         /// <param name="filePath"></param>
-        /// <returns></returns>
+        /// <returns />
         public static bool LoadFromFile(string filePath)
         {
             string path = filePath;
@@ -62,7 +63,7 @@
             {
                 Users.users = new List<User>
                                   {
-                                     [0] = Users.Admin
+                                     Users.Admin
                                   };
                 return false;
             }
@@ -81,9 +82,10 @@
         /// <param name="filePath"></param>
         public static void SaveToFile(string filePath)
         {
-            string path = filePath;
+            Users.CheckPathOrCreate(filePath);
+
             var    bf   = new BinaryFormatter();
-            using (var fstream = File.OpenWrite(path))
+            using (var fstream = File.OpenWrite(filePath))
             {
                 bf.Serialize(fstream, Users.users);
             }
@@ -94,10 +96,10 @@
         /// </summary>
         /// <param name="oldUser"></param>
         /// <param name="newUser"></param>
-        /// <returns></returns>
+        /// <returns></returns
         public static bool Replace(User oldUser, User newUser)
         {
-            int success = Users.users.RemoveAll(user => user.Name == oldUser.Name && user.PassWord == oldUser.PassWord);
+            int success = Users.users.RemoveAll(user => user.Name == oldUser.Name);
             if (success == 0)
             {
                 return false;
@@ -140,6 +142,15 @@
 
             Users.users.Add(new User(userName, password));
             return true;
+        }
+
+        public static void CheckPathOrCreate(string filePath)
+        {
+            var directory = Path.GetDirectoryName(filePath);
+            if (! Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
         }
 
         [Serializable]

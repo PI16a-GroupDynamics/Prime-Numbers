@@ -37,7 +37,7 @@
             if (Users.Contains(username, password))
             {
                 UserNameIfSuccess = username;
-                this.Close();
+                Close();
             }
             else
             {

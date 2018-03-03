@@ -34,7 +34,6 @@
             this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
             this.htmlPanel1 = new MetroFramework.Drawing.Html.HtmlPanel();
             this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.htmlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,7 +106,7 @@
         "Авторы:",
         "Горбань В.",
         "Андрееев А."};
-            this.metroTextBox2.Location = new System.Drawing.Point(194, 219);
+            this.metroTextBox2.Location = new System.Drawing.Point(194, 271);
             this.metroTextBox2.MaxLength = 32767;
             this.metroTextBox2.Multiline = true;
             this.metroTextBox2.Name = "metroTextBox2";
@@ -131,7 +130,6 @@
             this.htmlPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.htmlPanel1.Controls.Add(this.metroTextBox3);
             this.htmlPanel1.Controls.Add(this.metroTextBox2);
-            this.htmlPanel1.Controls.Add(this.metroButton1);
             this.htmlPanel1.Controls.Add(this.metroTextBox1);
             this.htmlPanel1.Controls.Add(this.metroLabel1);
             this.htmlPanel1.Controls.Add(this.pictureBox1);
@@ -146,9 +144,9 @@
             // 
             // 
             this.metroTextBox3.CustomButton.Image = null;
-            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(157, 1);
+            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(115, 2);
             this.metroTextBox3.CustomButton.Name = "";
-            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(77, 77);
+            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(117, 117);
             this.metroTextBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox3.CustomButton.TabIndex = 1;
             this.metroTextBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -156,7 +154,7 @@
             this.metroTextBox3.CustomButton.Visible = false;
             this.metroTextBox3.Lines = new string[] {
         "Еще не реализовано:",
-        "1) Логгирование",
+        "1) Админская часть",
         "2) Сам алгоритм",
         "3) Сохранение результа в файл выбранного формата",
         "4) Справка"};
@@ -170,24 +168,13 @@
             this.metroTextBox3.SelectionLength = 0;
             this.metroTextBox3.SelectionStart = 0;
             this.metroTextBox3.ShortcutsEnabled = true;
-            this.metroTextBox3.Size = new System.Drawing.Size(235, 79);
+            this.metroTextBox3.Size = new System.Drawing.Size(235, 122);
             this.metroTextBox3.TabIndex = 5;
-            this.metroTextBox3.Text = "Еще не реализовано:\r\n1) Логгирование\r\n2) Сам алгоритм\r\n3) Сохранение результа в ф" +
-    "айл выбранного формата\r\n4) Справка";
+            this.metroTextBox3.Text = "Еще не реализовано:\r\n1) Админская часть\r\n2) Сам алгоритм\r\n3) Сохранение результа " +
+    "в файл выбранного формата\r\n4) Справка";
             this.metroTextBox3.UseSelectable = true;
             this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.BackgroundImage = global::MetroFramework_test_at_a_new_project.Properties.Resources.arrow1600_300x300;
-            this.metroButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.metroButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.metroButton1.Location = new System.Drawing.Point(406, 273);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 59);
-            this.metroButton1.TabIndex = 4;
-            this.metroButton1.UseSelectable = true;
             // 
             // pictureBox1
             // 
@@ -221,7 +208,6 @@
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private MetroFramework.Controls.MetroTextBox metroTextBox2;
         private MetroFramework.Drawing.Html.HtmlPanel htmlPanel1;
-        private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroTextBox metroTextBox3;
     }
 }
