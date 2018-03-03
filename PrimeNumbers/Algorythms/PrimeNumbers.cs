@@ -1,15 +1,15 @@
-﻿using System;
-
-namespace MetroFramework_test_at_a_new_project.Algorythms
+﻿namespace MetroFramework_test_at_a_new_project.Algorythms
 {
+    using System;
+
     public static class PrimeNumbers
     {
-        static int[] Generate(int N)
+        public static int[] Generate(int N)
         {
             throw new NotImplementedException();
         }
 
-        static string[] GenerateStr(int N)
+        public static string[] GenerateStr(int N)
         {
             throw new NotImplementedException();
         }

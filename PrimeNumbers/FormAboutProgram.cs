@@ -8,10 +8,5 @@ namespace MetroFramework_test_at_a_new_project
         {
             InitializeComponent();
         }
-
-        private void metroTextBox3_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

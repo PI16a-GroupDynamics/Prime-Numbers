@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
-
-namespace MetroFramework_test_at_a_new_project.Data
+﻿namespace MetroFramework_test_at_a_new_project.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+
+    using JetBrains.Annotations;
+
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public static class Users
     {
-        public static User Admin = new User("admin", "ThisAdminIsCool");
+        public static User Admin { get; set; } = new User("admin", "admin");
+
         public static string DefaultFilePath { get; set; }
+
         public static string CurrentUserName => Users.CurrentUser.Name;
 
+        [CanBeNull]
         public static User CurrentUser
         {
             get => Users.currentUser;
@@ -24,23 +29,24 @@ namespace MetroFramework_test_at_a_new_project.Data
                     Users.currentUser = value;
                     return;
                 }
-                if (!Replace(Users.currentUser, value))
+
+                if (! Users.Replace(Users.currentUser, value))
                 {
-                    MessageBox.Show("Хьюстон, у нас проблемы. Он не находит.");
+                    MessageBox.Show(@"Хьюстон, у нас проблемы. Он не находит.");
                 }
+
                 Users.currentUser = value;
-                
             }
         }
 
-        private static List <User> users = new List <User>();
-        private static User currentUser;
+        private static List<User> users = new List<User>();
 
+        private static User currentUser;
 
         static Users()
         {
-            Users.DefaultFilePath = "users.bin";
-            Users.users.Add(new User("admin", "ThisAdminIsCool"));
+            Users.DefaultFilePath = @"Records\users.bin";
+            Users.users.Add(Users.Admin);
         }
 
         /// <summary>
@@ -51,19 +57,19 @@ namespace MetroFramework_test_at_a_new_project.Data
         public static bool LoadFromFile(string filePath)
         {
             string path = filePath;
-            var bf = new BinaryFormatter();
-            if (!File.Exists(path))
+            var    bf   = new BinaryFormatter();
+            if (! File.Exists(path))
             {
-                Users.users = new List <User>()
-                {
-                    [0] = Users.Admin
-                };
+                Users.users = new List<User>
+                                  {
+                                     [0] = Users.Admin
+                                  };
                 return false;
             }
 
-            using(var fstream = File.OpenRead(path))
+            using (var fstream = File.OpenRead(path))
             {
-                Users.users = bf.Deserialize(fstream) as List <User>;
+                Users.users = bf.Deserialize(fstream) as List<User>;
             }
 
             return true;
@@ -76,12 +82,13 @@ namespace MetroFramework_test_at_a_new_project.Data
         public static void SaveToFile(string filePath)
         {
             string path = filePath;
-            var bf = new BinaryFormatter();
-            using(var fstream = File.OpenWrite(path))
+            var    bf   = new BinaryFormatter();
+            using (var fstream = File.OpenWrite(path))
             {
                 bf.Serialize(fstream, Users.users);
             }
         }
+
         /// <summary>
         /// Замена записи пользователя. Используется метод RemoveAll.
         /// </summary>
@@ -90,11 +97,12 @@ namespace MetroFramework_test_at_a_new_project.Data
         /// <returns></returns>
         public static bool Replace(User oldUser, User newUser)
         {
-            int success = Users.users.RemoveAll(user => user.Name==oldUser.Name && user.PassWord==oldUser.PassWord);
+            int success = Users.users.RemoveAll(user => user.Name == oldUser.Name && user.PassWord == oldUser.PassWord);
             if (success == 0)
             {
                 return false;
             }
+
             Users.users.Add(newUser);
 
             return true;
@@ -120,13 +128,16 @@ namespace MetroFramework_test_at_a_new_project.Data
 
         public static bool Contains(string userName) => Users.users.Exists(x => x.Name == userName);
 
-        public static bool Contains
-            (string userName, string password) =>
+        public static bool Contains(string userName, string password) =>
             Users.users.Exists(x => x.Name == userName && x.PassWord == password);
 
         public static bool Add(string userName, string password)
         {
-            if (Users.Contains(userName)) return false;
+            if (Users.Contains(userName))
+            {
+                return false;
+            }
+
             Users.users.Add(new User(userName, password));
             return true;
         }
@@ -141,6 +152,7 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
 
             public string Name { get; }
+
             public string PassWord { get; set; }
         }
     }

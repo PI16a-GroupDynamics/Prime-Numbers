@@ -1,22 +1,25 @@
-﻿using System;
-using System.Windows.Forms;
-using MetroFramework_test_at_a_new_project.Data;
-
-namespace MetroFramework_test_at_a_new_project
+﻿namespace MetroFramework_test_at_a_new_project
 {
-    public partial class FormSignIn : Form
-    {
-        public string UserNameIfSuccess { get; private set; }
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Windows.Forms;
 
+    using MetroFramework_test_at_a_new_project.Data;
+
+    public partial class FormSignIn: Form
+    {
         public FormSignIn()
         {
             InitializeComponent();
         }
 
+        public string UserNameIfSuccess { get; private set; }
+
+        [SuppressMessage("ReSharper", "ArrangeThisQualifier")]
         private void BtSignIn_Click(object sender, EventArgs e)
         {
-            if (PnConfirmPassword.Visible) //мы находимся в "регистрация"
-            {
+            if (PnConfirmPassword.Visible)
+            { // мы находимся в "регистрация"
                 PnConfirmPassword.Visible = false;
                 return;
             }
@@ -25,11 +28,12 @@ namespace MetroFramework_test_at_a_new_project
             var username = TbUserName.Text.Trim();
             var password = TbPassword.Text.Trim();
 
-            if (!UserNamePassWordCheckIsEmpty())
+            if (! UserNamePassWordCheckIsEmpty())
+            {
                 return;
+            }
 
-            //а теперь мы ищем имя пользователя в каком-то списке. В файле, наверное.
-
+            // а теперь мы ищем имя пользователя в каком-то списке. В файле, наверное.
             if (Users.Contains(username, password))
             {
                 UserNameIfSuccess = username;
@@ -37,7 +41,7 @@ namespace MetroFramework_test_at_a_new_project
             }
             else
             {
-                if (!Users.Contains(username))
+                if (! Users.Contains(username))
                 {
                     MessageBox.Show(@"Неверное имя пользователя", @"Ошибка");
                     TbUserName.Focus();
@@ -47,22 +51,20 @@ namespace MetroFramework_test_at_a_new_project
                 MessageBox.Show(@"Неверный пароль.");
                 TbPassword.Focus();
                 TbPassword.Clear();
-
-
             }
         }
 
         private void BtSignUp_Click(object sender, EventArgs e)
         {
-            if (!PnConfirmPassword.Visible) //мы находимся в "Вход"
-            {
+            if (! PnConfirmPassword.Visible)
+            { // мы находимся в "Вход"
                 PnConfirmPassword.Visible = true;
                 return;
             }
 
             PnConfirmPassword.Visible = true;
-            var username = TbUserName.Text.Trim();
-            var password = TbPassword.Text.Trim();
+            var username        = TbUserName.Text.Trim();
+            var password        = TbPassword.Text.Trim();
             var confirmPassword = TbConfirmPassword.Text.Trim();
 
             UserNamePassWordCheckIsEmpty();
@@ -72,8 +74,8 @@ namespace MetroFramework_test_at_a_new_project
                 TbConfirmPassword.Focus();
                 return;
             }
-            //а теперь мы ищем имя пользователя в каком-то списке. В файле, наверное.
 
+            // а теперь мы ищем имя пользователя в каком-то списке. В файле, наверное.
             if (Users.Contains(username))
             {
                 MessageBox.Show(@"Это имя пользователя уже занято", @"Ошибка");
@@ -84,13 +86,15 @@ namespace MetroFramework_test_at_a_new_project
                 Users.Add(username, password);
                 MessageBox.Show(@"Успешно!");
             }
-
         }
 
         private void TbPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            if (char.IsWhiteSpace((char) e.KeyValue)&&!char.IsControl((char)e.KeyValue))
+            if (char.IsWhiteSpace((char)e.KeyValue)
+                && ! char.IsControl((char)e.KeyValue))
+            {
                 e.SuppressKeyPress = true;
+            }
         }
 
         private bool UserNamePassWordCheckIsEmpty()
@@ -113,7 +117,6 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-
         private void FormSignIn_Load(object sender, EventArgs e)
         {
             Users.LoadFromFile();
@@ -128,17 +131,22 @@ namespace MetroFramework_test_at_a_new_project
         {
             if (e.KeyChar == 13)
             {
-                if(PnConfirmPassword.Visible)
+                if (PnConfirmPassword.Visible)
+                {
                     BtSignUp_Click(sender, e);
+                }
             }
         }
 
+        [SuppressMessage("ReSharper", "InvertIf")]
         private void TbPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
-                if (!PnConfirmPassword.Visible)
+                if (! PnConfirmPassword.Visible)
+                {
                     BtSignIn_Click(sender, e);
+                }
             }
         }
     }
