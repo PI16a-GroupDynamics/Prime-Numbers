@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Windows.Forms;
 
@@ -13,7 +12,15 @@
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public static class Users
     {
-        public static User Admin { get; set; } = new User("admin", "admin");
+        public static User Admin
+        {
+            get => Users.admin;
+            set
+            {
+                Users.Replace(Users.admin, value);
+                Users.admin = value;
+            }
+        }
 
         public static string DefaultFilePath { get; set; }
 
@@ -43,6 +50,8 @@
         private static List<User> users = new List<User>();
 
         private static User currentUser;
+
+        private static User admin = new User("admin", "admin");
 
         static Users()
         {
@@ -154,7 +163,7 @@
         }
 
         [Serializable]
-        public class User
+        public sealed class User
         {
             public User(string name, string passWord)
             {
@@ -165,6 +174,11 @@
             public string Name { get; }
 
             public string PassWord { get; set; }
+
+            public bool Equals(User user)
+            {
+                return Name==user.Name && PassWord == user.PassWord;
+            }
         }
     }
 }

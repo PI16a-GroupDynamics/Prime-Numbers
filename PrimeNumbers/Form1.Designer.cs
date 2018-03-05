@@ -55,10 +55,8 @@
             this.CBoxTypeOfFile = new MetroFramework.Controls.MetroComboBox();
             this.TabPageAdmin = new MetroFramework.Controls.MetroTabPage();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.ButtonUsers = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
@@ -77,7 +75,7 @@
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.Location = new System.Drawing.Point(50, 28);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(332, 297);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroTabControl1.TabIndex = 12;
@@ -545,10 +543,8 @@
             // TabPageAdmin
             // 
             this.TabPageAdmin.Controls.Add(this.button6);
-            this.TabPageAdmin.Controls.Add(this.button5);
             this.TabPageAdmin.Controls.Add(this.button2);
-            this.TabPageAdmin.Controls.Add(this.button1);
-            this.TabPageAdmin.Controls.Add(this.button4);
+            this.TabPageAdmin.Controls.Add(this.ButtonUsers);
             this.TabPageAdmin.Controls.Add(this.button3);
             this.TabPageAdmin.HorizontalScrollbarBarColor = true;
             this.TabPageAdmin.HorizontalScrollbarHighlightOnWheel = false;
@@ -567,54 +563,34 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Location = new System.Drawing.Point(172, 164);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(106, 50);
+            this.button6.Size = new System.Drawing.Size(106, 70);
             this.button6.TabIndex = 12;
-            this.button6.Text = "Интерпретация бинарника в ворд";
+            this.button6.Text = "Интерпретация бинарника в ворд, а лучше в эксель.";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(172, 112);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(106, 36);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "Два текстбокса";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(172, 55);
+            this.button2.Location = new System.Drawing.Point(165, 43);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 36);
+            this.button2.Size = new System.Drawing.Size(156, 63);
             this.button2.TabIndex = 10;
-            this.button2.Text = "Таблица";
+            this.button2.Text = "Таблица. Сначала только для чтения, по желанию можно сделать не только для чтения" +
+    ".";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // ButtonUsers
             // 
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(18, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 36);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Учетная запись администратораУчетная запись администратора";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(18, 55);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 36);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Учетные записи пользователей";
-            this.button4.UseVisualStyleBackColor = true;
+            this.ButtonUsers.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.ButtonUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonUsers.Location = new System.Drawing.Point(18, 55);
+            this.ButtonUsers.Name = "ButtonUsers";
+            this.ButtonUsers.Size = new System.Drawing.Size(106, 36);
+            this.ButtonUsers.TabIndex = 8;
+            this.ButtonUsers.Text = "Учетные записи пользователей";
+            this.ButtonUsers.UseVisualStyleBackColor = true;
+            this.ButtonUsers.Click += new System.EventHandler(this.ButtonUsers_Click);
             // 
             // button3
             // 
@@ -672,12 +648,10 @@
         private MetroFramework.Controls.MetroPanel PanelResult;
         private MetroFramework.Controls.MetroButton ButtonStart;
         private MetroFramework.Controls.MetroTabPage TabPageAdmin;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button ButtonUsers;
         private System.Windows.Forms.Button button3;
         private MetroFramework.Controls.MetroButton metroButton2;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button2;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroButton ButtonChangeUser;

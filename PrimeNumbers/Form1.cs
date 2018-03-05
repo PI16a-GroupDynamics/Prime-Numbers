@@ -1,4 +1,6 @@
-﻿namespace MetroFramework_test_at_a_new_project
+﻿using JetBrains.Annotations;
+
+namespace MetroFramework_test_at_a_new_project
 {
     using System;
     using System.Collections.Generic;
@@ -49,6 +51,8 @@
             {
                 Users.CurrentUser   = Users.FindUserByName(signInForm.UserNameIfSuccess);
                 BoxCurrentUser.Text = Users.CurrentUserName;
+
+                IfAdmin();
             }
         }
 
@@ -60,6 +64,16 @@
             {
                 Users.CurrentUser   = Users.FindUserByName(signInForm.UserNameIfSuccess);
                 BoxCurrentUser.Text = Users.CurrentUserName;
+                IfAdmin();
+            }
+        }
+
+        private void IfAdmin()
+        {
+            // Про админа
+            if (Users.CurrentUser.Equals(Users.Admin))
+            {
+                TabPageAdmin.Parent = metroTabControl1;
             }
         }
 
@@ -176,6 +190,11 @@
             BoxPassword.WaterMark = "<пароль>";
             BoxPassword.ReadOnly  = true;
             ButtonPassword.Text   = @"Изменить";
+        }
+
+        private void ButtonUsers_Click([NotNull] object sender, [NotNull] EventArgs e)
+        { // Т.к. юзеров, скорее всего, будет немного(50 - это уже много), то можно вывести все это в tableGrid. И еще сделать автоматический обработчик, что ячейка не может быть пустой. И первая ячейка(0,0) не изменяется, т.к. это admin.
+            
         }
     }
 }

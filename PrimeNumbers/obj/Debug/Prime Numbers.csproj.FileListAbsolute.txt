@@ -15,3 +15,4 @@ C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework_t
 C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework_test_at_a_new_project.FormAboutProgram.resources
 C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\JetBrains.Annotations.dll
 C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\bin\Debug\JetBrains.Annotations.xml
+C:\Users\Home\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework_test_at_a_new_project.AdminEditForm.resources
