@@ -1,14 +1,11 @@
-﻿namespace MetroFramework_test_at_a_new_project.Data
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using JetBrains.Annotations;
+
+namespace MetroFramework_test_at_a_new_project.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Security.AccessControl;
-    using System.Windows.Forms;
-
-    using JetBrains.Annotations;
-
     public static class Log
     {
         private static List<LogRecord> log;
@@ -41,12 +38,14 @@
                 Log.log = new List<LogRecord>();
                 return;
             }
+            
 
             using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
             {
                 var formatter = new BinaryFormatter();
                 Log.log = formatter.Deserialize(stream) as List<LogRecord>;
             }
+
         }
 
         public static void SaveDefault() => Log.SaveTo(Log.DefaultFilePath);

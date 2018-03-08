@@ -97,7 +97,7 @@
             // 
             // BtSignIn
             // 
-            this.BtSignIn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BtSignIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtSignIn.Location = new System.Drawing.Point(227, 33);
             this.BtSignIn.Name = "BtSignIn";
             this.BtSignIn.Size = new System.Drawing.Size(83, 23);
@@ -108,7 +108,7 @@
             // 
             // BtSignUp
             // 
-            this.BtSignUp.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BtSignUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtSignUp.Location = new System.Drawing.Point(227, 59);
             this.BtSignUp.Name = "BtSignUp";
             this.BtSignUp.Size = new System.Drawing.Size(83, 23);

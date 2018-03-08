@@ -1,17 +1,29 @@
-﻿namespace MetroFramework_test_at_a_new_project.Data
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using JetBrains.Annotations;
+
+namespace MetroFramework_test_at_a_new_project.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Windows.Forms;
-
-    using JetBrains.Annotations;
-
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public static class Users
     {
+        private static List<User> users = new List<User>();
+
+        // А что, если использовать этот список просто всегда? Делать запись на диск только при закрытии главной формы... Или по особой прихоти админа... Хммм...
+        private static User currentUser;
+
+        private static User admin = new User("admin", "admin");
+
+        static Users()
+        {
+            Users.DefaultFilePath = @"Records\users.bin";
+            Users.users.Add(Users.Admin);
+        }
+
+        [CanBeNull]
         public static User Admin
         {
             get => Users.admin;
@@ -30,50 +42,38 @@
         public static User CurrentUser
         {
             get => Users.currentUser;
-            set
+            //set => Users.currentUser = value;
+        }
+
+        public static void SetCurrentUser([NotNull] string userName)
+        {
+            //var user = Users.FindUserByName(userName);
+            if (Users.FindUserByName(userName) is var user != default)
             {
-                if (Users.currentUser == null)
-                {
-                    Users.currentUser = value;
-                    return;
-                }
-
-                if (! Users.Replace(Users.currentUser, value))
-                {
-                    MessageBox.Show(@"Хьюстон, у нас проблемы. Он не находит.");
-                }
-
-                Users.currentUser = value;
+                Users.currentUser = user;
+            }
+            else
+            {
+                throw new ArgumentException("User " + userName + " not found");
             }
         }
 
-        private static List<User> users = new List<User>();
-
-        private static User currentUser;
-
-        private static User admin = new User("admin", "admin");
-
-        static Users()
-        {
-            Users.DefaultFilePath = @"Records\users.bin";
-            Users.users.Add(Users.Admin);
-        }
-
         /// <summary>
-        /// Загружает данные из бинарного файла
+        ///     Загружает данные из бинарного файла
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns />
-        public static bool LoadFromFile(string filePath)
+        public static bool LoadFromFile([NotNull] string filePath)
         {
-            string path = filePath;
-            var    bf   = new BinaryFormatter();
-            if (! File.Exists(path))
+            var path = filePath;
+            var bf   = new BinaryFormatter();
+            if (! Directory.Exists(Path.GetDirectoryName(path)) ||
+                ! File.Exists(path))
             {
                 Users.users = new List<User>
-                                  {
-                                     Users.Admin
-                                  };
+                {
+                    Users.Admin
+                };
                 return false;
             }
 
@@ -86,14 +86,14 @@
         }
 
         /// <summary>
-        /// Записывает в бинарный файл данные
+        ///     Записывает в бинарный файл данные
         /// </summary>
         /// <param name="filePath"></param>
         public static void SaveToFile(string filePath)
         {
             Users.CheckPathOrCreate(filePath);
 
-            var    bf   = new BinaryFormatter();
+            var bf = new BinaryFormatter();
             using (var fstream = File.OpenWrite(filePath))
             {
                 bf.Serialize(fstream, Users.users);
@@ -101,14 +101,14 @@
         }
 
         /// <summary>
-        /// Замена записи пользователя. Используется метод RemoveAll.
+        ///     Замена записи пользователя. Используется метод RemoveAll.
         /// </summary>
         /// <param name="oldUser"></param>
         /// <param name="newUser"></param>
-        /// <returns></returns
+        /// <returns />
         public static bool Replace(User oldUser, User newUser)
         {
-            int success = Users.users.RemoveAll(user => user.Name == oldUser.Name);
+            var success = Users.users.RemoveAll(user => user.Name == oldUser.Name);
             if (success == 0)
             {
                 return false;
@@ -119,18 +119,16 @@
             return true;
         }
 
-        public static User FindUserByName(string name) => Users.users.Find(user => user.Name == name);
+        public static User FindUserByName([NotNull] string name) =>
+            Users.users.Find(user => user.Name == name);
 
         /// <summary>
-        /// Загружает данные из бинарного файла
+        ///     Загружает данные из бинарного файла
         /// </summary>
-        public static bool LoadFromFile()
-        {
-            return Users.LoadFromFile(Users.DefaultFilePath);
-        }
+        public static bool LoadFromFile() => Users.LoadFromFile(Users.DefaultFilePath);
 
         /// <summary>
-        /// Записывает в бинарный файл данные
+        ///     Записывает в бинарный файл данные
         /// </summary>
         public static void SaveToFile()
         {
@@ -162,23 +160,32 @@
             }
         }
 
+        public static void SetPasswordUser(string username, [NotNull] string password)
+        {
+            Users.SetPasswordUser(Users.FindUserByName(username), password);
+        }
+
+        private static void SetPasswordUser(User user, string password)
+        {
+            user.PassWord = password;
+        }
+
+
         [Serializable]
         public sealed class User
-        {
+        { // Ни в коем случае не struct!
             public User(string name, string passWord)
             {
                 Name     = name;
                 PassWord = passWord;
             }
 
+            [NotNull]
             public string Name { get; }
 
             public string PassWord { get; set; }
 
-            public bool Equals(User user)
-            {
-                return Name==user.Name && PassWord == user.PassWord;
-            }
+            public bool Equals(User user) => Name == user.Name && PassWord == user.PassWord;
         }
     }
 }

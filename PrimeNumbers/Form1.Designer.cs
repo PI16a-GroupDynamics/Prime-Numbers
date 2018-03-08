@@ -610,6 +610,7 @@
             this.Controls.Add(this.metroTabControl1);
             this.Name = "Form1";
             this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);

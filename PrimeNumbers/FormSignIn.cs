@@ -1,11 +1,10 @@
-﻿namespace MetroFramework_test_at_a_new_project
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
+using MetroFramework_test_at_a_new_project.Data;
+
+namespace MetroFramework_test_at_a_new_project
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows.Forms;
-
-    using MetroFramework_test_at_a_new_project.Data;
-
     public partial class FormSignIn: Form
     {
         public FormSignIn()
@@ -28,7 +27,7 @@
             var username = TbUserName.Text.Trim();
             var password = TbPassword.Text.Trim();
 
-            if (! UserNamePassWordCheckIsEmpty())
+            if (UserNamePassWordCheckIsEmpty())
             {
                 return;
             }
@@ -90,8 +89,8 @@
 
         private void TbPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            if (char.IsWhiteSpace((char)e.KeyValue)
-                && ! char.IsControl((char)e.KeyValue))
+            if (char.IsWhiteSpace((char) e.KeyValue) &&
+                ! char.IsControl((char) e.KeyValue))
             {
                 e.SuppressKeyPress = true;
             }
@@ -104,27 +103,27 @@
                 if (TbUserName.Text == string.Empty)
                 {
                     MessageBox.Show(@"Имя пользователя не может быть пустым", @"Ошибка!");
-                    return false;
+                    return true;
                 }
 
                 if (TbPassword.Text == string.Empty)
                 {
                     MessageBox.Show(@"Пароль не может быть пустым", @"Ошибка!");
-                    return false;
+                    return true;
                 }
 
-                return true;
+                return false;
             }
         }
 
         private void FormSignIn_Load(object sender, EventArgs e)
         {
-            Users.LoadFromFile();
+
         }
 
         private void FormSignIn_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Users.SaveToFile();
+
         }
 
         private void TbConfirmPassword_KeyPress(object sender, KeyPressEventArgs e)

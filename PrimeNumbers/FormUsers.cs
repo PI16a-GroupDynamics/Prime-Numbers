@@ -2,9 +2,9 @@
 
 namespace MetroFramework_test_at_a_new_project
 {
-    public partial class FormAboutProgram: Form
+    public partial class FormUsers: Form
     {
-        public FormAboutProgram()
+        public FormUsers()
         {
             InitializeComponent();
         }
