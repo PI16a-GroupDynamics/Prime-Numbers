@@ -1,4 +1,5 @@
-﻿namespace MetroFramework_test_at_a_new_project
+﻿#pragma warning disable 618
+namespace MetroFramework_test_at_a_new_project
 {
     partial class Form1
     {
@@ -29,7 +30,7 @@
         private void InitializeComponent()
         {
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.TabPageWork = new MetroFramework.Controls.MetroTabPage();
             this.ButtonStart = new MetroFramework.Controls.MetroButton();
             this.PanelResult = new MetroFramework.Controls.MetroPanel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -38,15 +39,18 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.BoxNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.TabPageSettings = new MetroFramework.Controls.MetroTabPage();
+            this.PanelUser = new MetroFramework.Controls.MetroPanel();
+            this.PanelPassword = new MetroFramework.Controls.MetroPanel();
+            this.ButtonChangePassword = new MetroFramework.Controls.MetroButton();
+            this.BoxPassword = new MetroFramework.Controls.MetroTextBox();
+            this.ButtonChangeUsername = new MetroFramework.Controls.MetroButton();
             this.ButtonChangeUser = new MetroFramework.Controls.MetroButton();
             this.BoxCurrentUser = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            this.ButtonPassword = new MetroFramework.Controls.MetroButton();
-            this.BoxPassword = new MetroFramework.Controls.MetroTextBox();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.PanelSaveResultTo = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.BoxDirectoryForResult = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
@@ -54,56 +58,55 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.CBoxTypeOfFile = new MetroFramework.Controls.MetroComboBox();
             this.TabPageAdmin = new MetroFramework.Controls.MetroTabPage();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.ButtonUsers = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ButtonViewLog = new System.Windows.Forms.Button();
             this.metroTabControl1.SuspendLayout();
-            this.metroTabPage1.SuspendLayout();
+            this.TabPageWork.SuspendLayout();
             this.PanelResult.SuspendLayout();
-            this.metroTabPage2.SuspendLayout();
-            this.metroPanel1.SuspendLayout();
+            this.TabPageSettings.SuspendLayout();
+            this.PanelUser.SuspendLayout();
+            this.PanelPassword.SuspendLayout();
             this.PanelSaveResultTo.SuspendLayout();
             this.TabPageAdmin.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Controls.Add(this.TabPageWork);
+            this.metroTabControl1.Controls.Add(this.TabPageSettings);
             this.metroTabControl1.Controls.Add(this.TabPageAdmin);
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.Location = new System.Drawing.Point(50, 28);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
-            this.metroTabControl1.Size = new System.Drawing.Size(332, 297);
+            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.Size = new System.Drawing.Size(332, 332);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
             // 
-            // metroTabPage1
+            // TabPageWork
             // 
-            this.metroTabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroTabPage1.Controls.Add(this.ButtonStart);
-            this.metroTabPage1.Controls.Add(this.PanelResult);
-            this.metroTabPage1.Controls.Add(this.BoxNumber);
-            this.metroTabPage1.Controls.Add(this.metroLabel4);
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(324, 255);
-            this.metroTabPage1.Style = MetroFramework.MetroColorStyle.Brown;
-            this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Tag = "";
-            this.metroTabPage1.Text = "Работа";
-            this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
-            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 10;
-            this.metroTabPage1.Click += new System.EventHandler(this.MetroTabPage1_Click);
+            this.TabPageWork.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TabPageWork.Controls.Add(this.ButtonStart);
+            this.TabPageWork.Controls.Add(this.PanelResult);
+            this.TabPageWork.Controls.Add(this.BoxNumber);
+            this.TabPageWork.Controls.Add(this.metroLabel4);
+            this.TabPageWork.HorizontalScrollbarBarColor = true;
+            this.TabPageWork.HorizontalScrollbarHighlightOnWheel = false;
+            this.TabPageWork.HorizontalScrollbarSize = 10;
+            this.TabPageWork.Location = new System.Drawing.Point(4, 38);
+            this.TabPageWork.Name = "TabPageWork";
+            this.TabPageWork.Size = new System.Drawing.Size(324, 290);
+            this.TabPageWork.Style = MetroFramework.MetroColorStyle.Brown;
+            this.TabPageWork.TabIndex = 0;
+            this.TabPageWork.Tag = "";
+            this.TabPageWork.Text = "Работа";
+            this.TabPageWork.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.TabPageWork.VerticalScrollbarBarColor = true;
+            this.TabPageWork.VerticalScrollbarHighlightOnWheel = false;
+            this.TabPageWork.VerticalScrollbarSize = 10;
+            this.TabPageWork.Click += new System.EventHandler(this.MetroTabPage1_Click);
             // 
             // ButtonStart
             // 
@@ -124,9 +127,9 @@
             this.PanelResult.HorizontalScrollbarBarColor = true;
             this.PanelResult.HorizontalScrollbarHighlightOnWheel = false;
             this.PanelResult.HorizontalScrollbarSize = 10;
-            this.PanelResult.Location = new System.Drawing.Point(108, 2);
+            this.PanelResult.Location = new System.Drawing.Point(106, 3);
             this.PanelResult.Name = "PanelResult";
-            this.PanelResult.Size = new System.Drawing.Size(200, 248);
+            this.PanelResult.Size = new System.Drawing.Size(200, 277);
             this.PanelResult.TabIndex = 15;
             this.PanelResult.VerticalScrollbarBarColor = true;
             this.PanelResult.VerticalScrollbarHighlightOnWheel = false;
@@ -148,9 +151,9 @@
             // 
             // 
             this.BoxResult.CustomButton.Image = null;
-            this.BoxResult.CustomButton.Location = new System.Drawing.Point(-74, 2);
+            this.BoxResult.CustomButton.Location = new System.Drawing.Point(-104, 1);
             this.BoxResult.CustomButton.Name = "";
-            this.BoxResult.CustomButton.Size = new System.Drawing.Size(209, 209);
+            this.BoxResult.CustomButton.Size = new System.Drawing.Size(241, 241);
             this.BoxResult.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.BoxResult.CustomButton.TabIndex = 1;
             this.BoxResult.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -164,17 +167,18 @@
         "11",
         "13",
         "17"};
-            this.BoxResult.Location = new System.Drawing.Point(49, 31);
+            this.BoxResult.Location = new System.Drawing.Point(62, 31);
             this.BoxResult.MaxLength = 32767;
             this.BoxResult.Multiline = true;
             this.BoxResult.Name = "BoxResult";
             this.BoxResult.PasswordChar = '\0';
+            this.BoxResult.ReadOnly = true;
             this.BoxResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.BoxResult.SelectedText = "";
             this.BoxResult.SelectionLength = 0;
             this.BoxResult.SelectionStart = 0;
             this.BoxResult.ShortcutsEnabled = true;
-            this.BoxResult.Size = new System.Drawing.Size(138, 214);
+            this.BoxResult.Size = new System.Drawing.Size(138, 243);
             this.BoxResult.TabIndex = 8;
             this.BoxResult.Text = "2\r\n3\r\n5\r\n7\r\n11\r\n13\r\n17";
             this.BoxResult.UseSelectable = true;
@@ -187,9 +191,9 @@
             // 
             // 
             this.BoxNumerator.CustomButton.Image = null;
-            this.BoxNumerator.CustomButton.Location = new System.Drawing.Point(-178, 2);
+            this.BoxNumerator.CustomButton.Location = new System.Drawing.Point(-208, 1);
             this.BoxNumerator.CustomButton.Name = "";
-            this.BoxNumerator.CustomButton.Size = new System.Drawing.Size(209, 209);
+            this.BoxNumerator.CustomButton.Size = new System.Drawing.Size(241, 241);
             this.BoxNumerator.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.BoxNumerator.CustomButton.TabIndex = 1;
             this.BoxNumerator.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -208,12 +212,13 @@
             this.BoxNumerator.Multiline = true;
             this.BoxNumerator.Name = "BoxNumerator";
             this.BoxNumerator.PasswordChar = '\0';
+            this.BoxNumerator.ReadOnly = true;
             this.BoxNumerator.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.BoxNumerator.SelectedText = "";
             this.BoxNumerator.SelectionLength = 0;
             this.BoxNumerator.SelectionStart = 0;
             this.BoxNumerator.ShortcutsEnabled = true;
-            this.BoxNumerator.Size = new System.Drawing.Size(34, 214);
+            this.BoxNumerator.Size = new System.Drawing.Size(34, 243);
             this.BoxNumerator.TabIndex = 9;
             this.BoxNumerator.Text = "1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7";
             this.BoxNumerator.UseSelectable = true;
@@ -271,50 +276,125 @@
             this.metroLabel4.TabIndex = 13;
             this.metroLabel4.Text = "N:";
             // 
-            // metroTabPage2
+            // TabPageSettings
             // 
-            this.metroTabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroTabPage2.Controls.Add(this.metroPanel1);
-            this.metroTabPage2.Controls.Add(this.metroButton2);
-            this.metroTabPage2.Controls.Add(this.PanelSaveResultTo);
-            this.metroTabPage2.Controls.Add(this.btAbout);
-            this.metroTabPage2.Controls.Add(this.metroLabel2);
-            this.metroTabPage2.Controls.Add(this.CBoxTypeOfFile);
-            this.metroTabPage2.HorizontalScrollbarBarColor = true;
-            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.HorizontalScrollbarSize = 10;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(324, 255);
-            this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "Настройки";
-            this.metroTabPage2.VerticalScrollbarBarColor = true;
-            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.VerticalScrollbarSize = 10;
+            this.TabPageSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TabPageSettings.Controls.Add(this.PanelUser);
+            this.TabPageSettings.Controls.Add(this.metroButton2);
+            this.TabPageSettings.Controls.Add(this.PanelSaveResultTo);
+            this.TabPageSettings.Controls.Add(this.btAbout);
+            this.TabPageSettings.Controls.Add(this.metroLabel2);
+            this.TabPageSettings.Controls.Add(this.CBoxTypeOfFile);
+            this.TabPageSettings.HorizontalScrollbarBarColor = true;
+            this.TabPageSettings.HorizontalScrollbarHighlightOnWheel = false;
+            this.TabPageSettings.HorizontalScrollbarSize = 10;
+            this.TabPageSettings.Location = new System.Drawing.Point(4, 38);
+            this.TabPageSettings.Name = "TabPageSettings";
+            this.TabPageSettings.Size = new System.Drawing.Size(324, 290);
+            this.TabPageSettings.TabIndex = 1;
+            this.TabPageSettings.Text = "Настройки";
+            this.TabPageSettings.VerticalScrollbarBarColor = true;
+            this.TabPageSettings.VerticalScrollbarHighlightOnWheel = false;
+            this.TabPageSettings.VerticalScrollbarSize = 10;
             // 
-            // metroPanel1
+            // PanelUser
             // 
-            this.metroPanel1.Controls.Add(this.ButtonChangeUser);
-            this.metroPanel1.Controls.Add(this.BoxCurrentUser);
-            this.metroPanel1.Controls.Add(this.metroLabel6);
-            this.metroPanel1.Controls.Add(this.ButtonPassword);
-            this.metroPanel1.Controls.Add(this.BoxPassword);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(19, 122);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(273, 87);
-            this.metroPanel1.TabIndex = 22;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            this.metroPanel1.Leave += new System.EventHandler(this.MetroPanel1_Leave);
+            this.PanelUser.Controls.Add(this.PanelPassword);
+            this.PanelUser.Controls.Add(this.ButtonChangeUsername);
+            this.PanelUser.Controls.Add(this.ButtonChangeUser);
+            this.PanelUser.Controls.Add(this.BoxCurrentUser);
+            this.PanelUser.Controls.Add(this.metroLabel6);
+            this.PanelUser.HorizontalScrollbarBarColor = true;
+            this.PanelUser.HorizontalScrollbarHighlightOnWheel = false;
+            this.PanelUser.HorizontalScrollbarSize = 10;
+            this.PanelUser.Location = new System.Drawing.Point(19, 119);
+            this.PanelUser.Name = "PanelUser";
+            this.PanelUser.Size = new System.Drawing.Size(273, 117);
+            this.PanelUser.TabIndex = 22;
+            this.PanelUser.VerticalScrollbarBarColor = true;
+            this.PanelUser.VerticalScrollbarHighlightOnWheel = false;
+            this.PanelUser.VerticalScrollbarSize = 10;
+            // 
+            // PanelPassword
+            // 
+            this.PanelPassword.Controls.Add(this.ButtonChangePassword);
+            this.PanelPassword.Controls.Add(this.BoxPassword);
+            this.PanelPassword.HorizontalScrollbarBarColor = true;
+            this.PanelPassword.HorizontalScrollbarHighlightOnWheel = false;
+            this.PanelPassword.HorizontalScrollbarSize = 10;
+            this.PanelPassword.Location = new System.Drawing.Point(4, 57);
+            this.PanelPassword.Name = "PanelPassword";
+            this.PanelPassword.Size = new System.Drawing.Size(220, 23);
+            this.PanelPassword.TabIndex = 23;
+            this.PanelPassword.VerticalScrollbarBarColor = true;
+            this.PanelPassword.VerticalScrollbarHighlightOnWheel = false;
+            this.PanelPassword.VerticalScrollbarSize = 10;
+            this.PanelPassword.Leave += new System.EventHandler(this.PanelPassword_Leave);
+            // 
+            // ButtonChangePassword
+            // 
+            this.ButtonChangePassword.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.ButtonChangePassword.Location = new System.Drawing.Point(115, 0);
+            this.ButtonChangePassword.Name = "ButtonChangePassword";
+            this.ButtonChangePassword.Size = new System.Drawing.Size(88, 23);
+            this.ButtonChangePassword.TabIndex = 20;
+            this.ButtonChangePassword.Text = "Изменить";
+            this.ButtonChangePassword.UseSelectable = true;
+            this.ButtonChangePassword.Click += new System.EventHandler(this.ButtonPassword_Click);
+            // 
+            // BoxPassword
+            // 
+            // 
+            // 
+            // 
+            this.BoxPassword.CustomButton.BackColor = System.Drawing.Color.Transparent;
+            this.BoxPassword.CustomButton.DialogResult = System.Windows.Forms.DialogResult.Abort;
+            this.BoxPassword.CustomButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BoxPassword.CustomButton.Image = null;
+            this.BoxPassword.CustomButton.Location = new System.Drawing.Point(87, 1);
+            this.BoxPassword.CustomButton.Name = "";
+            this.BoxPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.BoxPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.BoxPassword.CustomButton.TabIndex = 1;
+            this.BoxPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.BoxPassword.CustomButton.UseSelectable = true;
+            this.BoxPassword.CustomButton.UseVisualStyleBackColor = false;
+            this.BoxPassword.CustomButton.Visible = false;
+            this.BoxPassword.Lines = new string[0];
+            this.BoxPassword.Location = new System.Drawing.Point(0, 0);
+            this.BoxPassword.MaxLength = 0;
+            this.BoxPassword.Name = "BoxPassword";
+            this.BoxPassword.PasswordChar = '\0';
+            this.BoxPassword.PromptText = "<пароль>";
+            this.BoxPassword.ReadOnly = true;
+            this.BoxPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.BoxPassword.SelectedText = "";
+            this.BoxPassword.SelectionLength = 0;
+            this.BoxPassword.SelectionStart = 0;
+            this.BoxPassword.ShortcutsEnabled = true;
+            this.BoxPassword.Size = new System.Drawing.Size(109, 23);
+            this.BoxPassword.TabIndex = 19;
+            this.BoxPassword.UseSelectable = true;
+            this.BoxPassword.WaterMark = "<пароль>";
+            this.BoxPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.BoxPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.BoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BoxPassword_KeyDown);
+            // 
+            // ButtonChangeUsername
+            // 
+            this.ButtonChangeUsername.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.ButtonChangeUsername.Location = new System.Drawing.Point(119, 28);
+            this.ButtonChangeUsername.Name = "ButtonChangeUsername";
+            this.ButtonChangeUsername.Size = new System.Drawing.Size(88, 23);
+            this.ButtonChangeUsername.TabIndex = 21;
+            this.ButtonChangeUsername.Text = "Изменить";
+            this.ButtonChangeUsername.UseSelectable = true;
+            this.ButtonChangeUsername.Click += new System.EventHandler(this.ButtonChangeUsername_Click);
             // 
             // ButtonChangeUser
             // 
             this.ButtonChangeUser.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.ButtonChangeUser.Location = new System.Drawing.Point(119, 28);
+            this.ButtonChangeUser.Location = new System.Drawing.Point(38, 86);
             this.ButtonChangeUser.Name = "ButtonChangeUser";
             this.ButtonChangeUser.Size = new System.Drawing.Size(131, 23);
             this.ButtonChangeUser.TabIndex = 3;
@@ -366,59 +446,10 @@
             this.metroLabel6.TabIndex = 18;
             this.metroLabel6.Text = "Пользователь";
             // 
-            // ButtonPassword
-            // 
-            this.ButtonPassword.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.ButtonPassword.Location = new System.Drawing.Point(119, 57);
-            this.ButtonPassword.Name = "ButtonPassword";
-            this.ButtonPassword.Size = new System.Drawing.Size(88, 23);
-            this.ButtonPassword.TabIndex = 20;
-            this.ButtonPassword.Text = "Изменить";
-            this.ButtonPassword.UseSelectable = true;
-            this.ButtonPassword.Click += new System.EventHandler(this.ButtonPassword_Click);
-            // 
-            // BoxPassword
-            // 
-            // 
-            // 
-            // 
-            this.BoxPassword.CustomButton.BackColor = System.Drawing.Color.Transparent;
-            this.BoxPassword.CustomButton.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.BoxPassword.CustomButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BoxPassword.CustomButton.Image = null;
-            this.BoxPassword.CustomButton.Location = new System.Drawing.Point(87, 1);
-            this.BoxPassword.CustomButton.Name = "";
-            this.BoxPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.BoxPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.BoxPassword.CustomButton.TabIndex = 1;
-            this.BoxPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.BoxPassword.CustomButton.UseSelectable = true;
-            this.BoxPassword.CustomButton.UseVisualStyleBackColor = false;
-            this.BoxPassword.CustomButton.Visible = false;
-            this.BoxPassword.Lines = new string[0];
-            this.BoxPassword.Location = new System.Drawing.Point(4, 57);
-            this.BoxPassword.MaxLength = 0;
-            this.BoxPassword.Name = "BoxPassword";
-            this.BoxPassword.PasswordChar = '\0';
-            this.BoxPassword.PromptText = "пароль";
-            this.BoxPassword.ReadOnly = true;
-            this.BoxPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.BoxPassword.SelectedText = "";
-            this.BoxPassword.SelectionLength = 0;
-            this.BoxPassword.SelectionStart = 0;
-            this.BoxPassword.ShortcutsEnabled = true;
-            this.BoxPassword.Size = new System.Drawing.Size(109, 23);
-            this.BoxPassword.TabIndex = 19;
-            this.BoxPassword.UseSelectable = true;
-            this.BoxPassword.WaterMark = "пароль";
-            this.BoxPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.BoxPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.BoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BoxPassword_KeyDown);
-            // 
             // metroButton2
             // 
             this.metroButton2.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.metroButton2.Location = new System.Drawing.Point(17, 227);
+            this.metroButton2.Location = new System.Drawing.Point(19, 262);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(111, 23);
             this.metroButton2.TabIndex = 21;
@@ -428,25 +459,36 @@
             // 
             // PanelSaveResultTo
             // 
+            this.PanelSaveResultTo.Controls.Add(this.metroLabel7);
             this.PanelSaveResultTo.Controls.Add(this.metroButton1);
             this.PanelSaveResultTo.Controls.Add(this.BoxDirectoryForResult);
             this.PanelSaveResultTo.Controls.Add(this.metroLabel5);
             this.PanelSaveResultTo.HorizontalScrollbarBarColor = true;
             this.PanelSaveResultTo.HorizontalScrollbarHighlightOnWheel = false;
             this.PanelSaveResultTo.HorizontalScrollbarSize = 10;
-            this.PanelSaveResultTo.Location = new System.Drawing.Point(19, 54);
+            this.PanelSaveResultTo.Location = new System.Drawing.Point(19, 41);
             this.PanelSaveResultTo.Name = "PanelSaveResultTo";
-            this.PanelSaveResultTo.Size = new System.Drawing.Size(273, 59);
+            this.PanelSaveResultTo.Size = new System.Drawing.Size(273, 72);
             this.PanelSaveResultTo.TabIndex = 15;
             this.PanelSaveResultTo.VerticalScrollbarBarColor = true;
             this.PanelSaveResultTo.VerticalScrollbarHighlightOnWheel = false;
             this.PanelSaveResultTo.VerticalScrollbarSize = 10;
             this.PanelSaveResultTo.Visible = false;
             // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel7.Location = new System.Drawing.Point(0, 28);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(204, 15);
+            this.metroLabel7.TabIndex = 17;
+            this.metroLabel7.Text = "(Если не существует, то будет создана)";
+            // 
             // metroButton1
             // 
             this.metroButton1.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.metroButton1.Location = new System.Drawing.Point(185, 27);
+            this.metroButton1.Location = new System.Drawing.Point(185, 46);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(85, 23);
             this.metroButton1.TabIndex = 2;
@@ -473,7 +515,7 @@
             this.BoxDirectoryForResult.CustomButton.UseVisualStyleBackColor = false;
             this.BoxDirectoryForResult.CustomButton.Visible = false;
             this.BoxDirectoryForResult.Lines = new string[0];
-            this.BoxDirectoryForResult.Location = new System.Drawing.Point(3, 27);
+            this.BoxDirectoryForResult.Location = new System.Drawing.Point(3, 46);
             this.BoxDirectoryForResult.MaxLength = 4;
             this.BoxDirectoryForResult.Name = "BoxDirectoryForResult";
             this.BoxDirectoryForResult.PasswordChar = '\0';
@@ -489,11 +531,12 @@
             this.BoxDirectoryForResult.WaterMark = "<путь>";
             this.BoxDirectoryForResult.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.BoxDirectoryForResult.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.BoxDirectoryForResult.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoxDirectoryForResult_KeyPress);
             // 
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(0, 7);
+            this.metroLabel5.Location = new System.Drawing.Point(0, 9);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(139, 19);
             this.metroLabel5.TabIndex = 16;
@@ -502,7 +545,7 @@
             // btAbout
             // 
             this.btAbout.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btAbout.Location = new System.Drawing.Point(181, 228);
+            this.btAbout.Location = new System.Drawing.Point(181, 262);
             this.btAbout.Name = "btAbout";
             this.btAbout.Size = new System.Drawing.Size(111, 23);
             this.btAbout.TabIndex = 4;
@@ -530,8 +573,8 @@
             this.CBoxTypeOfFile.ItemHeight = 19;
             this.CBoxTypeOfFile.Items.AddRange(new object[] {
             "Не сохранять результат",
-            "Текстовый (RTF)",
-            "Документ PDF"});
+            "Текстовый (.txt)",
+            "Документ PDF (.pdf)"});
             this.CBoxTypeOfFile.Location = new System.Drawing.Point(168, 14);
             this.CBoxTypeOfFile.Name = "CBoxTypeOfFile";
             this.CBoxTypeOfFile.PromptText = "Тип файла";
@@ -542,43 +585,19 @@
             // 
             // TabPageAdmin
             // 
-            this.TabPageAdmin.Controls.Add(this.button6);
-            this.TabPageAdmin.Controls.Add(this.button2);
             this.TabPageAdmin.Controls.Add(this.ButtonUsers);
-            this.TabPageAdmin.Controls.Add(this.button3);
+            this.TabPageAdmin.Controls.Add(this.ButtonViewLog);
             this.TabPageAdmin.HorizontalScrollbarBarColor = true;
             this.TabPageAdmin.HorizontalScrollbarHighlightOnWheel = false;
             this.TabPageAdmin.HorizontalScrollbarSize = 10;
             this.TabPageAdmin.Location = new System.Drawing.Point(4, 38);
             this.TabPageAdmin.Name = "TabPageAdmin";
-            this.TabPageAdmin.Size = new System.Drawing.Size(324, 255);
+            this.TabPageAdmin.Size = new System.Drawing.Size(324, 290);
             this.TabPageAdmin.TabIndex = 2;
             this.TabPageAdmin.Text = "Админ";
             this.TabPageAdmin.VerticalScrollbarBarColor = true;
             this.TabPageAdmin.VerticalScrollbarHighlightOnWheel = false;
             this.TabPageAdmin.VerticalScrollbarSize = 10;
-            // 
-            // button6
-            // 
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(172, 164);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(106, 70);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "Интерпретация бинарника в ворд, а лучше в эксель.";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(165, 43);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(156, 63);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Таблица. Сначала только для чтения, по желанию можно сделать не только для чтения" +
-    ".";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // ButtonUsers
             // 
@@ -592,35 +611,37 @@
             this.ButtonUsers.UseVisualStyleBackColor = true;
             this.ButtonUsers.Click += new System.EventHandler(this.ButtonUsers_Click);
             // 
-            // button3
+            // ButtonViewLog
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(18, 164);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "История";
-            this.button3.UseVisualStyleBackColor = true;
+            this.ButtonViewLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonViewLog.Location = new System.Drawing.Point(18, 164);
+            this.ButtonViewLog.Name = "ButtonViewLog";
+            this.ButtonViewLog.Size = new System.Drawing.Size(106, 23);
+            this.ButtonViewLog.TabIndex = 7;
+            this.ButtonViewLog.Text = "Логи";
+            this.ButtonViewLog.UseVisualStyleBackColor = true;
+            this.ButtonViewLog.Click += new System.EventHandler(this.ButtonViewLog_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 348);
+            this.ClientSize = new System.Drawing.Size(584, 405);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "Form1";
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.metroTabControl1.ResumeLayout(false);
-            this.metroTabPage1.ResumeLayout(false);
-            this.metroTabPage1.PerformLayout();
+            this.TabPageWork.ResumeLayout(false);
+            this.TabPageWork.PerformLayout();
             this.PanelResult.ResumeLayout(false);
             this.PanelResult.PerformLayout();
-            this.metroTabPage2.ResumeLayout(false);
-            this.metroTabPage2.PerformLayout();
-            this.metroPanel1.ResumeLayout(false);
-            this.metroPanel1.PerformLayout();
+            this.TabPageSettings.ResumeLayout(false);
+            this.TabPageSettings.PerformLayout();
+            this.PanelUser.ResumeLayout(false);
+            this.PanelUser.PerformLayout();
+            this.PanelPassword.ResumeLayout(false);
             this.PanelSaveResultTo.ResumeLayout(false);
             this.PanelSaveResultTo.PerformLayout();
             this.TabPageAdmin.ResumeLayout(false);
@@ -631,14 +652,14 @@
         #endregion
 
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
-        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private MetroFramework.Controls.MetroTabPage TabPageWork;
         private MetroFramework.Controls.MetroTextBox BoxNumber;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox BoxNumerator;
         private MetroFramework.Controls.MetroTextBox BoxResult;
-        private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private MetroFramework.Controls.MetroTabPage TabPageSettings;
         private MetroFramework.Controls.MetroPanel PanelSaveResultTo;
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroTextBox BoxDirectoryForResult;
@@ -650,16 +671,17 @@
         private MetroFramework.Controls.MetroButton ButtonStart;
         private MetroFramework.Controls.MetroTabPage TabPageAdmin;
         private System.Windows.Forms.Button ButtonUsers;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ButtonViewLog;
         private MetroFramework.Controls.MetroButton metroButton2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button2;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroPanel PanelUser;
         private MetroFramework.Controls.MetroButton ButtonChangeUser;
         private MetroFramework.Controls.MetroTextBox BoxCurrentUser;
         private MetroFramework.Controls.MetroLabel metroLabel6;
-        private MetroFramework.Controls.MetroButton ButtonPassword;
+        private MetroFramework.Controls.MetroButton ButtonChangePassword;
         private MetroFramework.Controls.MetroTextBox BoxPassword;
+        private MetroFramework.Controls.MetroButton ButtonChangeUsername;
+        private MetroFramework.Controls.MetroPanel PanelPassword;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
     }
 }
 

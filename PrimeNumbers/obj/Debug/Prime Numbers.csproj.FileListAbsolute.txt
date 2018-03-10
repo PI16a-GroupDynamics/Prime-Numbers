@@ -34,3 +34,8 @@ C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\obj\Debug\Pri
 C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\obj\Debug\Prime Numbers.csproj.CoreCompileInputs.cache
 C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\obj\Debug\MetroFramework test at a new project.exe
 C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\obj\Debug\MetroFramework test at a new project.pdb
+C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\obj\Debug\Prime Numbers.csproj.ResolveComReference.cache
+C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\obj\Debug\Prime Numbers.csproj.CopyComplete
+C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\bin\Debug\itextsharp.dll
+C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\bin\Debug\itextsharp.pdfa.dll
+C:\Users\Home\source\repos\Prime-Numbers - копия\PrimeNumbers\bin\Debug\itextsharp.xml

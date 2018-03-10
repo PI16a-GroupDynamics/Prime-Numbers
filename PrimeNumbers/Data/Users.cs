@@ -15,22 +15,22 @@ namespace MetroFramework_test_at_a_new_project.Data
         // А что, если использовать этот список просто всегда? Делать запись на диск только при закрытии главной формы... Или по особой прихоти админа... Хммм...
         private static User currentUser;
 
-        private static User admin = new User("admin", "admin");
+        private static User defaultAdmin = new User("admin", "admin");
 
         static Users()
         {
             Users.DefaultFilePath = @"Records\users.bin";
-            Users.users.Add(Users.Admin);
+            Users.users.Add(Users.DefaultAdmin);
         }
 
         [CanBeNull]
-        public static User Admin
+        public static User DefaultAdmin
         {
-            get => Users.admin;
+            get => Users.defaultAdmin;
             set
             {
-                Users.Replace(Users.admin, value);
-                Users.admin = value;
+                Users.Replace(Users.defaultAdmin, value);
+                Users.defaultAdmin = value;
             }
         }
 
@@ -58,6 +58,8 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
         }
 
+        public static bool DeleteUser(string userName) => Users.users.Remove(Users.FindUserByName(userName));
+
         /// <summary>
         ///     Загружает данные из бинарного файла
         /// </summary>
@@ -72,7 +74,7 @@ namespace MetroFramework_test_at_a_new_project.Data
             {
                 Users.users = new List<User>
                 {
-                    Users.Admin
+                    Users.DefaultAdmin
                 };
                 return false;
             }
@@ -164,16 +166,42 @@ namespace MetroFramework_test_at_a_new_project.Data
         {
             Users.SetPasswordUser(Users.FindUserByName(username), password);
         }
+        /// <summary>
+        /// Проверяет, можно ли изменить имя и изменяет его, если так.
+        /// </summary>
+        /// <param name="oldUsername"></param>
+        /// <param name="newUsername"></param>
+        /// <returns>flag Successful</returns>
+        public static bool SetNameUser(string oldUsername, string newUsername)
+        {
+            if (Users.Contains(newUsername))
+            {
+                return false;
+            }
+
+            if (Users.FindUserByName(oldUsername) is var user == default)
+            {
+                return false;
+            }
+
+            user.Name = newUsername;
+            return true;
+
+        }
 
         private static void SetPasswordUser(User user, string password)
         {
             user.PassWord = password;
         }
 
+        public static List<User> GetListUsers() => Users.users;
 
+        /// <summary>
+        /// Единица списка пользователей
+        /// </summary>
         [Serializable]
         public sealed class User
-        { // Ни в коем случае не struct!
+        {
             public User(string name, string passWord)
             {
                 Name     = name;
@@ -181,7 +209,7 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
 
             [NotNull]
-            public string Name { get; }
+            public string Name { get; set; }
 
             public string PassWord { get; set; }
 

@@ -138,6 +138,7 @@
             this.Controls.Add(this.BtSignIn);
             this.Controls.Add(this.BtSignUp);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormSignIn";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSignIn_FormClosed);
             this.Load += new System.EventHandler(this.FormSignIn_Load);
