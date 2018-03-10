@@ -516,7 +516,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxDirectoryForResult.CustomButton.Visible = false;
             this.BoxDirectoryForResult.Lines = new string[0];
             this.BoxDirectoryForResult.Location = new System.Drawing.Point(3, 46);
-            this.BoxDirectoryForResult.MaxLength = 4;
+            this.BoxDirectoryForResult.MaxLength = 0;
             this.BoxDirectoryForResult.Name = "BoxDirectoryForResult";
             this.BoxDirectoryForResult.PasswordChar = '\0';
             this.BoxDirectoryForResult.PromptText = "<путь>";
@@ -532,6 +532,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxDirectoryForResult.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.BoxDirectoryForResult.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.BoxDirectoryForResult.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoxDirectoryForResult_KeyPress);
+            this.BoxDirectoryForResult.Leave += new System.EventHandler(this.BoxDirectoryForResult_Leave);
             // 
             // metroLabel5
             // 

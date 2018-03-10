@@ -1,0 +1,14 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=programHelp.chm
+Contents file=Table of Contents.hhc
+Default topic=Краткая справка.htm
+Display compile progress=No
+Language=0x419 Русский (Россия)
+
+
+[FILES]
+Краткая справка.htm
+
+[INFOTYPES]
+

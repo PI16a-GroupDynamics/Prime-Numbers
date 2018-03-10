@@ -38,11 +38,13 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="itextsharp">
-      <HintPath>..\..\..\Сторонние библиотеки\itextsharp-all-5.5.10\itextsharp-dll-core\itextsharp.dll</HintPath>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Сторонние библиотеки\itextsharp-all-5.5.10\itextsharp-dll-core\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp.pdfa">
-      <HintPath>..\..\..\Сторонние библиотеки\itextsharp-all-5.5.10\itextsharp-dll-pdfa\itextsharp.pdfa.dll</HintPath>
+    <Reference Include="itextsharp.pdfa, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Сторонние библиотеки\itextsharp-all-5.5.10\itextsharp-dll-pdfa\itextsharp.pdfa.dll</HintPath>
     </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>

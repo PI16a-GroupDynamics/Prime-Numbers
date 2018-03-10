@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JetBrains.Annotations;
@@ -11,7 +10,6 @@ using MetroFramework_test_at_a_new_project.Algorythms;
 using MetroFramework_test_at_a_new_project.Data;
 using MetroFramework_test_at_a_new_project.Printing;
 using Microsoft.Office.Interop.Excel;
-using Action = System.Action;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 // ReSharper disable PossibleNullReferenceException
@@ -119,19 +117,19 @@ namespace MetroFramework_test_at_a_new_project
             {
                 BoxNumerator.Clear();
                 BoxResult.Clear();
-                
+
                 int[] result = null;
                 Parallel.Invoke(() => { result = PrimeNumbers.GenerateInt(N); });
 
                 for (var i = 0; i < result.Length; i++)
                 {
                     var number     = result[i];
-                    var indexFrom1 = i + 1;
-                    BoxResult.AppendText(number +Environment.NewLine);
+                    var indexFrom1 = i                 + 1;
+                    BoxResult.AppendText(number        + Environment.NewLine);
                     BoxNumerator.AppendText(indexFrom1 + Environment.NewLine);
                 }
 
-                if (CBoxTypeOfFile.SelectedIndex<=0)
+                if (CBoxTypeOfFile.SelectedIndex <= 0)
                 {
                     return;
                 }
@@ -144,7 +142,9 @@ namespace MetroFramework_test_at_a_new_project
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show($@"Не удается создать указанный путь ""{directoryForResult}"" для сохранения результата. Возможно, вы назначили сохранение на флешку, а затем вытащили ее.");
+                    MessageBox.Show($@"Не удается создать указанный путь ""{
+                                            directoryForResult
+                                        }"" для сохранения результата. Возможно, вы назначили сохранение на флешку, а затем вытащили ее.");
                     return;
                 }
 
@@ -205,7 +205,31 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var helpPath = "..\\Help\\programHelp.chm";
+            while (! File.Exists(helpPath))
+            {
+                MessageBox.Show("Не удается открыть файл помощи. Выберите файл.");
+                //диалог
+                var dialog = new OpenFileDialog
+                {
+                    InitialDirectory = Environment.CurrentDirectory,
+                    Filter           = @"Файлы справки (*.chm)|*.chm|Все файлы (*.*)|*.*",
+                    Multiselect      = false
+                };
+
+                var dialogResult = dialog.ShowDialog();
+                if (dialogResult is DialogResult.Yes ||
+                    dialogResult is DialogResult.OK)
+                {
+                    helpPath = dialog.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            Help.ShowHelp(this, helpPath);
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -343,10 +367,7 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-        private void clearAdd(object sender, EventArgs e)
-        {
-            
-        }
+        private void clearAdd(object sender, EventArgs e) {}
 
         private void BoxDirectoryForResult_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -354,6 +375,11 @@ namespace MetroFramework_test_at_a_new_project
             {
                 PanelUser.Focus(); // просто убираю фокус с текстбокса
             }
+        }
+
+        private void BoxDirectoryForResult_Leave(object sender, EventArgs e)
+        {
+            BoxDirectoryForResult.Text = BoxDirectoryForResult.Text.Trim(' ', '.');
         }
     }
 }
