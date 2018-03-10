@@ -78,8 +78,9 @@ namespace MetroFramework_test_at_a_new_project.Printing
                 using (document)
                 {
                     // ReSharper disable once UnusedVariable
-                    var pdfWriter = PdfWriter.GetInstance(document, stream); // не понимаю как, но зачем-то это нужно.
-                    document.Open(); // opens the document
+                    var pdfWriter =
+                        PdfWriter.GetInstance(document, stream); // не понимаю как, но зачем-то это нужно.
+                    document.Open();                             // opens the document
                     document.AddCreator(Users.CurrentUserName);
                     var paragraph = new Paragraph(ResultBuilder.ToString());
                     document.Add(paragraph);

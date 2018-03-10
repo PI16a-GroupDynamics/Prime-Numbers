@@ -39,11 +39,7 @@ namespace MetroFramework_test_at_a_new_project.Data
         public static string CurrentUserName => Users.CurrentUser.Name;
 
         [CanBeNull]
-        public static User CurrentUser
-        {
-            get => Users.currentUser;
-            //set => Users.currentUser = value;
-        }
+        public static User CurrentUser => Users.currentUser;
 
         public static void SetCurrentUser([NotNull] string userName)
         {
@@ -73,9 +69,7 @@ namespace MetroFramework_test_at_a_new_project.Data
                 ! File.Exists(path))
             {
                 Users.users = new List<User>
-                {
-                    Users.DefaultAdmin
-                };
+                    {Users.DefaultAdmin};
                 return false;
             }
 
@@ -166,8 +160,9 @@ namespace MetroFramework_test_at_a_new_project.Data
         {
             Users.SetPasswordUser(Users.FindUserByName(username), password);
         }
+
         /// <summary>
-        /// Проверяет, можно ли изменить имя и изменяет его, если так.
+        ///     Проверяет, можно ли изменить имя и изменяет его, если так.
         /// </summary>
         /// <param name="oldUsername"></param>
         /// <param name="newUsername"></param>
@@ -186,7 +181,6 @@ namespace MetroFramework_test_at_a_new_project.Data
 
             user.Name = newUsername;
             return true;
-
         }
 
         private static void SetPasswordUser(User user, string password)
@@ -197,7 +191,7 @@ namespace MetroFramework_test_at_a_new_project.Data
         public static List<User> GetListUsers() => Users.users;
 
         /// <summary>
-        /// Единица списка пользователей
+        ///     Единица списка пользователей
         /// </summary>
         [Serializable]
         public sealed class User

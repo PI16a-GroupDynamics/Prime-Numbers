@@ -116,15 +116,9 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-        private void FormSignIn_Load(object sender, EventArgs e)
-        {
+        private void FormSignIn_Load(object sender, EventArgs e) {}
 
-        }
-
-        private void FormSignIn_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-        }
+        private void FormSignIn_FormClosed(object sender, FormClosedEventArgs e) {}
 
         private void TbConfirmPassword_KeyPress(object sender, KeyPressEventArgs e)
         {

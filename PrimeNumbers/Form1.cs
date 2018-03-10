@@ -208,7 +208,7 @@ namespace MetroFramework_test_at_a_new_project
             var helpPath = "..\\Help\\programHelp.chm";
             while (! File.Exists(helpPath))
             {
-                MessageBox.Show("Не удается открыть файл помощи. Выберите файл.");
+                MessageBox.Show(@"Не удается открыть файл помощи. Выберите файл.");
                 //диалог
                 var dialog = new OpenFileDialog
                 {

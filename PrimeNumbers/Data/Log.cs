@@ -49,7 +49,7 @@ namespace MetroFramework_test_at_a_new_project.Data
             {
                 var bf = new BinaryFormatter();
 
-                while(stream.Position<stream.Length)
+                while (stream.Position < stream.Length)
                 {
                     Log.log.Add(bf.Deserialize(stream) as LogRecord);
                 }
