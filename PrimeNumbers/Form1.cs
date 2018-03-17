@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JetBrains.Annotations;
@@ -19,6 +20,8 @@ namespace MetroFramework_test_at_a_new_project
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public partial class Form1: MetroForm
     {
+        private Thread excelThread;
+
         public Form1()
         {
             InitializeComponent();
@@ -47,7 +50,6 @@ namespace MetroFramework_test_at_a_new_project
             {
                 Users.SetCurrentUser(signInForm.UserNameIfSuccess);
                 BoxCurrentUser.Text = Users.CurrentUserName;
-
                 IfAdmin();
             }
         }
@@ -321,18 +323,18 @@ namespace MetroFramework_test_at_a_new_project
                 return;
             }
 
-            Parallel.Invoke(ShowLog);
+            excelThread = new Thread(ShowLog);
+            excelThread.Start();
 
-            void ShowLog()
+
+
+
+            void ShowLog() => Parallel.Invoke(() => // с Parallel получается побыстрее.
             {
+                LabelForExcel.Text = @"Открытие Excel...";
                 var       excelApp  = new Application();
                 var       workbook  = excelApp.Workbooks.Add();
                 Worksheet worksheet = workbook.Worksheets[1];
-
-
-                //Что у нас тут: 1) делаю заголовки(userName, N, DataTime)
-                //2) делаю там нужный тип данных
-                //3) заполняю ячейки данными из log после LoadFrom()
 
                 //делаю заголовки(просто присвоение текста)
 
@@ -344,14 +346,6 @@ namespace MetroFramework_test_at_a_new_project
                 var range2 = (Range) worksheet.Columns["B"];
                 var range3 = (Range) worksheet.Columns["C"];
                 range3.Columns.AutoFit();
-
-                /*var logRecord = new LogRecord("admin", 12, DateTime.Now);
-
-                
-
-                range1.Cells[2] = logRecord.UserName;
-                range2.Cells[2] = logRecord.N;
-                range3.Cells[2] = logRecord.DateTime;*/
 
                 for (var i = 1; i <= logs.Count; i++)
                 {
@@ -365,7 +359,8 @@ namespace MetroFramework_test_at_a_new_project
                 excelApp.Visible = true;
                 excelApp.UserControl =
                     true; // т.е. освобождение ресурсов объекта происходит при удалении его программно.
-            }
+                LabelForExcel.Text = string.Empty;
+            });
         }
 
         private void BoxDirectoryForResult_KeyPress(object sender, KeyPressEventArgs e)
