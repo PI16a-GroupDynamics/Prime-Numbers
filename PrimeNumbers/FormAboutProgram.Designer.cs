@@ -154,8 +154,7 @@
             this.metroTextBox3.CustomButton.Visible = false;
             this.metroTextBox3.Lines = new string[] {
         "Еще не реализовано:",
-        "1) Сам алгоритм (Влад, я жду, просто измени метод в файле PrimeNumbers.cs)",
-        "2) Справка (Сделаем на паре, согласовав все со всеми)"};
+        "1) Алгоритм) "};
             this.metroTextBox3.Location = new System.Drawing.Point(194, 143);
             this.metroTextBox3.MaxLength = 32767;
             this.metroTextBox3.Multiline = true;
@@ -168,8 +167,7 @@
             this.metroTextBox3.ShortcutsEnabled = true;
             this.metroTextBox3.Size = new System.Drawing.Size(235, 122);
             this.metroTextBox3.TabIndex = 5;
-            this.metroTextBox3.Text = "Еще не реализовано:\r\n1) Сам алгоритм (Влад, я жду, просто измени метод в файле Pr" +
-    "imeNumbers.cs)\r\n2) Справка (Сделаем на паре, согласовав все со всеми)";
+            this.metroTextBox3.Text = "Еще не реализовано:\r\n1) Алгоритм) ";
             this.metroTextBox3.UseSelectable = true;
             this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -195,6 +193,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAboutProgram";
             this.Text = "О программе";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.htmlPanel1.ResumeLayout(false);
             this.htmlPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

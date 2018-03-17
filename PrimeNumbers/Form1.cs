@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JetBrains.Annotations;
-using MetroFramework.Forms;
 using MetroFramework_test_at_a_new_project.Algorythms;
 using MetroFramework_test_at_a_new_project.Data;
 using MetroFramework_test_at_a_new_project.Printing;
@@ -18,7 +18,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 namespace MetroFramework_test_at_a_new_project
 {
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
-    public partial class Form1: MetroForm
+    public partial class Form1: Form
     {
         private Thread excelThread;
 
@@ -28,6 +28,14 @@ namespace MetroFramework_test_at_a_new_project
             BoxDirectoryForResult.Text   = Environment.CurrentDirectory;
             CBoxTypeOfFile.SelectedIndex = 0;
             TabPageAdmin.Parent          = null;
+            MaximizeBox = false;
+            MinimizeBox = false;
+        }
+
+        void ShowHelp(object o, CancelEventArgs e)
+        {
+            MessageBox.Show(@"Просто закройте эту форму.");
+            Cursor = DefaultCursor;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -330,7 +338,7 @@ namespace MetroFramework_test_at_a_new_project
 
 
             void ShowLog() => Parallel.Invoke(() => // с Parallel получается побыстрее.
-            {
+            { // вообще, надо бы это сделать в Control.Invoke, но и так все ок.
                 LabelForExcel.Text = @"Открытие Excel...";
                 var       excelApp  = new Application();
                 var       workbook  = excelApp.Workbooks.Add();

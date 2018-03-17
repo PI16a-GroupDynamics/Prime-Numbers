@@ -104,6 +104,7 @@
             // 
             // ButtonBack
             // 
+            this.ButtonBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.ButtonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ButtonBack.Image = global::MetroFramework_test_at_a_new_project.Properties.Resources.back1;
             this.ButtonBack.Location = new System.Drawing.Point(12, 2);
@@ -128,7 +129,9 @@
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.BoxPreview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.HelpButton = true;
             this.Name = "FormResultLooksLike";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

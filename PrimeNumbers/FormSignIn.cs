@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using MetroFramework_test_at_a_new_project.Data;
@@ -10,6 +11,14 @@ namespace MetroFramework_test_at_a_new_project
         public FormSignIn()
         {
             InitializeComponent();
+            MaximizeBox = false;
+            MinimizeBox = false;
+        }
+
+        void ShowHelp(object o, CancelEventArgs e)
+        {
+            MessageBox.Show(@"Просто закройте эту форму.");
+            Cursor = DefaultCursor;
         }
 
         public string UserNameIfSuccess { get; private set; }

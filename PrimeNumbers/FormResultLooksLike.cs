@@ -25,6 +25,9 @@ namespace MetroFramework_test_at_a_new_project
         {
             InitializeComponent();
             var str = Printing.SettingsForResult.ItemResultSeparator;
+            MaximizeBox = false;
+            MinimizeBox = false;
+
             if (str == default) // по идее, не заходили туда еще
             {
                 CBoxNewLines.SelectedIndex = 1;
@@ -33,6 +36,15 @@ namespace MetroFramework_test_at_a_new_project
             {
                 AnalizeAndApplyResultSeparator(str);
             }
+
+            MaximizeBox = false;
+            MinimizeBox = false;
+        }
+
+        void ShowHelp(object o, CancelEventArgs e)
+        {
+            MessageBox.Show(@"Просто закройте эту форму.");
+            Cursor = DefaultCursor;
         }
 
         private void ChangeResultSeparator(object sender = null, EventArgs e = null)

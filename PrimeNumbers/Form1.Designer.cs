@@ -30,6 +30,7 @@ namespace MetroFramework_test_at_a_new_project
         private void InitializeComponent()
         {
             this.TabPageAdmin = new MetroFramework.Controls.MetroTabPage();
+            this.LabelForExcel = new MetroFramework.Controls.MetroLabel();
             this.ButtonUsers = new System.Windows.Forms.Button();
             this.ButtonViewLog = new System.Windows.Forms.Button();
             this.TabPageSettings = new MetroFramework.Controls.MetroTabPage();
@@ -61,7 +62,6 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.LabelForExcel = new MetroFramework.Controls.MetroLabel();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUser.SuspendLayout();
@@ -82,12 +82,20 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageAdmin.HorizontalScrollbarSize = 10;
             this.TabPageAdmin.Location = new System.Drawing.Point(4, 38);
             this.TabPageAdmin.Name = "TabPageAdmin";
-            this.TabPageAdmin.Size = new System.Drawing.Size(387, 331);
+            this.TabPageAdmin.Size = new System.Drawing.Size(425, 347);
             this.TabPageAdmin.TabIndex = 2;
             this.TabPageAdmin.Text = "Админ";
             this.TabPageAdmin.VerticalScrollbarBarColor = true;
             this.TabPageAdmin.VerticalScrollbarHighlightOnWheel = false;
             this.TabPageAdmin.VerticalScrollbarSize = 10;
+            // 
+            // LabelForExcel
+            // 
+            this.LabelForExcel.AutoSize = true;
+            this.LabelForExcel.Location = new System.Drawing.Point(232, 94);
+            this.LabelForExcel.Name = "LabelForExcel";
+            this.LabelForExcel.Size = new System.Drawing.Size(0, 0);
+            this.LabelForExcel.TabIndex = 11;
             // 
             // ButtonUsers
             // 
@@ -126,7 +134,7 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageSettings.HorizontalScrollbarSize = 10;
             this.TabPageSettings.Location = new System.Drawing.Point(4, 38);
             this.TabPageSettings.Name = "TabPageSettings";
-            this.TabPageSettings.Size = new System.Drawing.Size(387, 331);
+            this.TabPageSettings.Size = new System.Drawing.Size(425, 347);
             this.TabPageSettings.TabIndex = 1;
             this.TabPageSettings.Text = "Настройки";
             this.TabPageSettings.VerticalScrollbarBarColor = true;
@@ -444,7 +452,7 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageWork.HorizontalScrollbarSize = 10;
             this.TabPageWork.Location = new System.Drawing.Point(4, 38);
             this.TabPageWork.Name = "TabPageWork";
-            this.TabPageWork.Size = new System.Drawing.Size(387, 331);
+            this.TabPageWork.Size = new System.Drawing.Size(425, 347);
             this.TabPageWork.Style = MetroFramework.MetroColorStyle.Brown;
             this.TabPageWork.TabIndex = 0;
             this.TabPageWork.Tag = "";
@@ -629,31 +637,26 @@ namespace MetroFramework_test_at_a_new_project
             this.metroTabControl1.Controls.Add(this.TabPageSettings);
             this.metroTabControl1.Controls.Add(this.TabPageAdmin);
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.metroTabControl1.Location = new System.Drawing.Point(50, 28);
+            this.metroTabControl1.Location = new System.Drawing.Point(12, 12);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 2;
-            this.metroTabControl1.Size = new System.Drawing.Size(395, 373);
+            this.metroTabControl1.Size = new System.Drawing.Size(433, 389);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
             // 
-            // LabelForExcel
-            // 
-            this.LabelForExcel.AutoSize = true;
-            this.LabelForExcel.Location = new System.Drawing.Point(232, 94);
-            this.LabelForExcel.Name = "LabelForExcel";
-            this.LabelForExcel.Size = new System.Drawing.Size(0, 0);
-            this.LabelForExcel.TabIndex = 11;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(460, 405);
             this.Controls.Add(this.metroTabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.HelpButton = true;
             this.Name = "Form1";
-            this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TabPageAdmin.ResumeLayout(false);

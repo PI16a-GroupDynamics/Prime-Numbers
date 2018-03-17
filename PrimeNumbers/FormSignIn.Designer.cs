@@ -139,7 +139,9 @@
             this.Controls.Add(this.BtSignUp);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.HelpButton = true;
             this.Name = "FormSignIn";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSignIn_FormClosed);
             this.Load += new System.EventHandler(this.FormSignIn_Load);
             this.PnConfirmPassword.ResumeLayout(false);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
@@ -13,6 +14,14 @@ namespace MetroFramework_test_at_a_new_project
         public FormUsers()
         {
             InitializeComponent();
+            MaximizeBox = false;
+            MinimizeBox = false;
+        }
+
+        void ShowHelp(object o, CancelEventArgs e)
+        {
+            MessageBox.Show(@"Просто закройте эту форму.");
+            Cursor = DefaultCursor;
         }
 
         private void FormUsers_Load(object sender, EventArgs e)
@@ -122,6 +131,11 @@ namespace MetroFramework_test_at_a_new_project
         {
             UpdateListFromTable();
             UpdateTable();
+        }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

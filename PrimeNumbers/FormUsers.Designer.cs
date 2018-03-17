@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.TableUsers = new System.Windows.Forms.DataGridView();
-            this.ButtonSaveChanges = new System.Windows.Forms.Button();
-            this.ButtonCancelChanges = new System.Windows.Forms.Button();
             this.Usernames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Passwords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ButtonSaveChanges = new System.Windows.Forms.Button();
+            this.ButtonCancelChanges = new System.Windows.Forms.Button();
+            this.ButtonBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             this.Usernames,
             this.Passwords});
             this.TableUsers.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.TableUsers.Location = new System.Drawing.Point(24, 13);
+            this.TableUsers.Location = new System.Drawing.Point(12, 55);
             this.TableUsers.MinimumSize = new System.Drawing.Size(200, 50);
             this.TableUsers.MultiSelect = false;
             this.TableUsers.Name = "TableUsers";
@@ -55,30 +56,6 @@
             this.TableUsers.TabIndex = 0;
             this.TableUsers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.TableUsers_CellValidating);
             this.TableUsers.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.TableUsers_UserDeletingRow);
-            // 
-            // ButtonSaveChanges
-            // 
-            this.ButtonSaveChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ButtonSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonSaveChanges.Location = new System.Drawing.Point(253, 13);
-            this.ButtonSaveChanges.Name = "ButtonSaveChanges";
-            this.ButtonSaveChanges.Size = new System.Drawing.Size(95, 44);
-            this.ButtonSaveChanges.TabIndex = 1;
-            this.ButtonSaveChanges.Text = "Сохранить изменения";
-            this.ButtonSaveChanges.UseVisualStyleBackColor = true;
-            this.ButtonSaveChanges.Click += new System.EventHandler(this.ButtonSaveChanges_Click);
-            // 
-            // ButtonCancelChanges
-            // 
-            this.ButtonCancelChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ButtonCancelChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonCancelChanges.Location = new System.Drawing.Point(253, 127);
-            this.ButtonCancelChanges.Name = "ButtonCancelChanges";
-            this.ButtonCancelChanges.Size = new System.Drawing.Size(95, 44);
-            this.ButtonCancelChanges.TabIndex = 2;
-            this.ButtonCancelChanges.Text = "Отменить изменения";
-            this.ButtonCancelChanges.UseVisualStyleBackColor = true;
-            this.ButtonCancelChanges.Click += new System.EventHandler(this.ButtonCancelChanges_Click);
             // 
             // Usernames
             // 
@@ -93,11 +70,50 @@
             this.Passwords.Name = "Passwords";
             this.Passwords.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
+            // ButtonSaveChanges
+            // 
+            this.ButtonSaveChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ButtonSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonSaveChanges.Location = new System.Drawing.Point(239, 55);
+            this.ButtonSaveChanges.Name = "ButtonSaveChanges";
+            this.ButtonSaveChanges.Size = new System.Drawing.Size(95, 44);
+            this.ButtonSaveChanges.TabIndex = 1;
+            this.ButtonSaveChanges.Text = "Сохранить изменения";
+            this.ButtonSaveChanges.UseVisualStyleBackColor = true;
+            this.ButtonSaveChanges.Click += new System.EventHandler(this.ButtonSaveChanges_Click);
+            // 
+            // ButtonCancelChanges
+            // 
+            this.ButtonCancelChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ButtonCancelChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonCancelChanges.Location = new System.Drawing.Point(239, 152);
+            this.ButtonCancelChanges.Name = "ButtonCancelChanges";
+            this.ButtonCancelChanges.Size = new System.Drawing.Size(95, 44);
+            this.ButtonCancelChanges.TabIndex = 2;
+            this.ButtonCancelChanges.Text = "Отменить изменения";
+            this.ButtonCancelChanges.UseVisualStyleBackColor = true;
+            this.ButtonCancelChanges.Click += new System.EventHandler(this.ButtonCancelChanges_Click);
+            // 
+            // ButtonBack
+            // 
+            this.ButtonBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ButtonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonBack.Image = global::MetroFramework_test_at_a_new_project.Properties.Resources.back1;
+            this.ButtonBack.Location = new System.Drawing.Point(12, 0);
+            this.ButtonBack.Name = "ButtonBack";
+            this.ButtonBack.Size = new System.Drawing.Size(65, 38);
+            this.ButtonBack.TabIndex = 23;
+            this.ButtonBack.Text = "Назад";
+            this.ButtonBack.UseVisualStyleBackColor = true;
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
+            // 
             // FormUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.ButtonBack;
             this.ClientSize = new System.Drawing.Size(392, 331);
+            this.Controls.Add(this.ButtonBack);
             this.Controls.Add(this.ButtonCancelChanges);
             this.Controls.Add(this.ButtonSaveChanges);
             this.Controls.Add(this.TableUsers);
@@ -119,5 +135,6 @@
         private System.Windows.Forms.Button ButtonCancelChanges;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usernames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Passwords;
+        private System.Windows.Forms.Button ButtonBack;
     }
 }
