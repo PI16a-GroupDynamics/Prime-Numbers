@@ -134,7 +134,8 @@ namespace MetroFramework_test_at_a_new_project
                     return;
                 }
 
-                var saver = new ResultSaver<int>(result);
+                var saver =
+                    new ResultSaver<int>(result, SettingsForResult.ItemResultSeparator);
 
                 try
                 {
@@ -231,7 +232,7 @@ namespace MetroFramework_test_at_a_new_project
 
             Help.ShowHelp(this, helpPath);
         }
-
+        
         private void MetroButton1_Click(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog
@@ -367,8 +368,6 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-        private void clearAdd(object sender, EventArgs e) {}
-
         private void BoxDirectoryForResult_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -380,6 +379,12 @@ namespace MetroFramework_test_at_a_new_project
         private void BoxDirectoryForResult_Leave(object sender, EventArgs e)
         {
             BoxDirectoryForResult.Text = BoxDirectoryForResult.Text.Trim(' ', '.');
+        }
+
+        private void metroButton3_Click(object sender, EventArgs e)
+        {
+            var form = new FormResultLooksLike();
+            form.ShowDialog();
         }
     }
 }

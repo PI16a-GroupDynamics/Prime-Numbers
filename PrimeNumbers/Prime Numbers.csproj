@@ -60,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,6 +87,12 @@
     <Compile Include="FormAboutProgram.Designer.cs">
       <DependentUpon>FormAboutProgram.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormResultLooksLike.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormResultLooksLike.Designer.cs">
+      <DependentUpon>FormResultLooksLike.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSignIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +106,7 @@
       <DependentUpon>FormUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Printing\ResultSaver.cs" />
+    <Compile Include="Printing\SettingsForResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -106,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAboutProgram.resx">
       <DependentUpon>FormAboutProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormResultLooksLike.resx">
+      <DependentUpon>FormResultLooksLike.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSignIn.resx">
       <DependentUpon>FormSignIn.cs</DependentUpon>
@@ -174,6 +185,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

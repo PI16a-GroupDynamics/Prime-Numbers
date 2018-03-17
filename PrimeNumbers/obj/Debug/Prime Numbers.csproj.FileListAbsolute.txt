@@ -62,3 +62,4 @@ C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\obj\Debug\Prime Numbers.c
 C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\obj\Debug\Prime Numbers.csproj.CopyComplete
 C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework test at a new project.exe
 C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework test at a new project.pdb
+C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\obj\Debug\MetroFramework_test_at_a_new_project.FormResultLooksLike.resources

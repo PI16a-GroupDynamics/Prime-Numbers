@@ -10,17 +10,12 @@ namespace MetroFramework_test_at_a_new_project.Printing
 {
     public class ResultSaver<T>
     {
-        [NotNull] private T[] result;
+        [NotNull] private T[] result = new T[0];
 
-        public ResultSaver(T[] result)
+        public ResultSaver(T[] result, string itemResultSeparator = null)
         {
-            Result = result ?? throw new ArgumentNullException(nameof(result));
-
-            ResultBuilder = new StringBuilder(Result.Length);
-            foreach (var t in Result)
-            {
-                ResultBuilder.AppendLine(t.ToString());
-            }
+            this.itemResultSeparator = itemResultSeparator ?? Environment.NewLine;
+            Result                   = result;
         }
 
         [NotNull]
@@ -34,10 +29,12 @@ namespace MetroFramework_test_at_a_new_project.Printing
                 ResultBuilder = new StringBuilder(Result.Length);
                 foreach (var t in Result)
                 {
-                    ResultBuilder.AppendLine(t.ToString());
+                    ResultBuilder.Append(t + itemResultSeparator);
                 }
             }
         }
+
+        [NotNull] private readonly string itemResultSeparator;
 
         public StringBuilder ResultBuilder { get; private set; }
 
