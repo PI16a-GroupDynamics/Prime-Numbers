@@ -43,9 +43,10 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel1.Location = new System.Drawing.Point(248, 3);
+            this.metroLabel1.Location = new System.Drawing.Point(351, 21);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(130, 25);
+            this.metroLabel1.Size = new System.Drawing.Size(136, 25);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel1.TabIndex = 1;
             this.metroLabel1.Text = "Простые числа";
@@ -58,9 +59,10 @@
             // 
             // 
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(157, 1);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(179, 2);
+            this.metroTextBox1.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(77, 77);
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(131, 131);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox1.CustomButton.TabIndex = 1;
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -70,7 +72,8 @@
         "Назначение: ",
         "1) Сгенерировать нужное число простых чисел",
         "2) Сохранить результат"};
-            this.metroTextBox1.Location = new System.Drawing.Point(194, 58);
+            this.metroTextBox1.Location = new System.Drawing.Point(263, 66);
+            this.metroTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Multiline = true;
             this.metroTextBox1.Name = "metroTextBox1";
@@ -80,7 +83,7 @@
             this.metroTextBox1.SelectionLength = 0;
             this.metroTextBox1.SelectionStart = 0;
             this.metroTextBox1.ShortcutsEnabled = true;
-            this.metroTextBox1.Size = new System.Drawing.Size(235, 79);
+            this.metroTextBox1.Size = new System.Drawing.Size(313, 136);
             this.metroTextBox1.TabIndex = 2;
             this.metroTextBox1.Text = "Назначение: \r\n1) Сгенерировать нужное число простых чисел\r\n2) Сохранить результат" +
     "";
@@ -94,9 +97,10 @@
             // 
             // 
             this.metroTextBox2.CustomButton.Image = null;
-            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(152, 2);
+            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(239, 2);
+            this.metroTextBox2.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox2.CustomButton.Name = "";
-            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(51, 51);
+            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(71, 71);
             this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox2.CustomButton.TabIndex = 1;
             this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -106,7 +110,8 @@
         "Авторы:",
         "Горбань В.",
         "Андрееев А."};
-            this.metroTextBox2.Location = new System.Drawing.Point(194, 271);
+            this.metroTextBox2.Location = new System.Drawing.Point(263, 368);
+            this.metroTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox2.MaxLength = 32767;
             this.metroTextBox2.Multiline = true;
             this.metroTextBox2.Name = "metroTextBox2";
@@ -116,7 +121,7 @@
             this.metroTextBox2.SelectionLength = 0;
             this.metroTextBox2.SelectionStart = 0;
             this.metroTextBox2.ShortcutsEnabled = true;
-            this.metroTextBox2.Size = new System.Drawing.Size(206, 56);
+            this.metroTextBox2.Size = new System.Drawing.Size(313, 76);
             this.metroTextBox2.TabIndex = 3;
             this.metroTextBox2.Text = "Авторы:\r\nГорбань В.\r\nАндрееев А.";
             this.metroTextBox2.UseSelectable = true;
@@ -126,16 +131,17 @@
             // htmlPanel1
             // 
             this.htmlPanel1.AutoScroll = true;
-            this.htmlPanel1.AutoScrollMinSize = new System.Drawing.Size(481, 0);
+            this.htmlPanel1.AutoScrollMinSize = new System.Drawing.Size(615, 0);
             this.htmlPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.htmlPanel1.Controls.Add(this.metroTextBox3);
             this.htmlPanel1.Controls.Add(this.metroTextBox2);
             this.htmlPanel1.Controls.Add(this.metroTextBox1);
             this.htmlPanel1.Controls.Add(this.metroLabel1);
             this.htmlPanel1.Controls.Add(this.pictureBox1);
-            this.htmlPanel1.Location = new System.Drawing.Point(0, 5);
+            this.htmlPanel1.Location = new System.Drawing.Point(0, 0);
+            this.htmlPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.htmlPanel1.Name = "htmlPanel1";
-            this.htmlPanel1.Size = new System.Drawing.Size(481, 332);
+            this.htmlPanel1.Size = new System.Drawing.Size(611, 501);
             this.htmlPanel1.TabIndex = 1;
             // 
             // metroTextBox3
@@ -144,9 +150,10 @@
             // 
             // 
             this.metroTextBox3.CustomButton.Image = null;
-            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(115, 2);
+            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(165, 2);
+            this.metroTextBox3.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox3.CustomButton.Name = "";
-            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(117, 117);
+            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(145, 145);
             this.metroTextBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox3.CustomButton.TabIndex = 1;
             this.metroTextBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -155,7 +162,8 @@
             this.metroTextBox3.Lines = new string[] {
         "Еще не реализовано:",
         "1) Алгоритм) "};
-            this.metroTextBox3.Location = new System.Drawing.Point(194, 143);
+            this.metroTextBox3.Location = new System.Drawing.Point(263, 210);
+            this.metroTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox3.MaxLength = 32767;
             this.metroTextBox3.Multiline = true;
             this.metroTextBox3.Name = "metroTextBox3";
@@ -165,7 +173,7 @@
             this.metroTextBox3.SelectionLength = 0;
             this.metroTextBox3.SelectionStart = 0;
             this.metroTextBox3.ShortcutsEnabled = true;
-            this.metroTextBox3.Size = new System.Drawing.Size(235, 122);
+            this.metroTextBox3.Size = new System.Drawing.Size(313, 150);
             this.metroTextBox3.TabIndex = 5;
             this.metroTextBox3.Text = "Еще не реализовано:\r\n1) Алгоритм) ";
             this.metroTextBox3.UseSelectable = true;
@@ -175,22 +183,25 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MetroFramework_test_at_a_new_project.Properties.Resources._10494_771_lesson_1_t;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 43);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(176, 324);
+            this.pictureBox1.Size = new System.Drawing.Size(235, 401);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // FormAboutProgram
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 348);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.ClientSize = new System.Drawing.Size(613, 498);
             this.Controls.Add(this.htmlPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormAboutProgram";
             this.Text = "О программе";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);

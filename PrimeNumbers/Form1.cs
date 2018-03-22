@@ -125,18 +125,18 @@ namespace MetroFramework_test_at_a_new_project
 
             void WorkWithResult()
             {
-                BoxNumerator.Clear();
+                
                 BoxResult.Clear();
 
                 int[] result = null;
-                Parallel.Invoke(() => { result = PrimeNumbers.GenerateInt(N); });
+                Parallel.Invoke(() => { result = PrimeNumbers.Prim(N); });
 
                 for (var i = 0; i < result.Length; i++)
                 {
                     var number     = result[i];
                     var indexFrom1 = i                 + 1;
-                    BoxResult.AppendText(number        + Environment.NewLine);
-                    BoxNumerator.AppendText(indexFrom1 + Environment.NewLine);
+                    BoxResult.AppendText(indexFrom1 +  "\t " + number        + Environment.NewLine);
+                    
                 }
 
                 if (CBoxTypeOfFile.SelectedIndex <= 0)
