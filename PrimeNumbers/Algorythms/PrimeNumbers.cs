@@ -1,8 +1,17 @@
-﻿namespace MetroFramework_test_at_a_new_project.Algorythms
+﻿using System;
+using System.Threading;
+
+namespace MetroFramework_test_at_a_new_project.Algorythms
 {
     public static class PrimeNumbers
     {
-        public static int[] GenerateInt(int n) => new[] {1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
+        public static int[] GenerateInt(int n)
+        {
+            var res = new int[n];
+
+            Thread.Sleep(20000);
+            return res;
+        } 
 
         public static string[] GenerateStr(int n) => new[]
         {

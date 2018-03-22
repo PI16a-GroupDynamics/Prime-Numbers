@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,7 +12,10 @@ using MetroFramework_test_at_a_new_project.Algorythms;
 using MetroFramework_test_at_a_new_project.Data;
 using MetroFramework_test_at_a_new_project.Printing;
 using Microsoft.Office.Interop.Excel;
+using Action = System.Action;
 using Application = Microsoft.Office.Interop.Excel.Application;
+using ScrollBars = System.Windows.Forms.ScrollBars;
+using TextBox = System.Windows.Forms.TextBox;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -21,6 +25,7 @@ namespace MetroFramework_test_at_a_new_project
     public partial class Form1: Form
     {
         private Thread excelThread;
+        private Thread resultThread;
 
         public Form1()
         {
@@ -28,9 +33,10 @@ namespace MetroFramework_test_at_a_new_project
             BoxDirectoryForResult.Text   = Environment.CurrentDirectory;
             CBoxTypeOfFile.SelectedIndex = 0;
             TabPageAdmin.Parent          = null;
-            MaximizeBox = false;
-            MinimizeBox = false;
+            MaximizeBox                  = false;
+            MinimizeBox                  = false;
         }
+
 
         void ShowHelp(object o, CancelEventArgs e)
         {
@@ -118,38 +124,46 @@ namespace MetroFramework_test_at_a_new_project
 
             var directoryForResult = BoxDirectoryForResult.Text;
 
-
-            Parallel.Invoke(WorkWithResult);
-
+            resultThread = new Thread(() => { Parallel.Invoke(WorkWithResult); });
+            resultThread.Start();
             Log.AddToFile(new LogRecord(Users.CurrentUserName, N));
+
 
             void WorkWithResult()
             {
-                BoxNumerator.Clear();
-                BoxResult.Clear();
+                BoxResult.Invoke(new Action(() => { BoxResult.Clear(); }));
+                //PanelUser.Invoke(new Action(() => { PanelUser.Enabled = false; }));
+                PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = false; }));
+                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled = false; }));
+                
 
-                int[] result = null;
-                Parallel.Invoke(() => { result = PrimeNumbers.GenerateInt(N); });
+                var result = PrimeNumbers.GenerateInt(N);
+                var sbResultForTextBox = new StringBuilder(N * 5);
+                var progressStep = 100d / N;
+                var progressAction = new Action(() => { progressBar1.Value += (int) progressStep; });
 
-                for (var i = 0; i < result.Length; i++)
+                foreach (var number in result)
                 {
-                    var number     = result[i];
-                    var indexFrom1 = i                 + 1;
-                    BoxResult.AppendText(number        + Environment.NewLine);
-                    BoxNumerator.AppendText(indexFrom1 + Environment.NewLine);
+                    sbResultForTextBox.AppendLine(number.ToString());
+                    progressBar1.Invoke(progressAction);
                 }
 
-                if (CBoxTypeOfFile.SelectedIndex <= 0)
+                BoxResult.Invoke(new Action(() => { BoxResult.Text = sbResultForTextBox.ToString(); }));
+
+                var typeOfFile = 0;
+                CBoxTypeOfFile.Invoke(new Action(() => { typeOfFile = CBoxTypeOfFile.SelectedIndex; }));
+                if (typeOfFile <= 0)
                 {
+                    progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
                     return;
                 }
 
-                var saver =
+                var resultSaver =
                     new ResultSaver<int>(result, SettingsForResult.ItemResultSeparator);
 
                 try
                 {
-                    saver.SetDirectoryForResult(directoryForResult);
+                    resultSaver.SetDirectoryForResult(directoryForResult);
                 }
                 catch (Exception)
                 {
@@ -161,10 +175,19 @@ namespace MetroFramework_test_at_a_new_project
 
                 var actionsSaveResult = new Dictionary<int, Action<string, bool>>
                 {
-                    [1] = saver.SaveTextResultTo,
-                    [2] = saver.SavePdfResultTo
+                    [1] = resultSaver.SaveTextResultTo,
+                    [2] = resultSaver.SavePdfResultTo
                 };
                 actionsSaveResult[CBoxTypeOfFile.SelectedIndex].Invoke(string.Empty, false);
+                if (CBoxTypeOfFile.SelectedIndex > 0)
+                {
+                    MessageBox.Show($@"Результат сохранен в указанную папку ""{directoryForResult}""", @"Уведомление");
+                }
+
+                progressBar1.Invoke(new Action(()=> { progressBar1.Value = 0; }));
+                //PanelUser.Invoke(new Action(() => { PanelUser.Enabled                 = true; }));
+                PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = true; }));
+                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled = true; }));
             }
         }
 
@@ -242,7 +265,7 @@ namespace MetroFramework_test_at_a_new_project
 
             Help.ShowHelp(this, helpPath);
         }
-        
+
         private void MetroButton1_Click(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog
@@ -269,6 +292,16 @@ namespace MetroFramework_test_at_a_new_project
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (resultThread.IsAlive)
+            {
+                if (MessageBox.Show(@"Генерация еще не закончена. Уверены, что хотите выйти?",
+                                    @"Подтверждение", MessageBoxButtons.YesNo) !=
+                    DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
             Users.SaveToFile();
         }
 
@@ -335,10 +368,8 @@ namespace MetroFramework_test_at_a_new_project
             excelThread.Start();
 
 
-
-
             void ShowLog() => Parallel.Invoke(() => // с Parallel получается побыстрее.
-            { // вообще, надо бы это сделать в Control.Invoke, но и так все ок.
+            {
                 LabelForExcel.Text = @"Открытие Excel...";
                 var       excelApp  = new Application();
                 var       workbook  = excelApp.Workbooks.Add();
@@ -388,6 +419,15 @@ namespace MetroFramework_test_at_a_new_project
         {
             var form = new FormResultLooksLike();
             form.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить журнал?", @"Подтвердите удаление", MessageBoxButtons.YesNo) is
+                DialogResult.Yes)
+            {
+                File.Delete(Log.DefaultFilePath);
+            }
         }
     }
 }
