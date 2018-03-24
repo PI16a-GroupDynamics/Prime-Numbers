@@ -56,12 +56,13 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageWork = new MetroFramework.Controls.MetroTabPage();
             this.ButtonStart = new MetroFramework.Controls.MetroButton();
             this.PanelResult = new MetroFramework.Controls.MetroPanel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.BoxResult = new System.Windows.Forms.TextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.BoxNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.ButtonInterrupt = new MetroFramework.Controls.MetroButton();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUser.SuspendLayout();
@@ -455,6 +456,7 @@ namespace MetroFramework_test_at_a_new_project
             // TabPageWork
             // 
             this.TabPageWork.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TabPageWork.Controls.Add(this.ButtonInterrupt);
             this.TabPageWork.Controls.Add(this.ButtonStart);
             this.TabPageWork.Controls.Add(this.PanelResult);
             this.TabPageWork.Controls.Add(this.BoxNumber);
@@ -479,7 +481,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             this.ButtonStart.Location = new System.Drawing.Point(5, 30);
             this.ButtonStart.Name = "ButtonStart";
-            this.ButtonStart.Size = new System.Drawing.Size(58, 23);
+            this.ButtonStart.Size = new System.Drawing.Size(71, 23);
             this.ButtonStart.TabIndex = 16;
             this.ButtonStart.Text = "Начать";
             this.ButtonStart.UseSelectable = true;
@@ -502,11 +504,21 @@ namespace MetroFramework_test_at_a_new_project
             this.PanelResult.VerticalScrollbarSize = 10;
             this.PanelResult.Visible = false;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(41, 308);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(155, 23);
+            this.progressBar1.Step = 1;
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 14;
+            // 
             // BoxResult
             // 
             this.BoxResult.Location = new System.Drawing.Point(41, 24);
             this.BoxResult.Multiline = true;
             this.BoxResult.Name = "BoxResult";
+            this.BoxResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.BoxResult.Size = new System.Drawing.Size(155, 279);
             this.BoxResult.TabIndex = 13;
             // 
@@ -525,7 +537,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             // 
             this.BoxNumber.CustomButton.Image = null;
-            this.BoxNumber.CustomButton.Location = new System.Drawing.Point(17, 1);
+            this.BoxNumber.CustomButton.Location = new System.Drawing.Point(30, 1);
             this.BoxNumber.CustomButton.Name = "";
             this.BoxNumber.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.BoxNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -535,7 +547,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxNumber.CustomButton.Visible = false;
             this.BoxNumber.Lines = new string[0];
             this.BoxNumber.Location = new System.Drawing.Point(24, 3);
-            this.BoxNumber.MaxLength = 4;
+            this.BoxNumber.MaxLength = 6;
             this.BoxNumber.Name = "BoxNumber";
             this.BoxNumber.PasswordChar = '\0';
             this.BoxNumber.PromptText = "0";
@@ -544,7 +556,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxNumber.SelectionLength = 0;
             this.BoxNumber.SelectionStart = 0;
             this.BoxNumber.ShortcutsEnabled = true;
-            this.BoxNumber.Size = new System.Drawing.Size(39, 23);
+            this.BoxNumber.Size = new System.Drawing.Size(52, 23);
             this.BoxNumber.TabIndex = 14;
             this.BoxNumber.UseSelectable = true;
             this.BoxNumber.WaterMark = "0";
@@ -576,14 +588,16 @@ namespace MetroFramework_test_at_a_new_project
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
             // 
-            // progressBar1
+            // ButtonInterrupt
             // 
-            this.progressBar1.Location = new System.Drawing.Point(41, 308);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(155, 23);
-            this.progressBar1.Step = 1;
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 14;
+            this.ButtonInterrupt.Location = new System.Drawing.Point(5, 59);
+            this.ButtonInterrupt.Name = "ButtonInterrupt";
+            this.ButtonInterrupt.Size = new System.Drawing.Size(71, 23);
+            this.ButtonInterrupt.TabIndex = 17;
+            this.ButtonInterrupt.Text = "Прервать";
+            this.ButtonInterrupt.UseSelectable = true;
+            this.ButtonInterrupt.Visible = false;
+            this.ButtonInterrupt.Click += new System.EventHandler(this.ButtonInterrupt_Click);
             // 
             // Form1
             // 
@@ -651,6 +665,7 @@ namespace MetroFramework_test_at_a_new_project
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox BoxResult;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private MetroFramework.Controls.MetroButton ButtonInterrupt;
     }
 }
 

@@ -14,8 +14,6 @@ using MetroFramework_test_at_a_new_project.Printing;
 using Microsoft.Office.Interop.Excel;
 using Action = System.Action;
 using Application = Microsoft.Office.Interop.Excel.Application;
-using ScrollBars = System.Windows.Forms.ScrollBars;
-using TextBox = System.Windows.Forms.TextBox;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -38,7 +36,7 @@ namespace MetroFramework_test_at_a_new_project
         }
 
 
-        void ShowHelp(object o, CancelEventArgs e)
+        private void ShowHelp(object o, CancelEventArgs e)
         {
             MessageBox.Show(@"Просто закройте эту форму.");
             Cursor = DefaultCursor;
@@ -117,10 +115,14 @@ namespace MetroFramework_test_at_a_new_project
                 return;
             }
 
-            PanelResult.Visible = true;
+            PanelResult.Visible     = true;
+            ButtonInterrupt.Visible = true;
+            ButtonStart.Enabled     = false;
             var N = int.Parse(BoxNumber.Text);
-            //наконец-то сохраняю в файл результаты
-            //лучше это сделать в отдельном потоке, чтобы не мешало.
+            if (N <= 0)
+            {
+                return;
+            }
 
             var directoryForResult = BoxDirectoryForResult.Text;
 
@@ -134,13 +136,27 @@ namespace MetroFramework_test_at_a_new_project
                 BoxResult.Invoke(new Action(() => { BoxResult.Clear(); }));
                 //PanelUser.Invoke(new Action(() => { PanelUser.Enabled = false; }));
                 PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = false; }));
-                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled = false; }));
-                
+                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = false; }));
 
-                var result = PrimeNumbers.GenerateInt(N);
+
                 var sbResultForTextBox = new StringBuilder(N * 5);
-                var progressStep = 100d / N;
-                var progressAction = new Action(() => { progressBar1.Value += (int) progressStep; });
+                var progress           = 0.0;
+                var typeOfFile         = 0;
+                CBoxTypeOfFile.Invoke(new Action(() => { typeOfFile = CBoxTypeOfFile.SelectedIndex; }));
+
+                var progressStep = 100d / N / 2;
+                var progressAction = new Action(() =>
+                {
+                    progressBar1.Value = (int) (progress += progressStep);
+                });
+                var result = new int[N];
+                result[0] = PrimeNumbers.Next_prime(0);
+                progressBar1.Invoke(progressAction);
+                for (var i = 0; i < result.Length - 1; i++)
+                {
+                    result[i + 1] = PrimeNumbers.Next_prime(result[i]);
+                    progressBar1.Invoke(progressAction);
+                }
 
                 foreach (var number in result)
                 {
@@ -150,13 +166,12 @@ namespace MetroFramework_test_at_a_new_project
 
                 BoxResult.Invoke(new Action(() => { BoxResult.Text = sbResultForTextBox.ToString(); }));
 
-                var typeOfFile = 0;
-                CBoxTypeOfFile.Invoke(new Action(() => { typeOfFile = CBoxTypeOfFile.SelectedIndex; }));
                 if (typeOfFile <= 0)
                 {
-                    progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
-                    return;
+                    goto FinalActions;
                 }
+
+                #region SaveToFile
 
                 var resultSaver =
                     new ResultSaver<int>(result, SettingsForResult.ItemResultSeparator);
@@ -181,13 +196,26 @@ namespace MetroFramework_test_at_a_new_project
                 actionsSaveResult[CBoxTypeOfFile.SelectedIndex].Invoke(string.Empty, false);
                 if (CBoxTypeOfFile.SelectedIndex > 0)
                 {
-                    MessageBox.Show($@"Результат сохранен в указанную папку ""{directoryForResult}""", @"Уведомление");
+                    MessageBox.Show($@"Результат сохранен в указанную папку ""{directoryForResult}""",
+                                    @"Уведомление");
                 }
+                
 
-                progressBar1.Invoke(new Action(()=> { progressBar1.Value = 0; }));
+                #endregion
+
+                FinalActions:
+
+                #region FinalActions
+
+                progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
                 //PanelUser.Invoke(new Action(() => { PanelUser.Enabled                 = true; }));
                 PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = true; }));
-                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled = true; }));
+                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = true; }));
+
+                ButtonInterrupt.Invoke(new Action(() => { ButtonInterrupt.Visible = false; }));
+                ButtonStart.Invoke(new Action(() => { ButtonStart.Enabled         = true; }));
+
+                #endregion
             }
         }
 
@@ -292,16 +320,24 @@ namespace MetroFramework_test_at_a_new_project
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (resultThread.IsAlive)
+            if (resultThread != null &&
+                resultThread.IsAlive)
             {
                 if (MessageBox.Show(@"Генерация еще не закончена. Уверены, что хотите выйти?",
                                     @"Подтверждение", MessageBoxButtons.YesNo) !=
-                    DialogResult.No)
+                    DialogResult.Yes)
                 {
                     e.Cancel = true;
                     return;
                 }
             }
+
+            if (resultThread != null &&
+                resultThread.IsAlive)
+            {
+                resultThread.Abort();
+            }
+
             Users.SaveToFile();
         }
 
@@ -328,9 +364,6 @@ namespace MetroFramework_test_at_a_new_project
                     MessageBox.Show(@"Имя пользователя не может быть пустым", @"Ошибка");
                     return;
                 }
-
-                //Users.SetPasswordUser(BoxCurrentUser.Text, BoxPassword.Text);
-                //Users.CurrentUser    = Users.FindUserByName(BoxCurrentUser.Text);
 
                 if (Users.CurrentUserName == BoxCurrentUser.Text)
                 { // передумал изменять
@@ -368,38 +401,41 @@ namespace MetroFramework_test_at_a_new_project
             excelThread.Start();
 
 
-            void ShowLog() => Parallel.Invoke(() => // с Parallel получается побыстрее.
+            void ShowLog()
             {
-                LabelForExcel.Text = @"Открытие Excel...";
-                var       excelApp  = new Application();
-                var       workbook  = excelApp.Workbooks.Add();
-                Worksheet worksheet = workbook.Worksheets[1];
-
-                //делаю заголовки(просто присвоение текста)
-
-                worksheet.Cells[1, 1] = "Имя пользователя";
-                worksheet.Cells[1, 2] = "N";
-                worksheet.Cells[1, 3] = "дата и время операции";
-
-                var range1 = (Range) worksheet.Columns["A"];
-                var range2 = (Range) worksheet.Columns["B"];
-                var range3 = (Range) worksheet.Columns["C"];
-                range3.Columns.AutoFit();
-
-                for (var i = 1; i <= logs.Count; i++)
+                Parallel.Invoke(() =>
                 {
-                    var record = logs[i - 1];
-                    range1.Cells[i] = record.UserName;
-                    range2.Cells[i] = record.N;
-                    range3.Cells[i] = record.DateTime;
-                }
+                    LabelForExcel.Text = @"Открытие Excel...";
+                    var       excelApp  = new Application();
+                    var       workbook  = excelApp.Workbooks.Add();
+                    Worksheet worksheet = workbook.Worksheets[1];
+
+                    //делаю заголовки
+
+                    worksheet.Cells[1, 1] = "Имя пользователя";
+                    worksheet.Cells[1, 2] = "N";
+                    worksheet.Cells[1, 3] = "дата и время операции";
+
+                    var range1 = (Range) worksheet.Columns["A"];
+                    var range2 = (Range) worksheet.Columns["B"];
+                    var range3 = (Range) worksheet.Columns["C"];
+                    range3.Columns.AutoFit();
+
+                    for (var i = 1; i <= logs.Count; i++)
+                    {
+                        var record = logs[i - 1];
+                        range1.Cells[i] = record.UserName;
+                        range2.Cells[i] = record.N;
+                        range3.Cells[i] = record.DateTime;
+                    }
 
 
-                excelApp.Visible = true;
-                excelApp.UserControl =
-                    true; // т.е. освобождение ресурсов объекта происходит при удалении его программно.
-                LabelForExcel.Text = string.Empty;
-            });
+                    excelApp.Visible = true;
+                    excelApp.UserControl =
+                        true; // т.е. освобождение ресурсов объекта происходит при удалении его программно.
+                    LabelForExcel.Text = string.Empty;
+                });
+            }
         }
 
         private void BoxDirectoryForResult_KeyPress(object sender, KeyPressEventArgs e)
@@ -428,6 +464,33 @@ namespace MetroFramework_test_at_a_new_project
             {
                 File.Delete(Log.DefaultFilePath);
             }
+        }
+
+        private void ButtonInterrupt_Click(object sender, EventArgs e)
+        {
+            if (! resultThread.IsAlive)
+            {
+                return;
+            }
+
+            resultThread
+                .Abort(); // как я понял, безопасное прерывание. Да, это "Просит поток завершить работу"
+
+            #region FinalActions
+
+            progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
+            /*Хоть и находится в том же потоке, где был создан, но:
+                 1) Другой поток все еще работает с ним, делает свои действия (возможно, by Invoke, как надо.)
+                 2) Из-за того, что другой поток использует Invoke, он ставит свои действия в очередь.
+                 3) Если я тут просто присвою значения через = , то сразу после этого выполнятся действия в очереди... И будет похоже на странное поведение.*/
+            //PanelUser.Invoke(new Action(() => { PanelUser.Enabled                 = true; }));
+            PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = true; }));
+            ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = true; }));
+
+            ButtonInterrupt.Invoke(new Action(() => { ButtonInterrupt.Visible = false; }));
+            ButtonStart.Invoke(new Action(() => { ButtonStart.Enabled         = true; }));
+
+            #endregion
         }
     }
 }
