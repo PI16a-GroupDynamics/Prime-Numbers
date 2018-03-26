@@ -233,6 +233,8 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
+            throw new NotImplementedException();
+
             if (BoxPassword.ReadOnly)
             {
                 BoxPassword.ReadOnly      = false;

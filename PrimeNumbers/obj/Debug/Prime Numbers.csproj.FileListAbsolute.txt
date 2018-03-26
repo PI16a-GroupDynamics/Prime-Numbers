@@ -89,3 +89,7 @@ F:\Загрузки\Общие\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396a
 F:\Загрузки\Общие\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396ac6e72\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396ac6e72\PrimeNumbers\obj\Debug\Prime Numbers.csproj.CopyComplete
 F:\Загрузки\Общие\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396ac6e72\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396ac6e72\PrimeNumbers\obj\Debug\MetroFramework test at a new project.exe
 F:\Загрузки\Общие\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396ac6e72\Prime-Numbers-6edb5c5ddbfec3c03b56018e462a655396ac6e72\PrimeNumbers\obj\Debug\MetroFramework test at a new project.pdb
+C:\Users\Victo\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\Interop.LCC11.dll
+C:\Users\Victo\source\repos\Prime-Numbers\PrimeNumbers\obj\Debug\Interop.MsoEuro.dll
+C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\bin\Debug\UsersDatabase.mdf
+C:\Users\Victo\Source\Repos\Prime-Numbers\PrimeNumbers\bin\Debug\UsersDatabase_log.ldf

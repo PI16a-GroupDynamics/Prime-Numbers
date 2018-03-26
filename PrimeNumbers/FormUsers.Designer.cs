@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.TableUsers = new System.Windows.Forms.DataGridView();
-            this.Usernames = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Passwords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ButtonSaveChanges = new System.Windows.Forms.Button();
             this.ButtonCancelChanges = new System.Windows.Forms.Button();
             this.ButtonBack = new System.Windows.Forms.Button();
+            this.Usernames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Passwords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,19 +58,6 @@
             this.TableUsers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.TableUsers_CellValidating);
             this.TableUsers.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.TableUsers_UserDeletingRow);
             // 
-            // Usernames
-            // 
-            this.Usernames.HeaderText = "Пользователь";
-            this.Usernames.Name = "Usernames";
-            this.Usernames.ReadOnly = true;
-            this.Usernames.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Passwords
-            // 
-            this.Passwords.HeaderText = "Пароль";
-            this.Passwords.Name = "Passwords";
-            this.Passwords.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
             // ButtonSaveChanges
             // 
             this.ButtonSaveChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -86,7 +74,7 @@
             // 
             this.ButtonCancelChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ButtonCancelChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonCancelChanges.Location = new System.Drawing.Point(239, 152);
+            this.ButtonCancelChanges.Location = new System.Drawing.Point(239, 228);
             this.ButtonCancelChanges.Name = "ButtonCancelChanges";
             this.ButtonCancelChanges.Size = new System.Drawing.Size(95, 44);
             this.ButtonCancelChanges.TabIndex = 2;
@@ -107,12 +95,36 @@
             this.ButtonBack.UseVisualStyleBackColor = true;
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
+            // Usernames
+            // 
+            this.Usernames.HeaderText = "Пользователь";
+            this.Usernames.Name = "Usernames";
+            this.Usernames.ReadOnly = true;
+            this.Usernames.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Passwords
+            // 
+            this.Passwords.HeaderText = "Поставить пароль";
+            this.Passwords.Name = "Passwords";
+            this.Passwords.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(239, 105);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(141, 104);
+            this.textBox1.TabIndex = 24;
+            this.textBox1.Text = "Нужна БД. Все операции с юзерами - в БД. БД.get для паролей нет, т.к. хэш-шифр. Б" +
+    "Д set is password.Encrypt или password.EncryptToBase64String";
+            // 
             // FormUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonBack;
             this.ClientSize = new System.Drawing.Size(392, 331);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.ButtonBack);
             this.Controls.Add(this.ButtonCancelChanges);
             this.Controls.Add(this.ButtonSaveChanges);
@@ -125,6 +137,7 @@
             this.Load += new System.EventHandler(this.FormUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -133,8 +146,9 @@
         private System.Windows.Forms.DataGridView TableUsers;
         private System.Windows.Forms.Button ButtonSaveChanges;
         private System.Windows.Forms.Button ButtonCancelChanges;
+        private System.Windows.Forms.Button ButtonBack;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usernames;
         private System.Windows.Forms.DataGridViewTextBoxColumn Passwords;
-        private System.Windows.Forms.Button ButtonBack;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

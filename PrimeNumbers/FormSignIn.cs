@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using MetroFramework_test_at_a_new_project.Data;
+using MetroFramework_test_at_a_new_project.Encryption;
 
 namespace MetroFramework_test_at_a_new_project
 {
@@ -150,6 +151,21 @@ namespace MetroFramework_test_at_a_new_project
                     BtSignIn_Click(sender, e);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var arr = new string[10];
+            arr[0] = "private void button1_Click(object sender, EventArgs e)".Encrypt().ToBase64String();
+            arr[1] = "df".Encrypt().ToBase64String();
+            arr[2] = "".Encrypt().ToBase64String();
+            MessageBox.Show(arr[0]+ Environment.NewLine + arr[1] +Environment.NewLine+(arr[0].Length==arr[1].Length)+Environment.NewLine+arr
+                    [2] +
+                Environment.NewLine +
+                            (arr[1].Length == arr[2].Length));
+            MessageBox.Show(""+arr[0].Length+ arr[1].Length+ arr[2].Length);
+
+
         }
     }
 }

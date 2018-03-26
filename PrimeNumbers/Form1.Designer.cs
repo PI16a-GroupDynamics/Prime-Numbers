@@ -54,6 +54,7 @@ namespace MetroFramework_test_at_a_new_project
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.CBoxTypeOfFile = new MetroFramework.Controls.MetroComboBox();
             this.TabPageWork = new MetroFramework.Controls.MetroTabPage();
+            this.ButtonInterrupt = new MetroFramework.Controls.MetroButton();
             this.ButtonStart = new MetroFramework.Controls.MetroButton();
             this.PanelResult = new MetroFramework.Controls.MetroPanel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -62,7 +63,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.ButtonInterrupt = new MetroFramework.Controls.MetroButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUser.SuspendLayout();
@@ -136,6 +137,7 @@ namespace MetroFramework_test_at_a_new_project
             // TabPageSettings
             // 
             this.TabPageSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TabPageSettings.Controls.Add(this.textBox1);
             this.TabPageSettings.Controls.Add(this.PanelUser);
             this.TabPageSettings.Controls.Add(this.metroButton2);
             this.TabPageSettings.Controls.Add(this.PanelSaveResultTo);
@@ -477,6 +479,17 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageWork.VerticalScrollbarSize = 10;
             this.TabPageWork.Click += new System.EventHandler(this.MetroTabPage1_Click);
             // 
+            // ButtonInterrupt
+            // 
+            this.ButtonInterrupt.Location = new System.Drawing.Point(5, 59);
+            this.ButtonInterrupt.Name = "ButtonInterrupt";
+            this.ButtonInterrupt.Size = new System.Drawing.Size(71, 23);
+            this.ButtonInterrupt.TabIndex = 17;
+            this.ButtonInterrupt.Text = "Прервать";
+            this.ButtonInterrupt.UseSelectable = true;
+            this.ButtonInterrupt.Visible = false;
+            this.ButtonInterrupt.Click += new System.EventHandler(this.ButtonInterrupt_Click);
+            // 
             // ButtonStart
             // 
             this.ButtonStart.Location = new System.Drawing.Point(5, 30);
@@ -581,30 +594,29 @@ namespace MetroFramework_test_at_a_new_project
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.Location = new System.Drawing.Point(12, 12);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(433, 389);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
             // 
-            // ButtonInterrupt
+            // textBox1
             // 
-            this.ButtonInterrupt.Location = new System.Drawing.Point(5, 59);
-            this.ButtonInterrupt.Name = "ButtonInterrupt";
-            this.ButtonInterrupt.Size = new System.Drawing.Size(71, 23);
-            this.ButtonInterrupt.TabIndex = 17;
-            this.ButtonInterrupt.Text = "Прервать";
-            this.ButtonInterrupt.UseSelectable = true;
-            this.ButtonInterrupt.Visible = false;
-            this.ButtonInterrupt.Click += new System.EventHandler(this.ButtonInterrupt_Click);
+            this.textBox1.Location = new System.Drawing.Point(279, 169);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(97, 109);
+            this.textBox1.TabIndex = 24;
+            this.textBox1.Text = "Изменить пароль сначала просит старый пароль, затем новый. Чтобы юзер СЛУЧАЙНО не" +
+    " изменил";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(460, 412);
+            this.ClientSize = new System.Drawing.Size(990, 506);
             this.Controls.Add(this.metroTabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
@@ -666,6 +678,7 @@ namespace MetroFramework_test_at_a_new_project
         private System.Windows.Forms.TextBox BoxResult;
         private System.Windows.Forms.ProgressBar progressBar1;
         private MetroFramework.Controls.MetroButton ButtonInterrupt;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
