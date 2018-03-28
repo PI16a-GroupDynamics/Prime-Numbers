@@ -220,41 +220,44 @@ namespace MetroFramework_test_at_a_new_project
 
             void WorkWithResult()
             {
-                var sbResult      = new StringBuilder(N * 5);
-                var progressValue = 0.0;
-                var progressStep  = 100d / N / 2;
-
-                result[0] = PrimeNumbers.Next_prime(0);
-                progress.Report((int) (progressValue += progressStep*2));
-
-                for (var i = 0; i < result.Length - 1; i++)
+// c Parallel.Invoke(..) работает быстрее всего на несколько процентов. Почему? может, потому, что эта функция и так запускается в пуле потоков? 
                 {
-                    result[i + 1] = PrimeNumbers.Next_prime(result[i]);
-                    cts.Token
-                       .ThrowIfCancellationRequested();
-                    progressValue += progressStep*2;
-                    if (i % 1000 == 0)
+                    var sbResult      = new StringBuilder(N * 5);
+                    var progressValue = 0.0;
+                    var progressStep  = 100d / N / 2;
+
+                    result[0] = PrimeNumbers.Next_prime(0);
+                    progress.Report((int) (progressValue += progressStep * 2));
+
+                    for (var i = 0; i < result.Length - 1; i++)
                     {
-                        progress.Report((int) progressValue);
+                        result[i + 1] = PrimeNumbers.Next_prime(result[i]);
+                        cts.Token
+                           .ThrowIfCancellationRequested();
+                        progressValue += progressStep * 2;
+                        if (i % 1000 == 0)
+                        {
+                            progress.Report((int) progressValue);
+                        }
                     }
-                }
-                
+
 // ReSharper disable once ForCanBeConvertedToForeach
-                for (var i = 0; i < result.Length; i++)
-                {
-                    var number = result[i];
-// Блокировка UI. Почему?
-                    sbResult.AppendLine(number.ToString());
-                    cts.Token
-                       .ThrowIfCancellationRequested();
-                    /*progressValue += progressStep/2;
+                    for (var i = 0; i < result.Length; i++)
+                    {
+                        var number = result[i];
+
+                        sbResult.AppendLine(number.ToString());
+                        cts.Token
+                           .ThrowIfCancellationRequested();
+                        /*progressValue += progressStep/2;
                     if (i % 100_000 == 0) // цикл выполняется настолько быстро, что вывод прогресса незаметен.
                     {
                         progress.Report((int) progressValue);
                     }*/
-                }
+                    }
 
-                stringResult = sbResult.ToString();
+                    stringResult = sbResult.ToString();
+                }
             }
 
             Task SaveToFile()
