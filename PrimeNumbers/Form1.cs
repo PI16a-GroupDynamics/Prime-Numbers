@@ -142,7 +142,7 @@ namespace MetroFramework_test_at_a_new_project
                                       progressBar1.Value =
                                           percentage); // Handler - это Invoke, короче. Если быть точным, то SynchronizationContext.Post. Который посылает асинхронное сообщение в нужный синхр. контекст. Invoke, короче.
 
-            var result = new int[N];
+            var result = new long[N];
             //var    sbResultForTextBox = new StringBuilder(N * 5);
             var stringResult = string.Empty;
 
@@ -262,7 +262,7 @@ namespace MetroFramework_test_at_a_new_project
                 var localTask = new Task(() =>
                 {
                     var resultSaver =
-                        new ResultSaver<int>(result, SettingsForResult.ItemResultSeparator);
+                        new ResultSaver<long>(result, SettingsForResult.ItemResultSeparator);
 
                     try
                     {

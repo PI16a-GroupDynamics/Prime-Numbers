@@ -5,9 +5,9 @@ namespace MetroFramework_test_at_a_new_project.Algorythms
 {
     public static class PrimeNumbers
     {
-        public static int Is_prime(int n)
+        public static int Is_prime(long n)
         {
-            int i;
+            long i;
             for (i = 2; i * i <= n; ++i)
             {
                 if (n % i == 0)
@@ -19,7 +19,7 @@ namespace MetroFramework_test_at_a_new_project.Algorythms
             return 1;
         }
 
-        public static int Next_prime(int n)
+        public static long Next_prime(long n)
         {
             do
             {
@@ -31,15 +31,15 @@ namespace MetroFramework_test_at_a_new_project.Algorythms
 
 
         [NotNull]
-        public static int[] GenerateInt(int k)
+        public static long[] GenerateInt(int k)
         {
             if (k < 0)
             {
                 throw new ArgumentException(@"Количество не может быть <0", nameof(k));
             }
-            var generateInt = new int[k];
+            var generateInt = new long[k];
 
-            var n = 2;
+            long n = 2;
             int i,
                 nm = k;
 

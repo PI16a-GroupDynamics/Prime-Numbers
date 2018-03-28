@@ -57,7 +57,7 @@ namespace MetroFramework_test_at_a_new_project
         private void ShowChanges()
         {
             BoxPreview.Clear();
-            var result = new Printing.ResultSaver<int>(new[]{2, 3, 5, 7, 11, 13}, Printing.SettingsForResult.ItemResultSeparator);
+            var result = new Printing.ResultSaver<long>(new[]{2L, 3, 5, 7, 11, 13}, Printing.SettingsForResult.ItemResultSeparator);
 
             BoxPreview.Text = result.ResultBuilder.ToString();
         }
