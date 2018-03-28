@@ -86,20 +86,23 @@ namespace MetroFramework_test_at_a_new_project.Data
     [Serializable]
     public class LogRecord: ISerializable
     {
-        public LogRecord([NotNull] string userName, int n, DateTime? dateAndTime = null)
+        public LogRecord([NotNull] string userName, int n, bool isCancelled,
+            DateTime dateAndTimeStart)
         {
-            UserName = userName;
-            N        = n;
-            DateTime = dateAndTime ?? DateTime.Now;
+            UserName    = userName;
+            N           = n;
+            IsCancelled = isCancelled;
+            DateTimeStart    = dateAndTimeStart;
 
             // это крутой сахар для ??. Если не null, то возвращает value, а не саму переменную, которая типа Nullable<T>.
         }
 
         private LogRecord(SerializationInfo info, StreamingContext context)
         { // этот конструктор используется при десериализации
-            UserName = info.GetString("UserName");
-            N        = info.GetInt32("N");
-            DateTime = info.GetDateTime("DateTime");
+            UserName = info.GetString(nameof(LogRecord.UserName));
+            N = info.GetInt32(nameof(LogRecord.N));
+            IsCancelled = info.GetBoolean(nameof(LogRecord.IsCancelled));
+            DateTimeStart = info.GetDateTime(nameof(LogRecord.DateTimeStart));
         }
 
         [NotNull]
@@ -107,13 +110,16 @@ namespace MetroFramework_test_at_a_new_project.Data
 
         public int N { get; }
 
-        public DateTime DateTime { get; }
+        public DateTime DateTimeStart { get; }
+
+        public bool IsCancelled { get; }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         { // используется при сериализации
-            info.AddValue("UserName", UserName);
-            info.AddValue("N",        N);
-            info.AddValue("DateTime", DateTime);
+            info.AddValue(nameof(LogRecord.UserName),    UserName);
+            info.AddValue(nameof(LogRecord.N),           N);
+            info.AddValue(nameof(LogRecord.IsCancelled), IsCancelled);
+            info.AddValue(nameof(LogRecord.DateTimeStart),    DateTimeStart);
         }
     }
 }

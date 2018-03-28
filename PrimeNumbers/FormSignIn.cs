@@ -164,7 +164,7 @@ namespace MetroFramework_test_at_a_new_project
                 Environment.NewLine +
                             (arr[1].Length == arr[2].Length));
             MessageBox.Show(""+arr[0].Length+ arr[1].Length+ arr[2].Length);
-
+            
 
         }
     }

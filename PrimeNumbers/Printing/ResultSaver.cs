@@ -40,7 +40,7 @@ namespace MetroFramework_test_at_a_new_project.Printing
 
         public string DirectoryForResult { get; set; } = "";
 
-        public void SaveTextResultTo(string filePath = null, bool isFullPath = false)
+        public void SaveTextResultTo(IProgress<int> progress, string filePath = null, bool isFullPath = false)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -49,17 +49,42 @@ namespace MetroFramework_test_at_a_new_project.Printing
 
             var path = isFullPath is true ? filePath : DirectoryForResult + @"\" + filePath;
 
+            var str              = ResultBuilder.ToString();
+            var numberInsertions = str.Length / 5_000;
+            var lastInsertion    = str.Length % 5_000;
+            var nprogresses      = numberInsertions;
+            if (lastInsertion > 0)
+            {
+                nprogresses++;
+            }
+
+            var progressValue = 0.0;
+            var progressUnit  = 100d / nprogresses;
+
+
             // тут я создаю файл и записываю в него StringBuider.ToString();
 
             using (var stream = File.OpenWrite(path))
             {
                 var writer = new StreamWriter(stream);
-                writer.Write(ResultBuilder.ToString());
+
+                for (var i = 0; i < numberInsertions; i++)
+                {
+                    writer.Write(str.Substring(i * 5_000, 5_000));
+                    progress.Report((int) (progressValue += progressUnit));
+                }
+
+                if (lastInsertion > 0)
+                {
+                    writer.Write(str.Substring(str.Length - lastInsertion, lastInsertion));
+                    progress.Report((int) (progressValue + progressUnit));
+                }
+
                 writer.Flush();
             }
         }
 
-        public void SavePdfResultTo(string filePath = null, bool isFullPath = false)
+        public void SavePdfResultTo([CanBeNull] IProgress<int> progress, string filePath = null, bool isFullPath = false)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -67,6 +92,20 @@ namespace MetroFramework_test_at_a_new_project.Printing
             }
 
             var path = isFullPath is true ? filePath : DirectoryForResult + @"\" + filePath;
+            progress?.Report(0);
+
+
+            var str = ResultBuilder.ToString();
+            var numberInsertions = str.Length / 5_000;
+            var lastInsertion    = str.Length % 5_000;
+            var nprogresses = numberInsertions;
+            if (lastInsertion > 0)
+            {
+                nprogresses++;
+            }
+
+            var progressValue = 0.0;
+            var progressUnit = 100d / nprogresses;
 
             //создание и работа с pdf документом используя itextsharp
             using (var stream = File.OpenWrite(path))
@@ -79,8 +118,21 @@ namespace MetroFramework_test_at_a_new_project.Printing
                         PdfWriter.GetInstance(document, stream); // не понимаю как, но зачем-то это нужно.
                     document.Open();                             // opens the document
                     document.AddCreator(Users.CurrentUserName);
-                    var paragraph = new Paragraph(ResultBuilder.ToString());
-                    document.Add(paragraph);
+
+
+                    for (var i = 0; i <numberInsertions ; i++)
+                    {
+                        var paragraph = new Paragraph(str.Substring(i*5_000, 5_000));
+                        document.Add(paragraph);
+                        progress.Report((int)(progressValue+=progressUnit));
+                    }
+
+                    if (lastInsertion > 0)
+                    {
+                        var paragraph = new Paragraph(str.Substring(str.Length-lastInsertion, lastInsertion));
+                        document.Add(paragraph);
+                        progress.Report((int) (progressValue + progressUnit));
+                    }
 
                     document.Close();
                 }

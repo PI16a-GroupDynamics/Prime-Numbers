@@ -12,7 +12,6 @@ using MetroFramework_test_at_a_new_project.Algorythms;
 using MetroFramework_test_at_a_new_project.Data;
 using MetroFramework_test_at_a_new_project.Printing;
 using Microsoft.Office.Interop.Excel;
-using Action = System.Action;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 // ReSharper disable PossibleNullReferenceException
@@ -22,8 +21,8 @@ namespace MetroFramework_test_at_a_new_project
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public partial class Form1: Form
     {
-        private Thread excelThread;
-        private Thread resultThread;
+        //private Thread excelThread;
+        //private Thread resultThread;
 
         public Form1()
         {
@@ -105,8 +104,8 @@ namespace MetroFramework_test_at_a_new_project
 
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
-        private void ButtonStart_Click(object sender, EventArgs e)
-        {
+        private async void ButtonStart_Click(object sender, EventArgs e)
+        { // Отмена задачи - исключительная ситуация. Наверное, нормально.
             // Проверка на 0
             if (BoxNumber.Text == string.Empty ||
                 BoxNumber.Text == @"0")
@@ -115,107 +114,183 @@ namespace MetroFramework_test_at_a_new_project
                 return;
             }
 
-            PanelResult.Visible     = true;
-            ButtonInterrupt.Visible = true;
-            ButtonStart.Enabled     = false;
             var N = int.Parse(BoxNumber.Text);
-            if (N <= 0)
+
+
+            #region StartActions
+
+            BoxResult.Clear();
+            PanelResult.Visible  = true;
+            ButtonCancel.Visible = true;
+            ButtonStart.Enabled  = false;
+
+
+            #endregion
+
+
+            #region Job
+
+            var dateTimeStart      = DateTime.Now;
+
+            var cts                = new CancellationTokenSource();
+            ButtonCancel.Click += (sender1, e1) => cts.Cancel();
+            // анонимный метод, не лямбда. Лямбда - другой объект, который, тем не менее, может конвертироваться.
+            Closing += (o, args) => cts.Cancel();
+
+            IProgress<int> progress =
+                new Progress<int>(percentage =>
+                                      progressBar1.Value =
+                                          percentage); // Handler - это Invoke, короче. Если быть точным, то SynchronizationContext.Post. Который посылает асинхронное сообщение в нужный синхр. контекст. Invoke, короче.
+
+            var result = new int[N];
+            //var    sbResultForTextBox = new StringBuilder(N * 5);
+            var stringResult = string.Empty;
+
+            var task = new Task(WorkWithResult, cts.Token);
+            task.Start();
+            label1.Text = @"Генерация...";
+
+            try
             {
-                return;
+                await task.ConfigureAwait(true);
+            }
+            catch (OperationCanceledException)
+            {
+                // не знаю, что тут еще делать. Можно бы установить какой-то bool в true, но это и так есть в task.IsCanceled.
             }
 
-            var directoryForResult = BoxDirectoryForResult.Text;
+            label1.Text = @"Вывод результата...";
+            if (! task.IsCanceled)
+            {
+                progress.Report(0);
 
-            resultThread = new Thread(() => { Parallel.Invoke(WorkWithResult); });
-            resultThread.Start();
-            Log.AddToFile(new LogRecord(Users.CurrentUserName, N));
+                var numberInsertions = stringResult.Length / 10_000;
+                var lastInsertion    = stringResult.Length % 10_1000;
+                var progressValue = 0.0;
+                var progressUnit = 100d / (numberInsertions + (lastInsertion > 0 ? 1 : 0));
+
+
+                for (var i = 0; i < numberInsertions; i++)
+                {
+                    await Task.Delay(1).ConfigureAwait(true);
+                    BoxResult.AppendText(stringResult.Substring(i * 10_000,
+                                                                10_000));
+                    progress.Report((int)(progressValue += progressUnit));
+                }
+
+                if (lastInsertion != 0)
+                {
+                    await Task.Delay(1).ConfigureAwait(true);
+                    BoxResult.AppendText(stringResult.Substring(stringResult.Length - lastInsertion,
+                                                                lastInsertion));
+                    progress.Report((int) (progressValue + progressUnit));
+                }
+            }
+
+            Log.AddToFile(new LogRecord(Users.CurrentUserName, N, task.IsCanceled, dateTimeStart));
+
+            var typeOfFile = CBoxTypeOfFile.SelectedIndex;
+            string directoryForResult;
+            if (typeOfFile > 0)
+            {
+                directoryForResult = BoxDirectoryForResult.Text;
+                label1.Text = @"Сохранение...";
+                // ReSharper disable once MethodSupportsCancellation
+                ButtonCancel.Enabled = false;
+                await SaveToFile().ConfigureAwait(true); // отмены в этом методе нет.
+                ButtonCancel.Enabled = true;
+            }
+
+            #endregion
+
+            #region FinalActions
+
+            progress.Report(0);
+
+            PanelSaveResultTo.Enabled = true;
+            ButtonChangeUser.Enabled  = true;
+
+            ButtonCancel.Visible = false;
+            ButtonStart.Enabled  = true;
+
+            label1.Text = task.IsCanceled ? "Отменено" : "Готово";
+
+            #endregion
 
 
             void WorkWithResult()
             {
-                BoxResult.Invoke(new Action(() => { BoxResult.Clear(); }));
-                //PanelUser.Invoke(new Action(() => { PanelUser.Enabled = false; }));
-                PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = false; }));
-                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = false; }));
+                var sbResult      = new StringBuilder(N * 5);
+                var progressValue = 0.0;
+                var progressStep  = 100d / N / 2;
 
-
-                var sbResultForTextBox = new StringBuilder(N * 5);
-                var progress           = 0.0;
-                var typeOfFile         = 0;
-                CBoxTypeOfFile.Invoke(new Action(() => { typeOfFile = CBoxTypeOfFile.SelectedIndex; }));
-
-                var progressStep = 100d / N / 2;
-                var progressAction = new Action(() =>
-                {
-                    progressBar1.Value = (int) (progress += progressStep);
-                });
-                var result = new int[N];
                 result[0] = PrimeNumbers.Next_prime(0);
-                progressBar1.Invoke(progressAction);
+                progress.Report((int) (progressValue += progressStep*2));
+
                 for (var i = 0; i < result.Length - 1; i++)
                 {
                     result[i + 1] = PrimeNumbers.Next_prime(result[i]);
-                    progressBar1.Invoke(progressAction);
-                }
-
-                foreach (var number in result)
-                {
-                    sbResultForTextBox.AppendLine(number.ToString());
-                    progressBar1.Invoke(progressAction);
-                }
-
-                BoxResult.Invoke(new Action(() => { BoxResult.Text = sbResultForTextBox.ToString(); }));
-
-                if (typeOfFile <= 0)
-                {
-                    goto FinalActions;
-                }
-
-                #region SaveToFile
-
-                var resultSaver =
-                    new ResultSaver<int>(result, SettingsForResult.ItemResultSeparator);
-
-                try
-                {
-                    resultSaver.SetDirectoryForResult(directoryForResult);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show($@"Не удается создать указанный путь ""{
-                                            directoryForResult
-                                        }"" для сохранения результата. Возможно, вы назначили сохранение на флешку, а затем вытащили ее.");
-                    return;
-                }
-
-                var actionsSaveResult = new Dictionary<int, Action<string, bool>>
-                {
-                    [1] = resultSaver.SaveTextResultTo,
-                    [2] = resultSaver.SavePdfResultTo
-                };
-                actionsSaveResult[CBoxTypeOfFile.SelectedIndex].Invoke(string.Empty, false);
-                if (CBoxTypeOfFile.SelectedIndex > 0)
-                {
-                    MessageBox.Show($@"Результат сохранен в указанную папку ""{directoryForResult}""",
-                                    @"Уведомление");
+                    cts.Token
+                       .ThrowIfCancellationRequested();
+                    progressValue += progressStep*2;
+                    if (i % 1000 == 0)
+                    {
+                        progress.Report((int) progressValue);
+                    }
                 }
                 
+// ReSharper disable once ForCanBeConvertedToForeach
+                for (var i = 0; i < result.Length; i++)
+                {
+                    var number = result[i];
+// Блокировка UI. Почему?
+                    sbResult.AppendLine(number.ToString());
+                    cts.Token
+                       .ThrowIfCancellationRequested();
+                    /*progressValue += progressStep/2;
+                    if (i % 100_000 == 0) // цикл выполняется настолько быстро, что вывод прогресса незаметен.
+                    {
+                        progress.Report((int) progressValue);
+                    }*/
+                }
 
-                #endregion
+                stringResult = sbResult.ToString();
+            }
 
-                FinalActions:
+            Task SaveToFile()
+            {
+                var localTask = new Task(() =>
+                {
+                    var resultSaver =
+                        new ResultSaver<int>(result, SettingsForResult.ItemResultSeparator);
 
-                #region FinalActions
+                    try
+                    {
+                        resultSaver.SetDirectoryForResult(directoryForResult);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show($@"Не удается создать указанный путь ""{
+                                                directoryForResult
+                                            }"" для сохранения результата. Возможно, вы назначили сохранение на флешку, а затем вытащили ее.");
+                        return;
+                    }
 
-                progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
-                //PanelUser.Invoke(new Action(() => { PanelUser.Enabled                 = true; }));
-                PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = true; }));
-                ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = true; }));
-
-                ButtonInterrupt.Invoke(new Action(() => { ButtonInterrupt.Visible = false; }));
-                ButtonStart.Invoke(new Action(() => { ButtonStart.Enabled         = true; }));
-
-                #endregion
+                    var actionsSaveResult = new Dictionary<int, Action<IProgress<int>, string, bool>>
+                    {
+                        [1] = resultSaver.SaveTextResultTo,
+                        [2] = resultSaver.SavePdfResultTo
+                    };
+                    actionsSaveResult[typeOfFile]
+                        .Invoke(progress, string.Empty, false); //Invoke - потому что делегат.
+                    if (typeOfFile > 0)
+                    {
+                        MessageBox.Show($@"Результат сохранен в указанную папку ""{directoryForResult}""",
+                                        @"Уведомление");
+                    }
+                });
+                localTask.Start();
+                return localTask;
             }
         }
 
@@ -235,27 +310,30 @@ namespace MetroFramework_test_at_a_new_project
         {
             throw new NotImplementedException();
 
+            //1) прошу ввести старый пароль(мало ли что) 
+            //2) проверяю в DB совпадение userName и password.Encrypt
+            //2.1) Собственно проверка совпадения. Да? 2.2. Нет? Повторим запрос пароля.
+            //2.2) Запоминаю ячейку(?), куда потом записать новый пароль
+
             if (BoxPassword.ReadOnly)
             {
                 BoxPassword.ReadOnly      = false;
                 BoxPassword.Text          = Users.CurrentUser.PassWord;
                 ButtonChangePassword.Text = @"Сохранить";
             }
-            else
+
+            if (BoxPassword.Text == string.Empty)
             {
-                if (BoxPassword.Text == string.Empty)
-                {
-                    MessageBox.Show(@"Пароль не может быть пустым", @"Ошибка");
-                    return;
-                }
-
-                Users.CurrentUser.PassWord = BoxPassword.Text;
-                BoxPassword.ReadOnly       = true;
-
-                ButtonChangePassword.Text = @"Изменить";
-                BoxPassword.Text          = string.Empty;
-                BoxPassword.WaterMark     = "Пароль изменен";
+                MessageBox.Show(@"Пароль не может быть пустым", @"Ошибка");
+                return;
             }
+
+            Users.CurrentUser.PassWord = BoxPassword.Text;
+            BoxPassword.ReadOnly       = true;
+
+            ButtonChangePassword.Text = @"Изменить";
+            BoxPassword.Text          = string.Empty;
+            BoxPassword.WaterMark     = "Пароль изменен";
         }
 
         private void BoxPassword_KeyDown(object sender, KeyEventArgs e)
@@ -316,30 +394,14 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ButtonUsers_Click([NotNull] object sender, [NotNull] EventArgs e)
         { // Т.к. юзеров, скорее всего, будет немного(50 - это уже много), то можно вывести все это в tableGrid. И еще сделать автоматический обработчик, что ячейка не может быть пустой. И первая ячейка(0,0) не изменяется, т.к. это admin.
-            var userForm = new FormUsers();
-            userForm.ShowDialog();
+            {
+                var userForm = new FormUsers();
+                userForm.Show();
+            } // "Запустить и забыть"
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (resultThread != null &&
-                resultThread.IsAlive)
-            {
-                if (MessageBox.Show(@"Генерация еще не закончена. Уверены, что хотите выйти?",
-                                    @"Подтверждение", MessageBoxButtons.YesNo) !=
-                    DialogResult.Yes)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-            }
-
-            if (resultThread != null &&
-                resultThread.IsAlive)
-            {
-                resultThread.Abort();
-            }
-
             Users.SaveToFile();
         }
 
@@ -367,6 +429,9 @@ namespace MetroFramework_test_at_a_new_project
                     return;
                 }
 
+                BoxCurrentUser.ReadOnly   = true;
+                ButtonChangeUsername.Text = @"Изменить";
+
                 if (Users.CurrentUserName == BoxCurrentUser.Text)
                 { // передумал изменять
                     return;
@@ -375,10 +440,8 @@ namespace MetroFramework_test_at_a_new_project
                 if (Users.SetNameUser(Users.CurrentUserName, BoxCurrentUser.Text))
                 {
                     //Users.CurrentUser.Name = BoxCurrentUser.Text;
-                    BoxCurrentUser.ReadOnly = true;
 
-                    ButtonChangeUsername.Text = @"Изменить";
-                    BoxCurrentUser.Text       = Users.CurrentUserName;
+                    BoxCurrentUser.Text = Users.CurrentUserName;
                     MessageBox.Show(@"Успешно");
                 }
                 else
@@ -388,7 +451,7 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-        private void ButtonViewLog_Click(object sender, EventArgs e)
+        private async void ButtonViewLog_Click(object sender, EventArgs e)
         {
             Log.LoadDefault();
 
@@ -399,19 +462,21 @@ namespace MetroFramework_test_at_a_new_project
                 return;
             }
 
-            excelThread = new Thread(ShowLog);
-            excelThread.Start();
+            ButtonViewLog.Enabled = false;
+            ButtonViewLog.Text    = @"Открытие Excel...";
 
+            await Task.Run(() => ShowLog())
+                      .ConfigureAwait(true); // и так по умолчанию вызовется в текущем контексте, т.е. UI, но чисто для понимания
+            ButtonViewLog.Enabled = true;
+            ButtonViewLog.Text    = @"Журнал";
 
             void ShowLog()
             {
                 Parallel.Invoke(() =>
                 {
-                    LabelForExcel.Text = @"Открытие Excel...";
                     var       excelApp  = new Application();
                     var       workbook  = excelApp.Workbooks.Add();
                     Worksheet worksheet = workbook.Worksheets[1];
-
                     //делаю заголовки
 
                     worksheet.Cells[1, 1] = "Имя пользователя";
@@ -428,14 +493,13 @@ namespace MetroFramework_test_at_a_new_project
                         var record = logs[i - 1];
                         range1.Cells[i] = record.UserName;
                         range2.Cells[i] = record.N;
-                        range3.Cells[i] = record.DateTime;
+                        range3.Cells[i] = record.DateTimeStart;
                     }
 
 
                     excelApp.Visible = true;
                     excelApp.UserControl =
                         true; // т.е. освобождение ресурсов объекта происходит при удалении его программно.
-                    LabelForExcel.Text = string.Empty;
                 });
             }
         }
@@ -468,31 +532,37 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-        private void ButtonInterrupt_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            if (! resultThread.IsAlive)
+            /*if (! resultThread.IsAlive)
             {
                 return;
             }
 
             resultThread
                 .Abort(); // как я понял, безопасное прерывание. Да, это "Просит поток завершить работу"
+                */
 
             #region FinalActions
 
-            progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
-            /*Хоть и находится в том же потоке, где был создан, но:
-                 1) Другой поток все еще работает с ним, делает свои действия (возможно, by Invoke, как надо.)
-                 2) Из-за того, что другой поток использует Invoke, он ставит свои действия в очередь.
-                 3) Если я тут просто присвою значения через = , то сразу после этого выполнятся действия в очереди... И будет похоже на странное поведение.*/
-            //PanelUser.Invoke(new Action(() => { PanelUser.Enabled                 = true; }));
-            PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = true; }));
-            ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = true; }));
+            //progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
+            ///*Хоть и находится в том же потоке, где был создан, но:
+            //     1) Другой поток все еще работает с ним, делает свои действия (возможно, by Invoke, как надо.)
+            //     2) Из-за того, что другой поток использует Invoke, он ставит свои действия в очередь.
+            //     3) Если я тут просто присвою значения через = , то сразу после этого выполнятся действия в очереди... И будет похоже на странное поведение.*/
+            ////PanelUser.Invoke(new Action(() => { PanelUser.Enabled                 = true; }));
+            //PanelSaveResultTo.Invoke(new Action(() => { PanelSaveResultTo.Enabled = true; }));
+            //ButtonChangeUser.Invoke(new Action(() => { ButtonChangeUser.Enabled   = true; }));
 
-            ButtonInterrupt.Invoke(new Action(() => { ButtonInterrupt.Visible = false; }));
-            ButtonStart.Invoke(new Action(() => { ButtonStart.Enabled         = true; }));
+            //ButtonInterrupt.Invoke(new Action(() => { ButtonInterrupt.Visible = false; }));
+            //ButtonStart.Invoke(new Action(() => { ButtonStart.Enabled         = true; }));
 
             #endregion
+        }
+
+        private void BoxCurrentUser_TextChanged(object sender, EventArgs e)
+        {
+            LabelCurrentUser.Text = BoxCurrentUser.Text;
         }
     }
 }
