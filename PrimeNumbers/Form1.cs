@@ -249,11 +249,6 @@ namespace MetroFramework_test_at_a_new_project
                         sbResult.AppendLine(number.ToString());
                         cts.Token
                            .ThrowIfCancellationRequested();
-                        /*progressValue += progressStep/2;
-                    if (i % 100_000 == 0) // цикл выполняется настолько быстро, что вывод прогресса незаметен.
-                    {
-                        progress.Report((int) progressValue);
-                    }*/
                     }
 
                     stringResult = sbResult.ToString();
