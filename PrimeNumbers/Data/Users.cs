@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -10,6 +13,8 @@ namespace MetroFramework_test_at_a_new_project.Data
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public static class Users
     {
+        
+
         private static List<User> users = new List<User>();
 
         // А что, если использовать этот список просто всегда? Делать запись на диск только при закрытии главной формы... Или по особой прихоти админа... Хммм...
@@ -21,6 +26,7 @@ namespace MetroFramework_test_at_a_new_project.Data
         {
             Users.DefaultFilePath = @"Records\users.bin";
             Users.users.Add(Users.DefaultAdmin);
+            
         }
 
         [CanBeNull]

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -10,6 +13,7 @@ using System.Windows.Forms;
 using JetBrains.Annotations;
 using MetroFramework_test_at_a_new_project.Algorythms;
 using MetroFramework_test_at_a_new_project.Data;
+using MetroFramework_test_at_a_new_project.Encryption;
 using MetroFramework_test_at_a_new_project.Printing;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -561,6 +565,16 @@ namespace MetroFramework_test_at_a_new_project
         private void BoxCurrentUser_TextChanged(object sender, EventArgs e)
         {
             LabelCurrentUser.Text = BoxCurrentUser.Text;
+        }
+
+        private  void metroButton4_Click(object sender, EventArgs e)
+        {
+            var path = Environment.CurrentDirectory;
+
+            var str = "Screenshot_1.png";
+            var image = Image.FromFile(str);
+
+
         }
     }
 }

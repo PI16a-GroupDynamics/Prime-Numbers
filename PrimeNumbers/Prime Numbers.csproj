@@ -178,15 +178,6 @@
     <None Include="Resources\arrow1600-300x300.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ACTIVEXLib">
-      <Guid>{EA3E6E3C-5130-49C1-8EDE-F889CD0F4429}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="LCC11">
       <Guid>{EDCD5812-6A06-43C3-AFAC-46EF5D14E22C}</Guid>
       <VersionMajor>1</VersionMajor>

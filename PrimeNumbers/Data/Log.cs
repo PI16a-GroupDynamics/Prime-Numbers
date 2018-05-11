@@ -119,7 +119,8 @@ namespace MetroFramework_test_at_a_new_project.Data
             info.AddValue(nameof(LogRecord.UserName),    UserName);
             info.AddValue(nameof(LogRecord.N),           N);
             info.AddValue(nameof(LogRecord.IsCancelled), IsCancelled);
-            info.AddValue(nameof(LogRecord.DateTimeStart),    DateTimeStart);
+            info.AddValue(nameof(LogRecord.DateTimeStart),    DateTimeStart); 
+            
         }
     }
 }

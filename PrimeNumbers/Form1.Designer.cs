@@ -56,6 +56,7 @@ namespace MetroFramework_test_at_a_new_project
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.CBoxTypeOfFile = new MetroFramework.Controls.MetroComboBox();
             this.TabPageWork = new MetroFramework.Controls.MetroTabPage();
+            this.metroButton4 = new MetroFramework.Controls.MetroButton();
             this.ButtonCancel = new MetroFramework.Controls.MetroButton();
             this.ButtonStart = new MetroFramework.Controls.MetroButton();
             this.PanelResult = new MetroFramework.Controls.MetroPanel();
@@ -66,6 +67,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUser.SuspendLayout();
@@ -74,6 +76,7 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageWork.SuspendLayout();
             this.PanelResult.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TabPageAdmin
@@ -480,6 +483,7 @@ namespace MetroFramework_test_at_a_new_project
             // TabPageWork
             // 
             this.TabPageWork.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TabPageWork.Controls.Add(this.metroButton4);
             this.TabPageWork.Controls.Add(this.ButtonCancel);
             this.TabPageWork.Controls.Add(this.ButtonStart);
             this.TabPageWork.Controls.Add(this.PanelResult);
@@ -500,6 +504,16 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageWork.VerticalScrollbarHighlightOnWheel = false;
             this.TabPageWork.VerticalScrollbarSize = 10;
             this.TabPageWork.Click += new System.EventHandler(this.MetroTabPage1_Click);
+            // 
+            // metroButton4
+            // 
+            this.metroButton4.Location = new System.Drawing.Point(5, 167);
+            this.metroButton4.Name = "metroButton4";
+            this.metroButton4.Size = new System.Drawing.Size(81, 23);
+            this.metroButton4.TabIndex = 18;
+            this.metroButton4.Text = "Тест ";
+            this.metroButton4.UseSelectable = true;
+            this.metroButton4.Click += new System.EventHandler(this.metroButton4_Click);
             // 
             // ButtonCancel
             // 
@@ -626,12 +640,20 @@ namespace MetroFramework_test_at_a_new_project
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.Location = new System.Drawing.Point(12, 12);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(433, 389);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(483, 98);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -639,6 +661,7 @@ namespace MetroFramework_test_at_a_new_project
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(990, 506);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.metroTabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
@@ -660,6 +683,7 @@ namespace MetroFramework_test_at_a_new_project
             this.PanelResult.ResumeLayout(false);
             this.PanelResult.PerformLayout();
             this.metroTabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -703,6 +727,8 @@ namespace MetroFramework_test_at_a_new_project
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
+        private MetroFramework.Controls.MetroButton metroButton4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
