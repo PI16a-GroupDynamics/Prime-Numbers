@@ -14,6 +14,7 @@ namespace MetroFramework_test_at_a_new_project
             InitializeComponent();
             MaximizeBox = false;
             MinimizeBox = false;
+
         }
 
         void ShowHelp(object o, CancelEventArgs e)
@@ -46,6 +47,7 @@ namespace MetroFramework_test_at_a_new_project
             if (Users.Contains(username, password))
             {
                 UserNameIfSuccess = username;
+                //MessageBox.Show(@"Contains. Really.");
                 Close();
             }
             else

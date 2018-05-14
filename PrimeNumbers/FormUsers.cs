@@ -28,7 +28,7 @@ namespace MetroFramework_test_at_a_new_project
         {
             foreach (var user in Users.GetListUsers())
             {
-                TableUsers.Rows.Add(user.Name, user.PassWord);
+                TableUsers.Rows.Add(user.Name, user.IsAdmin, user.PassWord );
             }
 
             rowsToDelete                                  = new bool[TableUsers.RowCount];
@@ -65,7 +65,7 @@ namespace MetroFramework_test_at_a_new_project
         private void TableUsers_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             var currentCell = TableUsers.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (currentCell.ColumnIndex == 0)
+            if (currentCell.ColumnIndex is 0 || currentCell.ColumnIndex is 2)
             {
                 return;
             }
@@ -74,14 +74,14 @@ namespace MetroFramework_test_at_a_new_project
             var trimStr = str.Trim();
             if (string.IsNullOrEmpty(trimStr))
             {
-                MessageBox.Show(@"Пароль не может быть пустым", @"Error");
+                MessageBox.Show(@"Поле не может быть пустым", @"Error");
                 e.Cancel = true;
                 return;
             }
 
-            if (str.Contains(" "))
+            if (!bool.TryParse(str,out var _))
             {
-                MessageBox.Show(@"Пароль не может содержать пробелов. Удалите их.", @"Error");
+                MessageBox.Show(@"Значение не может быть преобразовано в логическое.", @"Error");
                 e.Cancel = true;
             }
         }
@@ -98,7 +98,7 @@ namespace MetroFramework_test_at_a_new_project
             TableUsers.Rows.Clear();
             foreach (var user in Users.GetListUsers())
             {
-                TableUsers.Rows.Add(user.Name, user.PassWord);
+                TableUsers.Rows.Add(user.Name, user.IsAdmin, user.PassWord );
             }
 
             rowsToDelete                                  = new bool[TableUsers.RowCount];
@@ -117,12 +117,18 @@ namespace MetroFramework_test_at_a_new_project
                 if (rowsToDelete[i] is true)
                 {
                     Users.DeleteUser(TableUsers.Rows[i].Cells[0].Value.ToString());
-                }
+                } 
+            }
 
-                var user = Users.FindUserByName(TableUsers.Rows[i].Cells[0].Value.ToString());
-                if (user.PassWord != TableUsers.Rows[i].Cells[1].Value.ToString())
+            var users = Users.GetListUsers();
+            for (var i = 0; i < TableUsers.Rows.Count; i++)
+            {
+                var controlUser =
+                    users.Find(user => user.Name == TableUsers.Rows[i].Cells[0].Value.ToString());
+                if (TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString() != controlUser.IsAdmin.ToString())
                 {
-                    user.PassWord = TableUsers.Rows[i].Cells[1].Value.ToString();
+                    Users.SetAdminPriveledgeUser(controlUser.Name,
+                                                 Convert.ToBoolean(TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString()));
                 }
             }
         }
