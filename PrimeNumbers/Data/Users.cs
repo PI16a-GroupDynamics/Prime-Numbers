@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Data.SQLite;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using JetBrains.Annotations;
-using MetroFramework_test_at_a_new_project.Encryption;
 
 namespace MetroFramework_test_at_a_new_project.Data
 {
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public static class Users
     {
-        private static SQLiteConnection dbConnection;
+        
 
-        //private static List<User> users = new List<User>();
+        private static List<User> users = new List<User>();
 
         // А что, если использовать этот список просто всегда? Делать запись на диск только при закрытии главной формы... Или по особой прихоти админа... Хммм...
         private static User currentUser;
@@ -26,23 +24,20 @@ namespace MetroFramework_test_at_a_new_project.Data
 
         static Users()
         {
-            SetConnections();
-        }
-
-        private static void SetConnections()
-        {
-            string baseName = @"Databases\Users.db3";
-
-            SQLiteFactory factory = DbProviderFactories.GetFactory("System.Data.SQLite") as SQLiteFactory;
-
-            dbConnection = factory.CreateConnection() as SQLiteConnection;
-            dbConnection.ConnectionString = @"Data Source = " + baseName;
+            Users.DefaultFilePath = @"Records\users.bin";
+            Users.users.Add(Users.DefaultAdmin);
+            
         }
 
         [CanBeNull]
         public static User DefaultAdmin
         {
             get => Users.defaultAdmin;
+            set
+            {
+                Users.Replace(Users.defaultAdmin, value);
+                Users.defaultAdmin = value;
+            }
         }
 
         public static string DefaultFilePath { get; set; }
@@ -65,28 +60,9 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
         }
 
-        public static bool DeleteUser(string userName)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-            int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText = $@"delete from Users where username = '{userName}'";
-                command.CommandType = CommandType.Text;
-                number = command.ExecuteNonQuery();  
-            }
+        public static bool DeleteUser(string userName) => Users.users.Remove(Users.FindUserByName(userName));
 
-            Users.dbConnection.Close();
-            if (number > 1)
-            {
-                throw new Exception("В базе данных пользователей не уникальные значения имени.");
-            }
-            return number is 1;
-            //=> Users.users.Remove(Users.FindUserByName(userName));
-        } 
-
-        /*/// <summary>
+        /// <summary>
         ///     Загружает данные из бинарного файла
         /// </summary>
         /// <param name="filePath"></param>
@@ -109,9 +85,9 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
 
             return true;
-        }*/
+        }
 
-        /*/// <summary>
+        /// <summary>
         ///     Записывает в бинарный файл данные
         /// </summary>
         /// <param name="filePath"></param>
@@ -125,7 +101,7 @@ namespace MetroFramework_test_at_a_new_project.Data
                 bf.Serialize(fstream, Users.users);
             }
         }
-        */
+
         /// <summary>
         ///     Замена записи пользователя. Используется метод RemoveAll.
         /// </summary>
@@ -134,146 +110,50 @@ namespace MetroFramework_test_at_a_new_project.Data
         /// <returns />
         public static bool Replace(User oldUser, User newUser)
         {
-            ResetConnections();
-            Users.dbConnection.Open();
-            int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
+            var success = Users.users.RemoveAll(user => user.Name == oldUser.Name);
+            if (success == 0)
             {
-                command.CommandText = $@"update Users set Username = '{newUser.Name}' set Password = '{newUser.PassWord}' where Username = '{oldUser.Name}'";
-                command.CommandType = CommandType.Text;
-                number              = command.ExecuteNonQuery();
+                return false;
             }
 
-            Users.dbConnection.Close();
-            if (number > 1)
-            {
-                throw new Exception("В базе данных пользователей не уникальные значения имени.");
-            }
-            return number is 1;
+            Users.users.Add(newUser);
 
+            return true;
         }
 
+        public static User FindUserByName([NotNull] string name) =>
+            Users.users.Find(user => user.Name == name);
 
-
-        [CanBeNull]
-        public static User FindUserByName([NotNull] string name)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-            var user = new User("","");
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"select * from Users where Username = '{name}'";
-                command.CommandType = CommandType.Text;
-                var reader = command.ExecuteReader();
-
-                // Если user не найден
-                if (! reader.HasRows)
-                {
-                    user = null;
-                    goto endFunction;
-                }
-
-                reader.Read();
-                user.Name = reader.GetString(0);
-                user.PassWord = reader.GetString(1);
-            }
-
-            endFunction:
-            Users.dbConnection.Close();
-            return user;
-        }
-
-        /*/// <summary>
+        /// <summary>
         ///     Загружает данные из бинарного файла
         /// </summary>
         public static bool LoadFromFile() => Users.LoadFromFile(Users.DefaultFilePath);
-        */
 
-        /*/// <summary>
+        /// <summary>
         ///     Записывает в бинарный файл данные
         /// </summary>
         public static void SaveToFile()
         {
             Users.SaveToFile(Users.DefaultFilePath);
         }
-        */
 
-        public static bool Contains(string userName)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-            
-            bool result = true;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"select * from Users where Username = '{userName}'";
-                command.CommandType = CommandType.Text;
-                var reader = command.ExecuteReader();
+        public static bool Contains(string userName) => Users.users.Exists(x => x.Name == userName);
 
-                // Если user не найден
-                if (! reader.HasRows)
-                {
-                    result = false;
-                    goto endFunction;
-                }
+        public static bool Contains(string userName, string password) =>
+            Users.users.Exists(x => x.Name == userName && x.PassWord == password);
 
-            }
-
-            endFunction:
-            Users.dbConnection.Close();
-            return result;
-        }
-
-        public static bool Contains(string userName, string password)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-            bool result = true;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"select * from Users where Username = '{userName}' and Password = '{password.EncryptToBase64String()}'";
-                command.CommandType = CommandType.Text;
-                var reader = command.ExecuteReader();
-
-                // Если user не найден
-                if (! reader.HasRows)
-                {
-                    result = false;
-                    goto endFunction;
-                }
-
-            }
-
-            endFunction:
-            Users.dbConnection.Close();
-            return result;
-        }
-
-        public static bool Add([NotNull] string userName, [NotNull] string password, bool isAdmin = false)
+        public static bool Add(string userName, string password)
         {
             if (Users.Contains(userName))
             {
                 return false;
             }
-            ResetConnections();
-            Users.dbConnection.Open();
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"Insert into Users (Username, Password, IsAdmin) values ('{userName}','{password.EncryptToBase64String()}', '{isAdmin}')";
-                command.CommandType = CommandType.Text;
-                command.ExecuteNonQuery();
-            }
 
-            Users.dbConnection.Close();
+            Users.users.Add(new User(userName, password));
             return true;
         }
 
-        /*public static void CheckPathOrCreate(string filePath)
+        public static void CheckPathOrCreate(string filePath)
         {
             var directory = Path.GetDirectoryName(filePath);
             if (! Directory.Exists(directory))
@@ -281,59 +161,10 @@ namespace MetroFramework_test_at_a_new_project.Data
                 Directory.CreateDirectory(directory);
             }
         }
-        */
-        public static bool SetAdminPriveledgeUser(string username, bool isAdmin = true)
+
+        public static void SetPasswordUser(string username, [NotNull] string password)
         {
-            ResetConnections();
-            Users.dbConnection.Open();
-            int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"Update Users set IsAdmin = '{isAdmin}' 
-                        where Username = '{username}'
-                        ";
-                command.CommandType = CommandType.Text;
-                number              = command.ExecuteNonQuery();
-            }
-
-            Users.dbConnection.Close();
-            if (number > 1)
-            {
-                throw new
-                    Exception("База данных пользователей повреждена. Имеется неуникальное имя пользователя (" +
-                              username                                                                        +
-                              ")");
-            }
-
-            return number is 1;
-        }
-
-        public static bool SetPasswordUser([NotNull]string username, [NotNull] string password)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-            int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"Update Users set Password = '{password.EncryptToBase64String()}' where Username = '{username}'";
-                command.CommandType = CommandType.Text;
-                number = command.ExecuteNonQuery();
-            }
-
-            Users.dbConnection.Close();
-            if (number > 1)
-            {
-                throw new Exception("База данных пользователей повреждена. Имеется неуникальное имя пользователя ("+username+")");
-            }
-            return number is 1;
-        }
-
-        public static void ResetConnections()
-        {
-            DisposeConnections();
-            SetConnections();
+            Users.SetPasswordUser(Users.FindUserByName(username), password);
         }
 
         /// <summary>
@@ -344,76 +175,26 @@ namespace MetroFramework_test_at_a_new_project.Data
         /// <returns>flag Successful</returns>
         public static bool SetNameUser(string oldUsername, string newUsername)
         {
-            /*if (Users.Contains(newUsername))
+            if (Users.Contains(newUsername))
             {
                 return false;
-            }*/
-
-            ResetConnections();
-
-            Users.dbConnection.Open();
-            int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"Update Users set Username = '{newUsername}' 
-                        where Username = '{oldUsername
-                        }'";
-                command.CommandType = CommandType.Text;
-                number              = command.ExecuteNonQuery();
             }
 
-            Users.dbConnection.Close();
-
-            return number is 1;
-            
-        }
-
-        private static bool SetUserPassword(string username, string newPassword)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-            int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
+            if (Users.FindUserByName(oldUsername) is var user == default)
             {
-                command.CommandText =
-                    $@"Update Users set Password = '{newPassword}' 
-                        where Username = '{username}'";
-                command.CommandType = CommandType.Text;
-                number = command.ExecuteNonQuery();
+                return false;
             }
 
-            Users.dbConnection.Close();
-            return number is 1;
+            user.Name = newUsername;
+            return true;
         }
 
-        public static List<User> GetListUsers()
+        private static void SetPasswordUser(User user, string password)
         {
-            var users = new List<User>();
-            ResetConnections();
-            Users.dbConnection.Open();
-            
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-                command.CommandText =
-                    $@"select * from Users";
-                command.CommandType = CommandType.Text;
-                var reader             = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    var user = new User(reader.GetString(0), reader.GetString(1), Convert.ToBoolean(reader.GetString(2)));
-                    users.Add(user);
-                }
-            }
-
-            Users.dbConnection.Close();
-            return users;
+            user.PassWord = password;
         }
 
-        public static void DisposeConnections()
-        {
-            Users.dbConnection.Dispose();
-        }
+        public static List<User> GetListUsers() => Users.users;
 
         /// <summary>
         ///     Единица списка пользователей
@@ -421,11 +202,10 @@ namespace MetroFramework_test_at_a_new_project.Data
         [Serializable]
         public sealed class User
         {
-            public User(string name, string passWord, bool isAdmin = false)
+            public User(string name, string passWord)
             {
                 Name     = name;
                 PassWord = passWord;
-                IsAdmin = isAdmin;
             }
 
             [NotNull]
@@ -433,38 +213,7 @@ namespace MetroFramework_test_at_a_new_project.Data
 
             public string PassWord { get; set; }
 
-            public bool IsAdmin { get; set; }
-
-            public bool Equals(User user) => Name == user.Name && PassWord == user.PassWord && IsAdmin == user.IsAdmin;
-        }
-
-        public static bool CheckAdminPriveledge(string username)
-        {
-            ResetConnections();
-            Users.dbConnection.Open();
-
-            bool result = true;
-            using (var command = new SQLiteCommand(Users.dbConnection))
-            {
-        //WTF is here??? no, no and NO! Why?
-                command.CommandText =
-                    $@"select * from Users where Username = '{username}' and IsAdmin = 'True'";
-                command.CommandType = CommandType.Text;
-                var reader = command.ExecuteReader();
-
-                // Если user не найден
-                if (! reader.HasRows)
-                {
-                    result = false;
-                    goto endFunction;
-                }
-
-            }
-
-
-            endFunction:
-            Users.dbConnection.Close();
-            return result;
+            public bool Equals(User user) => Name == user.Name && PassWord == user.PassWord;
         }
     }
 }
