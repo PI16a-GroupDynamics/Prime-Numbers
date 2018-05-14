@@ -166,6 +166,7 @@
             this.Controls.Add(this.BtChangePassword);
             this.Name = "FormChangePassword";
             this.Text = "FormChangePassword";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.Load += new System.EventHandler(this.FormChangePassword_Load);
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();

@@ -58,9 +58,9 @@
             // 
             // 
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(95, 2);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(127, 2);
             this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(79, 85);
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(105, 105);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox1.CustomButton.TabIndex = 1;
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -94,9 +94,9 @@
             // 
             // 
             this.metroTextBox2.CustomButton.Image = null;
-            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(131, 2);
+            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(175, 2);
             this.metroTextBox2.CustomButton.Name = "";
-            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(43, 46);
+            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(57, 57);
             this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox2.CustomButton.TabIndex = 1;
             this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -126,7 +126,7 @@
             // htmlPanel1
             // 
             this.htmlPanel1.AutoScroll = true;
-            this.htmlPanel1.AutoScrollMinSize = new System.Drawing.Size(611, 0);
+            this.htmlPanel1.AutoScrollMinSize = new System.Drawing.Size(458, 0);
             this.htmlPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.htmlPanel1.Controls.Add(this.metroTextBox3);
             this.htmlPanel1.Controls.Add(this.metroTextBox2);
@@ -137,6 +137,7 @@
             this.htmlPanel1.Name = "htmlPanel1";
             this.htmlPanel1.Size = new System.Drawing.Size(458, 407);
             this.htmlPanel1.TabIndex = 1;
+            this.htmlPanel1.Click += new System.EventHandler(this.htmlPanel1_Click);
             // 
             // metroTextBox3
             // 
@@ -144,18 +145,19 @@
             // 
             // 
             this.metroTextBox3.CustomButton.Image = null;
-            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(86, 2);
+            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(115, 2);
             this.metroTextBox3.CustomButton.Name = "";
-            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(88, 95);
+            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(117, 117);
             this.metroTextBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox3.CustomButton.TabIndex = 1;
             this.metroTextBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBox3.CustomButton.UseSelectable = true;
             this.metroTextBox3.CustomButton.Visible = false;
             this.metroTextBox3.Lines = new string[] {
-        "Еще не реализовано:",
-        "1) Хранение паролей в зашифрованном виде",
-        "2) Использование базы данных пользователей"};
+        "Дополнительно:",
+        "    Сохранение результата в txt или pdf(на выбор);",
+        "    База данных пользователей;",
+        "    Ведение журналов действий и хранение в базах данных."};
             this.metroTextBox3.Location = new System.Drawing.Point(197, 171);
             this.metroTextBox3.MaxLength = 32767;
             this.metroTextBox3.Multiline = true;
@@ -168,8 +170,8 @@
             this.metroTextBox3.ShortcutsEnabled = true;
             this.metroTextBox3.Size = new System.Drawing.Size(235, 122);
             this.metroTextBox3.TabIndex = 5;
-            this.metroTextBox3.Text = "Еще не реализовано:\r\n1) Хранение паролей в зашифрованном виде\r\n2) Использование б" +
-    "азы данных пользователей";
+            this.metroTextBox3.Text = "Дополнительно:\r\n    Сохранение результата в txt или pdf(на выбор);\r\n    База данн" +
+    "ых пользователей;\r\n    Ведение журналов действий и хранение в базах данных.";
             this.metroTextBox3.UseSelectable = true;
             this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);

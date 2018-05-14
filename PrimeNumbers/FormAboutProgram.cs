@@ -14,7 +14,12 @@ namespace MetroFramework_test_at_a_new_project
 
         void ShowHelp(object o, CancelEventArgs e)
         {
-            MessageBox.Show(@"Просто закройте эту форму.");
+            MessageBox.Show(@"Просто закройте это окно.");
+        }
+
+        private void htmlPanel1_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

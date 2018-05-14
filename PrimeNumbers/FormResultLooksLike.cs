@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 
@@ -43,7 +38,7 @@ namespace MetroFramework_test_at_a_new_project
 
         void ShowHelp(object o, CancelEventArgs e)
         {
-            MessageBox.Show(@"Просто закройте эту форму.");
+            MessageBox.Show($@"Строка из поля 'Разделитель чисел' и выбранные специальные символы будут вставляться в файле результата между соседними числами.{Environment.NewLine}Вы можете посмотреть, как будет выглядеть результат, в поле 'Превью'");
             Cursor = DefaultCursor;
         }
 

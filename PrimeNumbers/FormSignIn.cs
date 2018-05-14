@@ -19,7 +19,7 @@ namespace MetroFramework_test_at_a_new_project
 
         void ShowHelp(object o, CancelEventArgs e)
         {
-            MessageBox.Show(@"Просто закройте эту форму.");
+            MessageBox.Show(@"Введите имя пользователя и пароль, если хотите войти."+Environment.NewLine+@"Введите имя пользователя, пароль и подтверждение пароля, если хотите зарегистрироваться."+Environment.NewLine+@"Вы можете использовать Tab для перемещения по кнопкам и текстовым полям.");
             Cursor = DefaultCursor;
         }
 

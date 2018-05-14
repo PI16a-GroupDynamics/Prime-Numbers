@@ -38,7 +38,7 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ShowHelp(object o, CancelEventArgs e)
         {
-            MessageBox.Show(@"Просто закройте эту форму.");
+            MessageBox.Show($@"Зайдите на вкладку 'Настройки' и вызовите справку нажатием на кнопку 'Справка'.");
             Cursor = DefaultCursor;
         }
 
@@ -329,7 +329,7 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            var helpPath = "..\\Help\\programHelp.chm";
+            var helpPath = @"Help\Help.chm";
             while (! File.Exists(helpPath))
             {
                 MessageBox.Show(@"Не удается открыть файл помощи. Выберите файл.");

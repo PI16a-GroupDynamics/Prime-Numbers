@@ -16,6 +16,9 @@ namespace MetroFramework_test_at_a_new_project
         public FormChangePassword()
         {
             InitializeComponent();
+            MaximizeBox = false;
+            MinimizeBox = false;
+            HelpButton = true;
         }
 
         private void FormChangePassword_Load(object sender, EventArgs e)
@@ -70,6 +73,11 @@ namespace MetroFramework_test_at_a_new_project
         private void BtClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ShowHelp(object sender, CancelEventArgs e)
+        {
+            MessageBox.Show($@"Введите в поле 'Старый пароль' тот пароль, который стоит сейчас.{Environment.NewLine}Введите в поле 'Новый пароль' тот пароль, который вы хотите поставить.{Environment.NewLine}Введите новый пароль еще раз в поле 'Подтвердите пароль'");
         }
     }
 }
