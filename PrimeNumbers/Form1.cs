@@ -1,8 +1,11 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using MetroFramework_test_at_a_new_project.Algorythms;
+using MetroFramework_test_at_a_new_project.Data;
+using MetroFramework_test_at_a_new_project.Printing;
+using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
@@ -10,12 +13,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using JetBrains.Annotations;
-using MetroFramework_test_at_a_new_project.Algorythms;
-using MetroFramework_test_at_a_new_project.Data;
-using MetroFramework_test_at_a_new_project.Encryption;
-using MetroFramework_test_at_a_new_project.Printing;
-using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 // ReSharper disable PossibleNullReferenceException
@@ -122,6 +119,7 @@ namespace MetroFramework_test_at_a_new_project
                 return;
             }
 
+
             var N = int.Parse(BoxNumber.Text);
 
 
@@ -131,6 +129,7 @@ namespace MetroFramework_test_at_a_new_project
             PanelResult.Visible  = true;
             ButtonCancel.Visible = true;
             ButtonStart.Enabled  = false;
+            ButtonCancel.Enabled = true;
 
 
             #endregion
@@ -168,6 +167,7 @@ namespace MetroFramework_test_at_a_new_project
             }
 
             label1.Text = @"Вывод результата...";
+            ButtonCancel.Enabled = false;
             if (! task.IsCanceled)
             {
                 progress.Report(0);
@@ -195,7 +195,7 @@ namespace MetroFramework_test_at_a_new_project
                 }
             }
 
-            Log.AddToFile(new LogRecord(Users.CurrentUserName, N, task.IsCanceled, dateTimeStart));
+            Log.Add(new LogRecord(Users.CurrentUserName, N, task.IsCanceled, dateTimeStart));
 
             var typeOfFile = CBoxTypeOfFile.SelectedIndex;
             string directoryForResult;
@@ -427,12 +427,11 @@ namespace MetroFramework_test_at_a_new_project
 
         private async void ButtonViewLog_Click(object sender, EventArgs e)
         {
-            Log.LoadDefault();
 
-            var logs = Log.GetLogRecords;
+            var logs = Log.GetLogRecords();
             if (logs.Count == 0)
             {
-                MessageBox.Show(@"Список логов пуст. Показывать нечего.");
+                MessageBox.Show(@"Журнал пуст. Показывать нечего.");
                 return;
             }
 
@@ -460,7 +459,6 @@ namespace MetroFramework_test_at_a_new_project
                     var range1 = (Range) worksheet.Columns["A"];
                     var range2 = (Range) worksheet.Columns["B"];
                     var range3 = (Range) worksheet.Columns["C"];
-                    range3.Columns.AutoFit();
 
                     for (var i = 1; i <= logs.Count; i++)
                     {
@@ -469,7 +467,8 @@ namespace MetroFramework_test_at_a_new_project
                         range2.Cells[i] = record.N;
                         range3.Cells[i] = record.DateTimeStart;
                     }
-
+                    range1.Columns.AutoFit();
+                    range3.Columns.AutoFit(); // Autofit делается после заполнения данных, чтобы Ексель понимал, под какие значения ему выравнивать колонки.
 
                     excelApp.Visible = true;
                     excelApp.UserControl =
@@ -497,26 +496,18 @@ namespace MetroFramework_test_at_a_new_project
             form.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonClearLog_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(@"Очистить журнал?", @"Подтвердите удаление", MessageBoxButtons.YesNo) is
                 DialogResult.Yes)
             {
-                File.Delete(Log.DefaultFilePath);
+                Log.Clear();
+                MessageBox.Show("Журнал очищен");
             }
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            /*if (! resultThread.IsAlive)
-            {
-                return;
-            }
-
-            resultThread
-                .Abort(); // как я понял, безопасное прерывание. Да, это "Просит поток завершить работу"
-                */
-
             #region FinalActions
 
             //progressBar1.Invoke(new Action(() => { progressBar1.Value = 0; }));
@@ -547,6 +538,66 @@ namespace MetroFramework_test_at_a_new_project
             var image = Image.FromFile(str);
 
 
+        }
+
+        private async void ButtonViewLog2_Click(object sender, EventArgs e)
+        {
+
+            var logs = Users.Log.GetLogRecords();
+            if (logs.Count == 0)
+            {
+                MessageBox.Show(@"Журнал пуст. Показывать нечего.");
+                return;
+            }
+
+            ButtonViewLog2.Enabled = false;
+            ButtonViewLog2.Text    = @"Открытие Excel...";
+
+            await Task.Run(() => ShowLog())
+                      .ConfigureAwait(true); // и так по умолчанию вызовется в текущем контексте, т.е. UI, но чисто для понимания
+            ButtonViewLog2.Enabled = true;
+            ButtonViewLog2.Text    = @"Журнал";
+
+            void ShowLog()
+            {
+                Parallel.Invoke(() =>
+                {
+                    var       excelApp  = new Application();
+                    var       workbook  = excelApp.Workbooks.Add();
+                    Worksheet worksheet = workbook.Worksheets[1];
+                    //делаю заголовки
+
+                    worksheet.Cells[1, 1] = "Сообщение";
+                    worksheet.Cells[1, 2] = "дата и время операции";
+
+                    var range1 = (Range) worksheet.Columns["A"];
+                    var range2 = (Range) worksheet.Columns["B"];
+                    range1.Columns.AutoFit();
+
+                    for (var i = 1; i <= logs.Count; i++)
+                    {
+                        var record = logs[i - 1];
+                        range1.Cells[i] = record.Message;
+                        range2.Cells[i] = record.DateTime;
+                    }
+                    range1.Columns.AutoFit();
+                    range2.Columns.AutoFit();
+
+                    excelApp.Visible = true;
+                    excelApp.UserControl =
+                        true; // т.е. освобождение ресурсов объекта происходит при удалении его программно.
+                });
+            }
+        }
+
+        private void ButtonClearLog2_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить журнал?", @"Подтвердите удаление", MessageBoxButtons.YesNo) is
+                DialogResult.Yes)
+            {
+                Users.Log.Clear();
+                MessageBox.Show("Журнал очищен");
+            }
         }
     }
 }

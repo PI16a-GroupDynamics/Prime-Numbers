@@ -1,87 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Data.SQLite;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 
 namespace MetroFramework_test_at_a_new_project.Data
 {
     public static class Log
-    {
-        private static List<LogRecord> log = new List<LogRecord>();
-
-        public static string DefaultFilePath { get; set; } = @"Records\log.bin";
-
-        public static List<LogRecord> GetLogRecords => Log.log;
-
-        public static void Add(LogRecord record) => Log.log.Add(record);
-
-        public static void AddToFile(LogRecord record, string filePath)
         {
-            Log.CheckPathOrCreate(filePath);
-
-            using (Stream stream = File.Open(filePath, FileMode.Append))
+            public static void Add(LogRecord record)
             {
-                var bf = new BinaryFormatter();
-                bf.Serialize(stream, record);
-            }
-        }
-
-
-        public static void AddToFile(LogRecord record) => Log.AddToFile(record, Log.DefaultFilePath);
-
-        public static void LoadDefault() => Log.LoadFrom(Log.DefaultFilePath);
-
-        public static void LoadFrom([NotNull] string filePath)
-        {
-            Log.CheckPathOrCreate(filePath);
-
-            if (! File.Exists(filePath))
-            { // Если файла нет, то мы инициализируем лог как пустой лог (не null, это важно) и выходим. Создавать файл будем при записи.
-                Log.log = new List<LogRecord>();
-                return;
-            }
-
-            Log.log = new List<LogRecord>();
-            // считывание в список по одной записи.
-            using (Stream stream = File.OpenRead(filePath))
-            {
-                var bf = new BinaryFormatter();
-
-                while (stream.Position < stream.Length)
+                using(var connection = new SQLiteConnection(@"Data Source = Databases\Log.db3"))
                 {
-                    Log.log.Add(bf.Deserialize(stream) as LogRecord);
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText =
+                            $@"Insert into ActionsLog (Username, Number, Datetime, IsCancelled)
+                                values ('{record.UserName}','{record.N}','{record.DateTimeStart}','{record.IsCancelled}');";
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            
+            public static List<LogRecord> GetLogRecords()
+            {
+                var records = new List<LogRecord>();    
+
+                using(var connection = new SQLiteConnection($@"Data Source = Databases\Log.db3"))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText =
+                            $@"select * from ActionsLog";
+                        var reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            records.Add(new LogRecord(reader.GetString(0), reader.GetInt32(1), Convert.ToBoolean(reader.GetString(3)), Convert.ToDateTime(reader.GetString(2)) ));
+                        }
+                        
+                    } 
+                }
+
+                return records;
+            }
+
+            public static void Clear()
+            {
+                using(var connection = new SQLiteConnection(@"Data Source = Databases\Log.db3"))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText =
+                            @"delete from ActionsLog where Username like '%'";
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
         }
-
-        public static void SaveDefault() => Log.SaveTo(Log.DefaultFilePath);
-
-        private static void CheckPathOrCreate(string filePath)
-        {
-            var directory = Path.GetDirectoryName(filePath);
-            if (! Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-        }
-
-        public static void SaveTo(string filePath)
-        {
-            Log.CheckPathOrCreate(filePath);
-
-            using (Stream stream = File.OpenWrite(filePath))
-            {
-                var bf = new BinaryFormatter();
-
-                foreach (var record in Log.log)
-                {
-                    bf.Serialize(stream, record);
-                }
-            }
-        }
-    }
 
     [Serializable]
     public class LogRecord: ISerializable

@@ -30,16 +30,19 @@ namespace MetroFramework_test_at_a_new_project
         private void InitializeComponent()
         {
             this.TabPageAdmin = new MetroFramework.Controls.MetroTabPage();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.ButtonClearLog2 = new System.Windows.Forms.Button();
+            this.ButtonViewLog2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ButtonClearLog = new System.Windows.Forms.Button();
             this.ButtonUsers = new System.Windows.Forms.Button();
             this.ButtonViewLog = new System.Windows.Forms.Button();
             this.TabPageSettings = new MetroFramework.Controls.MetroTabPage();
             this.PanelUser = new MetroFramework.Controls.MetroPanel();
             this.PanelPassword = new MetroFramework.Controls.MetroPanel();
             this.ButtonChangePassword = new MetroFramework.Controls.MetroButton();
-            this.ButtonChangeUsername = new MetroFramework.Controls.MetroButton();
             this.ButtonChangeUser = new MetroFramework.Controls.MetroButton();
+            this.ButtonChangeUsername = new MetroFramework.Controls.MetroButton();
             this.BoxCurrentUser = new MetroFramework.Controls.MetroTextBox();
             this.LabelCurrentUser = new MetroFramework.Controls.MetroLabel();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
@@ -63,9 +66,6 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxNumber = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUser.SuspendLayout();
@@ -79,10 +79,10 @@ namespace MetroFramework_test_at_a_new_project
             // TabPageAdmin
             // 
             this.TabPageAdmin.Controls.Add(this.textBox3);
-            this.TabPageAdmin.Controls.Add(this.button2);
-            this.TabPageAdmin.Controls.Add(this.button3);
+            this.TabPageAdmin.Controls.Add(this.ButtonClearLog2);
+            this.TabPageAdmin.Controls.Add(this.ButtonViewLog2);
             this.TabPageAdmin.Controls.Add(this.textBox2);
-            this.TabPageAdmin.Controls.Add(this.button1);
+            this.TabPageAdmin.Controls.Add(this.ButtonClearLog);
             this.TabPageAdmin.Controls.Add(this.ButtonUsers);
             this.TabPageAdmin.Controls.Add(this.ButtonViewLog);
             this.TabPageAdmin.HorizontalScrollbarBarColor = true;
@@ -97,6 +97,36 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageAdmin.VerticalScrollbarHighlightOnWheel = false;
             this.TabPageAdmin.VerticalScrollbarSize = 10;
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(319, 41);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(106, 20);
+            this.textBox3.TabIndex = 16;
+            this.textBox3.Text = "В БД";
+            // 
+            // ButtonClearLog2
+            // 
+            this.ButtonClearLog2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonClearLog2.Location = new System.Drawing.Point(319, 125);
+            this.ButtonClearLog2.Name = "ButtonClearLog2";
+            this.ButtonClearLog2.Size = new System.Drawing.Size(106, 23);
+            this.ButtonClearLog2.TabIndex = 15;
+            this.ButtonClearLog2.Text = "Очистить журнал";
+            this.ButtonClearLog2.UseVisualStyleBackColor = true;
+            this.ButtonClearLog2.Click += new System.EventHandler(this.ButtonClearLog2_Click);
+            // 
+            // ButtonViewLog2
+            // 
+            this.ButtonViewLog2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonViewLog2.Location = new System.Drawing.Point(319, 67);
+            this.ButtonViewLog2.Name = "ButtonViewLog2";
+            this.ButtonViewLog2.Size = new System.Drawing.Size(106, 52);
+            this.ButtonViewLog2.TabIndex = 14;
+            this.ButtonViewLog2.Text = "Действия над пользователями";
+            this.ButtonViewLog2.UseVisualStyleBackColor = true;
+            this.ButtonViewLog2.Click += new System.EventHandler(this.ButtonViewLog2_Click);
+            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(195, 41);
@@ -105,16 +135,16 @@ namespace MetroFramework_test_at_a_new_project
             this.textBox2.TabIndex = 13;
             this.textBox2.Text = "В БД";
             // 
-            // button1
+            // ButtonClearLog
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(195, 125);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Очистить журнал";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ButtonClearLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonClearLog.Location = new System.Drawing.Point(195, 125);
+            this.ButtonClearLog.Name = "ButtonClearLog";
+            this.ButtonClearLog.Size = new System.Drawing.Size(106, 23);
+            this.ButtonClearLog.TabIndex = 12;
+            this.ButtonClearLog.Text = "Очистить журнал";
+            this.ButtonClearLog.UseVisualStyleBackColor = true;
+            this.ButtonClearLog.Click += new System.EventHandler(this.ButtonClearLog_Click);
             // 
             // ButtonUsers
             // 
@@ -135,7 +165,7 @@ namespace MetroFramework_test_at_a_new_project
             this.ButtonViewLog.Name = "ButtonViewLog";
             this.ButtonViewLog.Size = new System.Drawing.Size(106, 52);
             this.ButtonViewLog.TabIndex = 7;
-            this.ButtonViewLog.Text = "Журнал действий над пользователями";
+            this.ButtonViewLog.Text = "Действия пользователей";
             this.ButtonViewLog.UseVisualStyleBackColor = true;
             this.ButtonViewLog.Click += new System.EventHandler(this.ButtonViewLog_Click);
             // 
@@ -204,17 +234,6 @@ namespace MetroFramework_test_at_a_new_project
             this.ButtonChangePassword.UseSelectable = true;
             this.ButtonChangePassword.Click += new System.EventHandler(this.ButtonPassword_Click);
             // 
-            // ButtonChangeUsername
-            // 
-            this.ButtonChangeUsername.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.ButtonChangeUsername.Location = new System.Drawing.Point(231, 28);
-            this.ButtonChangeUsername.Name = "ButtonChangeUsername";
-            this.ButtonChangeUsername.Size = new System.Drawing.Size(88, 23);
-            this.ButtonChangeUsername.TabIndex = 21;
-            this.ButtonChangeUsername.Text = "Изменить";
-            this.ButtonChangeUsername.UseSelectable = true;
-            this.ButtonChangeUsername.Click += new System.EventHandler(this.ButtonChangeUsername_Click);
-            // 
             // ButtonChangeUser
             // 
             this.ButtonChangeUser.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -226,6 +245,17 @@ namespace MetroFramework_test_at_a_new_project
             this.ButtonChangeUser.UseSelectable = true;
             this.ButtonChangeUser.Click += new System.EventHandler(this.ButtonChangeUser_Click);
             // 
+            // ButtonChangeUsername
+            // 
+            this.ButtonChangeUsername.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.ButtonChangeUsername.Location = new System.Drawing.Point(231, 28);
+            this.ButtonChangeUsername.Name = "ButtonChangeUsername";
+            this.ButtonChangeUsername.Size = new System.Drawing.Size(88, 23);
+            this.ButtonChangeUsername.TabIndex = 21;
+            this.ButtonChangeUsername.Text = "Изменить";
+            this.ButtonChangeUsername.UseSelectable = true;
+            this.ButtonChangeUsername.Click += new System.EventHandler(this.ButtonChangeUsername_Click);
+            // 
             // BoxCurrentUser
             // 
             // 
@@ -235,7 +265,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxCurrentUser.CustomButton.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.BoxCurrentUser.CustomButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.BoxCurrentUser.CustomButton.Image = null;
-            this.BoxCurrentUser.CustomButton.Location = new System.Drawing.Point(140, 1);
+            this.BoxCurrentUser.CustomButton.Location = new System.Drawing.Point(199, 1);
             this.BoxCurrentUser.CustomButton.Name = "";
             this.BoxCurrentUser.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.BoxCurrentUser.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -570,40 +600,12 @@ namespace MetroFramework_test_at_a_new_project
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.Location = new System.Drawing.Point(12, 12);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(433, 389);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(319, 41);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(106, 20);
-            this.textBox3.TabIndex = 16;
-            this.textBox3.Text = "В БД";
-            // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(319, 125);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 23);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Очистить журнал";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(319, 67);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 52);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Журнал действий пользователей";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -666,15 +668,15 @@ namespace MetroFramework_test_at_a_new_project
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private MetroFramework.Controls.MetroButton ButtonStart;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonClearLog;
         private System.Windows.Forms.TextBox BoxResult;
         private System.Windows.Forms.ProgressBar progressBar1;
         private MetroFramework.Controls.MetroButton ButtonCancel;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ButtonClearLog2;
+        private System.Windows.Forms.Button ButtonViewLog2;
     }
 }
 

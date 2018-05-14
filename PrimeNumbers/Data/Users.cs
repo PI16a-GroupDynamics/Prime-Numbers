@@ -1,14 +1,11 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using MetroFramework_test_at_a_new_project.Encryption;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using JetBrains.Annotations;
-using MetroFramework_test_at_a_new_project.Encryption;
 
 namespace MetroFramework_test_at_a_new_project.Data
 {
@@ -17,9 +14,6 @@ namespace MetroFramework_test_at_a_new_project.Data
     {
         private static SQLiteConnection dbConnection;
 
-        //private static List<User> users = new List<User>();
-
-        // А что, если использовать этот список просто всегда? Делать запись на диск только при закрытии главной формы... Или по особой прихоти админа... Хммм...
         private static User currentUser;
 
         private static User defaultAdmin = new User("admin", "admin");
@@ -35,8 +29,7 @@ namespace MetroFramework_test_at_a_new_project.Data
 
             SQLiteFactory factory = DbProviderFactories.GetFactory("System.Data.SQLite") as SQLiteFactory;
 
-            dbConnection = factory.CreateConnection() as SQLiteConnection;
-            dbConnection.ConnectionString = @"Data Source = " + baseName;
+            dbConnection = new SQLiteConnection(@"Data Source = " + baseName);
         }
 
         [CanBeNull]
@@ -65,14 +58,14 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
         }
 
-        public static bool DeleteUser(string userName)
+        public static bool DeleteUser(string username)
         {
             ResetConnections();
             Users.dbConnection.Open();
             int number;
             using (var command = new SQLiteCommand(Users.dbConnection))
             {
-                command.CommandText = $@"delete from Users where username = '{userName}'";
+                command.CommandText = $@"delete from Users where username = '{username}'";
                 command.CommandType = CommandType.Text;
                 number = command.ExecuteNonQuery();  
             }
@@ -82,50 +75,16 @@ namespace MetroFramework_test_at_a_new_project.Data
             {
                 throw new Exception("В базе данных пользователей не уникальные значения имени.");
             }
+
+            if(number is 1)
+            {
+                Log.Add($@"Пользователь {CurrentUserName} удалил пользователя {username}");
+            }
+
             return number is 1;
-            //=> Users.users.Remove(Users.FindUserByName(userName));
+            
         } 
 
-        /*/// <summary>
-        ///     Загружает данные из бинарного файла
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns />
-        public static bool LoadFromFile([NotNull] string filePath)
-        {
-            var path = filePath;
-            var bf   = new BinaryFormatter();
-            if (! Directory.Exists(Path.GetDirectoryName(path)) ||
-                ! File.Exists(path))
-            {
-                Users.users = new List<User>
-                    {Users.DefaultAdmin};
-                return false;
-            }
-
-            using (var fstream = File.OpenRead(path))
-            {
-                Users.users = bf.Deserialize(fstream) as List<User>;
-            }
-
-            return true;
-        }*/
-
-        /*/// <summary>
-        ///     Записывает в бинарный файл данные
-        /// </summary>
-        /// <param name="filePath"></param>
-        public static void SaveToFile(string filePath)
-        {
-            Users.CheckPathOrCreate(filePath);
-
-            var bf = new BinaryFormatter();
-            using (var fstream = File.OpenWrite(filePath))
-            {
-                bf.Serialize(fstream, Users.users);
-            }
-        }
-        */
         /// <summary>
         ///     Замена записи пользователя. Используется метод RemoveAll.
         /// </summary>
@@ -184,21 +143,6 @@ namespace MetroFramework_test_at_a_new_project.Data
             Users.dbConnection.Close();
             return user;
         }
-
-        /*/// <summary>
-        ///     Загружает данные из бинарного файла
-        /// </summary>
-        public static bool LoadFromFile() => Users.LoadFromFile(Users.DefaultFilePath);
-        */
-
-        /*/// <summary>
-        ///     Записывает в бинарный файл данные
-        /// </summary>
-        public static void SaveToFile()
-        {
-            Users.SaveToFile(Users.DefaultFilePath);
-        }
-        */
 
         public static bool Contains(string userName)
         {
@@ -269,19 +213,21 @@ namespace MetroFramework_test_at_a_new_project.Data
                 command.ExecuteNonQuery();
             }
 
+            if(isAdmin is false)
+            {
+                Log.Add($@"Зарегистрирован новый простой пользователь {userName}");
+            }
+            else
+            {
+                Log.Add($@"Зарегистрирован новый администратор {userName}");
+            }
+            
+            
+
             Users.dbConnection.Close();
             return true;
         }
 
-        /*public static void CheckPathOrCreate(string filePath)
-        {
-            var directory = Path.GetDirectoryName(filePath);
-            if (! Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-        }
-        */
         public static bool SetAdminPriveledgeUser(string username, bool isAdmin = true)
         {
             ResetConnections();
@@ -306,6 +252,18 @@ namespace MetroFramework_test_at_a_new_project.Data
                               ")");
             }
 
+            if(number is 1)
+            {
+                if(isAdmin)
+                {
+                    Log.Add($@"Пользователь {CurrentUserName} сделал администратором {username}");
+                }
+                else
+                {
+                    Log.Add($@"Пользователь {CurrentUserName} сделал обычным пользователем {username}");
+                }
+            }
+
             return number is 1;
         }
 
@@ -327,6 +285,10 @@ namespace MetroFramework_test_at_a_new_project.Data
             {
                 throw new Exception("База данных пользователей повреждена. Имеется неуникальное имя пользователя ("+username+")");
             }
+            if(number is 1)
+            {
+                Log.Add($@"Пользователь {CurrentUserName} изменил пароль {username}");
+            }
             return number is 1;
         }
 
@@ -344,27 +306,28 @@ namespace MetroFramework_test_at_a_new_project.Data
         /// <returns>flag Successful</returns>
         public static bool SetNameUser(string oldUsername, string newUsername)
         {
-            /*if (Users.Contains(newUsername))
-            {
-                return false;
-            }*/
 
             ResetConnections();
-
-            Users.dbConnection.Open();
+            DisposeConnections();
             int number;
-            using (var command = new SQLiteCommand(Users.dbConnection))
+            using(var connection = new SQLiteConnection(@"Data Source = Databases\Users.db3"))
             {
-                command.CommandText =
-                    $@"Update Users set Username = '{newUsername}' 
-                        where Username = '{oldUsername
-                        }'";
-                command.CommandType = CommandType.Text;
-                number              = command.ExecuteNonQuery();
+                connection.Open();
+                using (var command = new SQLiteCommand(connection))
+                {
+                    command.CommandText =
+                        $@"Update Users set Username = '{newUsername}' 
+                            where Username = '{oldUsername
+                            }'";
+                    command.CommandType = CommandType.Text;
+                    number              = command.ExecuteNonQuery();
+                }
             }
 
-            Users.dbConnection.Close();
-
+            if(number is 1)
+            {
+                Log.Add($@"Пользователь {CurrentUserName} изменил имя пользователя {oldUsername} на {newUsername}");
+            }
             return number is 1;
             
         }
@@ -384,6 +347,10 @@ namespace MetroFramework_test_at_a_new_project.Data
             }
 
             Users.dbConnection.Close();
+            if(number is 1)
+            {
+                Log.Add($@"Пользователь {CurrentUserName} изменил пароль {username}");
+            }
             return number is 1;
         }
 
@@ -466,5 +433,78 @@ namespace MetroFramework_test_at_a_new_project.Data
             Users.dbConnection.Close();
             return result;
         }
+
+        public static class Log
+        {
+            public static void Add(string message, DateTime? dateTime = null)
+            {
+                if (!dateTime.HasValue)
+                {
+                    dateTime = DateTime.Now;
+                }
+                using(var connection = new SQLiteConnection(@"Data Source = Databases\Log.db3"))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText =
+                            $@"Insert into UsersLog (Message, DateTime)
+                                values ('{message}','{dateTime}');";
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            internal static List<LogRecord> GetLogRecords()
+            {
+                var records = new List<LogRecord>();    
+
+                using(var connection = new SQLiteConnection($@"Data Source = Databases\Log.db3"))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText =
+                            $@"select * from UsersLog";
+                        var reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            records.Add(new LogRecord(reader.GetString(0), Convert.ToDateTime(reader.GetString(1)) ));
+                        }
+                        
+                    } 
+                }
+
+                return records;                
+            }
+
+            public static void Clear()
+            {
+                using(var connection = new SQLiteConnection(@"Data Source = Databases\Log.db3"))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText =
+                            @"delete from UsersLog where Message like '%'";
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        public class LogRecord
+        {
+            public string Message{get;set;}
+            public DateTime DateTime{get;set;}
+            public LogRecord(string message, DateTime dateTime)
+            {
+                Message = message;
+                DateTime = dateTime;
+            }
+        }
+
     }
 }
