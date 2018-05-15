@@ -22,8 +22,6 @@ namespace MetroFramework_test_at_a_new_project
     [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
     public partial class Form1: Form
     {
-        //private Thread excelThread;
-        //private Thread resultThread;
 
         public Form1()
         {
@@ -31,8 +29,8 @@ namespace MetroFramework_test_at_a_new_project
             BoxDirectoryForResult.Text   = Environment.CurrentDirectory;
             CBoxTypeOfFile.SelectedIndex = 0;
             TabPageAdmin.Parent          = null;
-            MaximizeBox                  = false;
-            MinimizeBox                  = false;
+            //MaximizeBox                  = false;
+            //MinimizeBox                  = false;
         }
 
 
@@ -43,10 +41,7 @@ namespace MetroFramework_test_at_a_new_project
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            //Users.CheckPathOrCreate(Users.DefaultFilePath);
-            //Users.CheckPathOrCreate(Log.DefaultFilePath);
-            
+        {            
             var fabout = new FormAboutProgram();
             fabout.ShowDialog();
 

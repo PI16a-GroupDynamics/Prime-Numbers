@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUsers));
             this.TableUsers = new System.Windows.Forms.DataGridView();
-            this.ButtonSaveChanges = new System.Windows.Forms.Button();
-            this.ButtonCancelChanges = new System.Windows.Forms.Button();
-            this.ButtonBack = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.Usernames = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsAdmin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Passwords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ButtonSaveChanges = new System.Windows.Forms.Button();
+            this.ButtonCancelChanges = new System.Windows.Forms.Button();
+            this.ButtonBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +59,25 @@
             this.TableUsers.TabIndex = 0;
             this.TableUsers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.TableUsers_CellValidating);
             this.TableUsers.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.TableUsers_UserDeletingRow);
+            // 
+            // Usernames
+            // 
+            this.Usernames.HeaderText = "Пользователь";
+            this.Usernames.Name = "Usernames";
+            this.Usernames.ReadOnly = true;
+            this.Usernames.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // IsAdmin
+            // 
+            this.IsAdmin.HeaderText = "Администратор";
+            this.IsAdmin.Name = "IsAdmin";
+            // 
+            // Passwords
+            // 
+            this.Passwords.HeaderText = "Зашифрованный пароль";
+            this.Passwords.Name = "Passwords";
+            this.Passwords.ReadOnly = true;
+            this.Passwords.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // ButtonSaveChanges
             // 
@@ -97,55 +116,25 @@
             this.ButtonBack.UseVisualStyleBackColor = true;
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(348, 111);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 104);
-            this.textBox1.TabIndex = 24;
-            this.textBox1.Text = "Нужна БД. Все операции с юзерами - в БД. БД.get для паролей нет, т.к. хэш-шифр. Б" +
-    "Д set is password.Encrypt или password.EncryptToBase64String";
-            // 
-            // Usernames
-            // 
-            this.Usernames.HeaderText = "Пользователь";
-            this.Usernames.Name = "Usernames";
-            this.Usernames.ReadOnly = true;
-            this.Usernames.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // IsAdmin
-            // 
-            this.IsAdmin.HeaderText = "Администратор";
-            this.IsAdmin.Name = "IsAdmin";
-            // 
-            // Passwords
-            // 
-            this.Passwords.HeaderText = "Зашифрованный пароль";
-            this.Passwords.Name = "Passwords";
-            this.Passwords.ReadOnly = true;
-            this.Passwords.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
             // FormUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonBack;
-            this.ClientSize = new System.Drawing.Size(631, 376);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(467, 301);
             this.Controls.Add(this.ButtonBack);
             this.Controls.Add(this.ButtonCancelChanges);
             this.Controls.Add(this.ButtonSaveChanges);
             this.Controls.Add(this.TableUsers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormUsers";
-            this.Text = "FormUsers";
+            this.Text = "Пользователи";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormUsers_FormClosing);
             this.Load += new System.EventHandler(this.FormUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -155,7 +144,6 @@
         private System.Windows.Forms.Button ButtonSaveChanges;
         private System.Windows.Forms.Button ButtonCancelChanges;
         private System.Windows.Forms.Button ButtonBack;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usernames;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsAdmin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Passwords;

@@ -14,6 +14,7 @@ namespace MetroFramework_test_at_a_new_project
         public FormUsers()
         {
             InitializeComponent();
+            TableUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             MaximizeBox = false;
             MinimizeBox = false;
         }
@@ -26,6 +27,7 @@ namespace MetroFramework_test_at_a_new_project
 
         private void FormUsers_Load(object sender, EventArgs e)
         {
+            TableUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             foreach (var user in Users.GetListUsers())
             {
                 TableUsers.Rows.Add(user.Name, user.IsAdmin, user.PassWord );
@@ -38,9 +40,10 @@ namespace MetroFramework_test_at_a_new_project
         [SuppressMessage("ReSharper", "InvertIf")]
         private void TableUsers_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if (e.Row.Index == 0)
+            var table = sender as DataGridView;
+            if (table.Rows[e.Row.Index].Cells[0].Value.ToString() == Users.CurrentUserName)
             {
-                MessageBox.Show(@"Администратора нельзя удалить.", @"Ошибка");
+                MessageBox.Show(@"Нельзя удалить себя.", @"Ошибка");
                 e.Cancel = true;
             }
             else
@@ -74,16 +77,24 @@ namespace MetroFramework_test_at_a_new_project
             var trimStr = str.Trim();
             if (string.IsNullOrEmpty(trimStr))
             {
-                MessageBox.Show(@"Поле не может быть пустым", @"Error");
+                MessageBox.Show(@"Поле не может быть пустым", @"Ошибка");
                 e.Cancel = true;
                 return;
             }
 
-            if (!bool.TryParse(str,out var _))
+            if (!bool.TryParse(str,out var isAdmin))
             {
-                MessageBox.Show(@"Значение не может быть преобразовано в логическое.", @"Error");
+                MessageBox.Show(@"Значение не может быть преобразовано в логическое.", @"Ошибка");
                 e.Cancel = true;
+                return;
             }
+            if(isAdmin is false && currentCell.OwningRow.Cells[0].Value.ToString() == Users.CurrentUserName)
+            {
+                e.Cancel = true;
+                MessageBox.Show("Нельзя отобрать у себя привелегию администратора","Ошибка");
+            }
+            
+
         }
 
         private void FormUsers_FormClosing(object sender, FormClosingEventArgs e) {}
@@ -127,6 +138,7 @@ namespace MetroFramework_test_at_a_new_project
                     users.Find(user => user.Name == TableUsers.Rows[i].Cells[0].Value.ToString());
                 if (TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString() != controlUser.IsAdmin.ToString())
                 {
+                    
                     Users.SetAdminPriveledgeUser(controlUser.Name,
                                                  Convert.ToBoolean(TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString()));
                 }

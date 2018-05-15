@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSignIn));
             this.PnConfirmPassword = new System.Windows.Forms.Panel();
             this.TbConfirmPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -102,7 +103,7 @@
             this.BtSignIn.Name = "BtSignIn";
             this.BtSignIn.Size = new System.Drawing.Size(83, 23);
             this.BtSignIn.TabIndex = 3;
-            this.BtSignIn.Text = "Войти";
+            this.BtSignIn.Text = "Вход";
             this.BtSignIn.UseVisualStyleBackColor = true;
             this.BtSignIn.Click += new System.EventHandler(this.BtSignIn_Click);
             // 
@@ -140,7 +141,9 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSignIn";
+            this.Text = "Вход/регистрация";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSignIn_FormClosed);
             this.Load += new System.EventHandler(this.FormSignIn_Load);

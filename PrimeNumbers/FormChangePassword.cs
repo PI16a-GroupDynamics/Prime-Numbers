@@ -41,8 +41,9 @@ namespace MetroFramework_test_at_a_new_project
 
             if (! (Data.Users.CurrentUser.PassWord == TbOldPassword.Text.Trim().EncryptToBase64String()))
             {
-                MessageBox.Show(@"Пароль неверен");
+                MessageBox.Show(@"Пароль неверен", "Ошибка");
                 TbOldPassword.Focus();
+                return;
             }
 
             if (TbPassword.Text != TbConfirmPassword.Text)
@@ -58,7 +59,7 @@ namespace MetroFramework_test_at_a_new_project
             }
             else
             {
-                MessageBox.Show("Не удалось сменить пароль. Пользователя с таким именем не существует.");
+                MessageBox.Show("Не удалось сменить пароль. Пользователя с таким именем не существует.", "Что-то пошло не так");
             }
         }
 

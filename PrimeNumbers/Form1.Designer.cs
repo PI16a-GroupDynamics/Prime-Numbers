@@ -29,6 +29,7 @@ namespace MetroFramework_test_at_a_new_project
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.TabPageAdmin = new MetroFramework.Controls.MetroTabPage();
             this.ButtonClearLog2 = new System.Windows.Forms.Button();
             this.ButtonViewLog2 = new System.Windows.Forms.Button();
@@ -172,6 +173,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             // PanelUser
             // 
+            this.PanelUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelUser.Controls.Add(this.PanelPassword);
             this.PanelUser.Controls.Add(this.ButtonChangeUsername);
             this.PanelUser.Controls.Add(this.BoxCurrentUser);
@@ -232,7 +234,7 @@ namespace MetroFramework_test_at_a_new_project
             this.ButtonChangeUsername.Name = "ButtonChangeUsername";
             this.ButtonChangeUsername.Size = new System.Drawing.Size(88, 23);
             this.ButtonChangeUsername.TabIndex = 21;
-            this.ButtonChangeUsername.Text = "Изменить";
+            this.ButtonChangeUsername.Text = "Изменить имя";
             this.ButtonChangeUsername.UseSelectable = true;
             this.ButtonChangeUsername.Click += new System.EventHandler(this.ButtonChangeUsername_Click);
             // 
@@ -294,6 +296,8 @@ namespace MetroFramework_test_at_a_new_project
             // 
             // PanelSaveResultTo
             // 
+            this.PanelSaveResultTo.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelSaveResultTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelSaveResultTo.Controls.Add(this.metroButton3);
             this.PanelSaveResultTo.Controls.Add(this.metroLabel7);
             this.PanelSaveResultTo.Controls.Add(this.metroButton1);
@@ -596,6 +600,7 @@ namespace MetroFramework_test_at_a_new_project
             this.Controls.Add(this.metroTabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ShowHelp);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
