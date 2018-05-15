@@ -28,10 +28,7 @@ namespace MetroFramework_test_at_a_new_project
         private void FormUsers_Load(object sender, EventArgs e)
         {
             TableUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            foreach (var user in Users.GetListUsers())
-            {
-                TableUsers.Rows.Add(user.Name, user.IsAdmin, user.PassWord );
-            }
+            UpdateTable();
 
             rowsToDelete                                  = new bool[TableUsers.RowCount];
             TableUsers.Rows[0].DefaultCellStyle.BackColor = Color.BurlyWood;
@@ -82,19 +79,19 @@ namespace MetroFramework_test_at_a_new_project
                 return;
             }
 
-            if (!bool.TryParse(str,out var isAdmin))
+            if (!Extensions.BoolCustomTryParse(str,out var cellIsAdmin))
             {
                 MessageBox.Show(@"Значение не может быть преобразовано в логическое.", @"Ошибка");
                 e.Cancel = true;
                 return;
             }
-            if(isAdmin is false && currentCell.OwningRow.Cells[0].Value.ToString() == Users.CurrentUserName)
+            if(cellIsAdmin is false && currentCell.OwningRow.Cells[0].Value.ToString() == Users.CurrentUserName)
             {
-                e.Cancel = true;
                 MessageBox.Show("Нельзя отобрать у себя привелегию администратора","Ошибка");
+                e.Cancel = true;
+                return;
             }
             
-
         }
 
         private void FormUsers_FormClosing(object sender, FormClosingEventArgs e) {}
@@ -109,7 +106,7 @@ namespace MetroFramework_test_at_a_new_project
             TableUsers.Rows.Clear();
             foreach (var user in Users.GetListUsers())
             {
-                TableUsers.Rows.Add(user.Name, user.IsAdmin, user.PassWord );
+                TableUsers.Rows.Add(user.Name, user.IsAdmin?"Да":"Нет", user.PassWord );
             }
 
             rowsToDelete                                  = new bool[TableUsers.RowCount];
@@ -120,7 +117,7 @@ namespace MetroFramework_test_at_a_new_project
         {
             if (TableUsers.RowCount is 0)
             {
-                throw new ArgumentException("Нет строк в таблице. Количество строк должно быть минимум 1.");
+                throw new ArgumentException("Нет строк в таблице. Количество строк должно быть больше 0.");
             }
 
             for (var i = 0; i < rowsToDelete.Length; i++)
@@ -136,11 +133,13 @@ namespace MetroFramework_test_at_a_new_project
             {
                 var controlUser =
                     users.Find(user => user.Name == TableUsers.Rows[i].Cells[0].Value.ToString());
-                if (TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString() != controlUser.IsAdmin.ToString())
+                
+                Extensions.BoolCustomTryParse(TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString(), out var value);
+                if (value.ToString() != controlUser.IsAdmin.ToString())
                 {
                     
                     Users.SetAdminPriveledgeUser(controlUser.Name,
-                                                 Convert.ToBoolean(TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString()));
+                                                 value);
                 }
             }
         }

@@ -116,6 +116,7 @@
     <Compile Include="Data\Users.cs" />
     <Compile Include="Encryption\Extensions.cs" />
     <Compile Include="Encryption\HashEncryptor.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
