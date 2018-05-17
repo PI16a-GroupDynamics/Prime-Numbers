@@ -8,7 +8,13 @@ namespace MetroFramework_test_at_a_new_project
 {
     public static class Extensions
     {
-       public static bool BoolCustomTryParse(string value, out bool result)
+        /// <summary>
+        /// замена стандартному bool.TryParse
+        /// </summary>
+        /// <param name="value">Строка для синтаксического анализа</param>
+        /// <param name="result"></param>
+        /// <returns>flag Successful</returns>
+        public static bool BoolCustomTryParse(string value, out bool result)
         {
             switch (value.ToLower())
             {

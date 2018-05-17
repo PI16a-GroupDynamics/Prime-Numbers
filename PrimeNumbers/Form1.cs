@@ -57,6 +57,7 @@ namespace MetroFramework_test_at_a_new_project
                 BoxCurrentUser.Text = Users.CurrentUserName;
                 IfAdmin();
             }
+            TabControlMenu.SelectedIndex = 0;
         }
 
         private void ButtonChangeUser_Click(object sender, EventArgs e)
@@ -76,7 +77,7 @@ namespace MetroFramework_test_at_a_new_project
             // Про админа
             if (Users.CheckAdminPriveledge(Users.CurrentUser.Name))
             {
-                TabPageAdmin.Parent = metroTabControl1;
+                TabPageAdmin.Parent = TabControlMenu;
             }
             else
             {
@@ -190,7 +191,7 @@ namespace MetroFramework_test_at_a_new_project
                 }
             }
 
-            Log.Add(new LogRecord(Users.CurrentUserName, N, task.IsCanceled, dateTimeStart));
+            ActionsLog.Add(new ActionsLogRecord(Users.CurrentUserName, N, task.IsCanceled, dateTimeStart));
 
             var typeOfFile = CBoxTypeOfFile.SelectedIndex;
             string directoryForResult;
@@ -210,7 +211,7 @@ namespace MetroFramework_test_at_a_new_project
 
             progress.Report(0);
 
-            PanelSaveResultTo.Enabled = true;
+            PanelResultSettings.Enabled = true;
             ButtonChangeUser.Enabled  = true;
 
             ButtonCancel.Visible = false;
@@ -223,7 +224,6 @@ namespace MetroFramework_test_at_a_new_project
 
             void WorkWithResult()
             {
-// c Parallel.Invoke(..) работает быстрее всего на несколько процентов. Почему? может, потому, что эта функция и так запускается в пуле потоков? 
                 {
                     var sbResult      = new StringBuilder(N * 5);
                     var progressValue = 0.0;
@@ -297,7 +297,7 @@ namespace MetroFramework_test_at_a_new_project
 
         private void CBoxTypeOfFile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PanelSaveResultTo.Visible =
+            PanelSaveResult.Enabled =
                 CBoxTypeOfFile.SelectedIndex != 0;
         }
 
@@ -322,35 +322,6 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
-        private void ButtonHelp_Click(object sender, EventArgs e)
-        {
-            var helpPath = @"Help\Help.chm";
-            while (! File.Exists(helpPath))
-            {
-                MessageBox.Show(@"Не удается открыть файл помощи. Выберите файл.");
-                //диалог
-                var dialog = new OpenFileDialog
-                {
-                    InitialDirectory = Environment.CurrentDirectory,
-                    Filter           = @"Файлы справки (*.chm)|*.chm|Все файлы (*.*)|*.*",
-                    Multiselect      = false
-                };
-
-                var dialogResult = dialog.ShowDialog();
-                if (dialogResult is DialogResult.Yes ||
-                    dialogResult is DialogResult.OK)
-                {
-                    helpPath = dialog.FileName;
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            Help.ShowHelp(this, helpPath);
-        }
-
         private void MetroButton1_Click(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog
@@ -372,11 +343,6 @@ namespace MetroFramework_test_at_a_new_project
                 var userForm = new FormUsers();
                 userForm.Show();
              // "Запустить и забыть"
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Users.DisposeConnections();
         }
 
         private void ButtonChangeUsername_Click(object sender, EventArgs e)
@@ -420,10 +386,21 @@ namespace MetroFramework_test_at_a_new_project
             }
         }
 
+        /// <summary>
+        /// Выводит в Excel записи обоих журналов (логов)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ButtonViewLog_Click(object sender, EventArgs e)
         {
 
-            var logs = Log.GetLogRecords();
+            var logs = Users.Log.GetLogRecords(); // list<LogRecord>
+            logs.AddRange(ActionsLog.GetLogRecords());
+            logs.Sort((record1,record2)
+                =>
+                record1.DateTime.CompareTo(record2.DateTime));
+
+
             if (logs.Count == 0)
             {
                 MessageBox.Show(@"Журнал пуст. Показывать нечего.");
@@ -447,23 +424,20 @@ namespace MetroFramework_test_at_a_new_project
                     Worksheet worksheet = workbook.Worksheets[1];
                     //делаю заголовки
 
-                    worksheet.Cells[1, 1] = "Имя пользователя";
-                    worksheet.Cells[1, 2] = "N";
-                    worksheet.Cells[1, 3] = "дата и время операции";
+                    worksheet.Cells[1, 1] = "Время операции";
+                    worksheet.Cells[1, 2] = "Действие";
 
                     var range1 = (Range) worksheet.Columns["A"];
                     var range2 = (Range) worksheet.Columns["B"];
-                    var range3 = (Range) worksheet.Columns["C"];
 
                     for (var i = 1; i <= logs.Count; i++)
                     {
                         var record = logs[i - 1];
-                        range1.Cells[i] = record.UserName;
-                        range2.Cells[i] = record.N;
-                        range3.Cells[i] = record.DateTimeStart;
+                        range1.Cells[i] = record.DateTime;
+                        range2.Cells[i] = record.Message;
                     }
                     range1.Columns.AutoFit();
-                    range3.Columns.AutoFit(); // Autofit делается после заполнения данных, чтобы Ексель понимал, под какие значения ему выравнивать колонки.
+                    range2.Columns.AutoFit();
 
                     excelApp.Visible = true;
                     excelApp.UserControl =
@@ -476,7 +450,7 @@ namespace MetroFramework_test_at_a_new_project
         {
             if (e.KeyChar == 13)
             {
-                PanelUser.Focus(); // просто убираю фокус с текстбокса
+                PanelUserSettings.Focus(); // просто убираю фокус с текстбокса
             }
         }
 
@@ -496,7 +470,7 @@ namespace MetroFramework_test_at_a_new_project
             if (MessageBox.Show(@"Очистить журнал?", @"Подтвердите удаление", MessageBoxButtons.YesNo) is
                 DialogResult.Yes)
             {
-                Log.Clear();
+                ActionsLog.Clear();
                 MessageBox.Show("Журнал очищен");
             }
         }
@@ -535,64 +509,33 @@ namespace MetroFramework_test_at_a_new_project
 
         }
 
-        private async void ButtonViewLog2_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-
-            var logs = Users.Log.GetLogRecords();
-            if (logs.Count == 0)
+            var helpPath = @"Help\Help.chm";
+            while (! File.Exists(helpPath))
             {
-                MessageBox.Show(@"Журнал пуст. Показывать нечего.");
-                return;
-            }
-
-            ButtonViewLog2.Enabled = false;
-            ButtonViewLog2.Text    = @"Открытие Excel...";
-
-            await Task.Run(() => ShowLog())
-                      .ConfigureAwait(true); // и так по умолчанию вызовется в текущем контексте, т.е. UI, но чисто для понимания
-            ButtonViewLog2.Enabled = true;
-            ButtonViewLog2.Text    = @"Журнал";
-
-            void ShowLog()
-            {
-                Parallel.Invoke(() =>
+                MessageBox.Show(@"Не удается открыть файл помощи. Выберите файл.");
+                //диалог
+                var dialog = new OpenFileDialog
                 {
-                    var       excelApp  = new Application();
-                    var       workbook  = excelApp.Workbooks.Add();
-                    Worksheet worksheet = workbook.Worksheets[1];
-                    //делаю заголовки
+                    InitialDirectory = Environment.CurrentDirectory,
+                    Filter           = @"Файлы справки (*.chm)|*.chm|Все файлы (*.*)|*.*",
+                    Multiselect      = false
+                };
 
-                    worksheet.Cells[1, 1] = "Сообщение";
-                    worksheet.Cells[1, 2] = "дата и время операции";
-
-                    var range1 = (Range) worksheet.Columns["A"];
-                    var range2 = (Range) worksheet.Columns["B"];
-                    range1.Columns.AutoFit();
-
-                    for (var i = 1; i <= logs.Count; i++)
-                    {
-                        var record = logs[i - 1];
-                        range1.Cells[i] = record.Message;
-                        range2.Cells[i] = record.DateTime;
-                    }
-                    range1.Columns.AutoFit();
-                    range2.Columns.AutoFit();
-
-                    excelApp.Visible = true;
-                    excelApp.UserControl =
-                        true; // т.е. освобождение ресурсов объекта происходит при удалении его программно.
-                });
+                var dialogResult = dialog.ShowDialog();
+                if (dialogResult is DialogResult.Yes ||
+                    dialogResult is DialogResult.OK)
+                {
+                    helpPath = dialog.FileName;
+                }
+                else
+                {
+                    return;
+                }
             }
-        }
 
-        private void ButtonClearLog2_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show(@"Очистить журнал?", @"Подтвердите удаление", MessageBoxButtons.YesNo) is
-                DialogResult.Yes)
-            {
-                Users.Log.Clear();
-                MessageBox.Show("Журнал очищен");
-            }
+            Help.ShowHelp(this, helpPath);
         }
     }
 }

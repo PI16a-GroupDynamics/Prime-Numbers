@@ -54,6 +54,7 @@
             // TbConfirmPassword
             // 
             this.TbConfirmPassword.Location = new System.Drawing.Point(3, 22);
+            this.TbConfirmPassword.MaxLength = 100;
             this.TbConfirmPassword.Name = "TbConfirmPassword";
             this.TbConfirmPassword.PasswordChar = '*';
             this.TbConfirmPassword.Size = new System.Drawing.Size(164, 20);
@@ -73,6 +74,7 @@
             // TbUserName
             // 
             this.TbUserName.Location = new System.Drawing.Point(23, 36);
+            this.TbUserName.MaxLength = 50;
             this.TbUserName.Name = "TbUserName";
             this.TbUserName.Size = new System.Drawing.Size(164, 20);
             this.TbUserName.TabIndex = 0;
@@ -80,6 +82,7 @@
             // TbPassword
             // 
             this.TbPassword.Location = new System.Drawing.Point(23, 80);
+            this.TbPassword.MaxLength = 100;
             this.TbPassword.Name = "TbPassword";
             this.TbPassword.PasswordChar = '*';
             this.TbPassword.Size = new System.Drawing.Size(164, 20);

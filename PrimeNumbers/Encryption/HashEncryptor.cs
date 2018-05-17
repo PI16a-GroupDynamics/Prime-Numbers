@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace MetroFramework_test_at_a_new_project.Encryption
 {
+    /// <summary>
+    /// Класс со стандартной реализацией хэширования строки.
+    /// </summary>
     class HashEncryptor
     {
         public HashAlgorithm Algorithm = HashAlgorithm.Create("SHA512"); // реализация паттерна Стратегия

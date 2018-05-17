@@ -35,6 +35,8 @@
             this.htmlPanel1 = new MetroFramework.Drawing.Html.HtmlPanel();
             this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.fluentTheme1 = new Telerik.WinControls.Themes.FluentTheme();
+            this.ButtonSaveChanges = new System.Windows.Forms.Button();
             this.htmlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -67,14 +69,15 @@
             this.metroTextBox1.CustomButton.UseSelectable = true;
             this.metroTextBox1.CustomButton.Visible = false;
             this.metroTextBox1.Lines = new string[] {
-        "Назначение: ",
-        "1) Сгенерировать нужное число простых чисел",
-        "2) Сохранить результат"};
+        "Возможности:",
+        "    1. Генерировать нужное количество простых чисел.",
+        "    2. Сохранять результат в файл."};
             this.metroTextBox1.Location = new System.Drawing.Point(197, 54);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Multiline = true;
             this.metroTextBox1.Name = "metroTextBox1";
             this.metroTextBox1.PasswordChar = '\0';
+            this.metroTextBox1.ReadOnly = true;
             this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.metroTextBox1.SelectedText = "";
             this.metroTextBox1.SelectionLength = 0;
@@ -82,8 +85,8 @@
             this.metroTextBox1.ShortcutsEnabled = true;
             this.metroTextBox1.Size = new System.Drawing.Size(235, 110);
             this.metroTextBox1.TabIndex = 2;
-            this.metroTextBox1.Text = "Назначение: \r\n1) Сгенерировать нужное число простых чисел\r\n2) Сохранить результат" +
-    "";
+            this.metroTextBox1.Text = "Возможности:\r\n    1. Генерировать нужное количество простых чисел.\r\n    2. Сохран" +
+    "ять результат в файл.";
             this.metroTextBox1.UseSelectable = true;
             this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -111,6 +114,7 @@
             this.metroTextBox2.Multiline = true;
             this.metroTextBox2.Name = "metroTextBox2";
             this.metroTextBox2.PasswordChar = '\0';
+            this.metroTextBox2.ReadOnly = true;
             this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.metroTextBox2.SelectedText = "";
             this.metroTextBox2.SelectionLength = 0;
@@ -128,6 +132,7 @@
             this.htmlPanel1.AutoScroll = true;
             this.htmlPanel1.AutoScrollMinSize = new System.Drawing.Size(458, 0);
             this.htmlPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.htmlPanel1.Controls.Add(this.ButtonSaveChanges);
             this.htmlPanel1.Controls.Add(this.metroTextBox3);
             this.htmlPanel1.Controls.Add(this.metroTextBox2);
             this.htmlPanel1.Controls.Add(this.metroTextBox1);
@@ -137,7 +142,6 @@
             this.htmlPanel1.Name = "htmlPanel1";
             this.htmlPanel1.Size = new System.Drawing.Size(458, 407);
             this.htmlPanel1.TabIndex = 1;
-            this.htmlPanel1.Click += new System.EventHandler(this.htmlPanel1_Click);
             // 
             // metroTextBox3
             // 
@@ -154,24 +158,25 @@
             this.metroTextBox3.CustomButton.UseSelectable = true;
             this.metroTextBox3.CustomButton.Visible = false;
             this.metroTextBox3.Lines = new string[] {
-        "Дополнительно:",
-        "    Сохранение результата в txt или pdf(на выбор);",
-        "    База данных пользователей;",
-        "    Ведение журналов действий и хранение в базах данных."};
+        "Дополнительные функции:",
+        "    1. Выбор типа файла для сохранения;",
+        "    2. Система аккаунтов пользователей;",
+        "    3. Ведение журналов действий."};
             this.metroTextBox3.Location = new System.Drawing.Point(197, 171);
             this.metroTextBox3.MaxLength = 32767;
             this.metroTextBox3.Multiline = true;
             this.metroTextBox3.Name = "metroTextBox3";
             this.metroTextBox3.PasswordChar = '\0';
-            this.metroTextBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.metroTextBox3.ReadOnly = true;
+            this.metroTextBox3.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.metroTextBox3.SelectedText = "";
             this.metroTextBox3.SelectionLength = 0;
             this.metroTextBox3.SelectionStart = 0;
             this.metroTextBox3.ShortcutsEnabled = true;
             this.metroTextBox3.Size = new System.Drawing.Size(235, 122);
             this.metroTextBox3.TabIndex = 5;
-            this.metroTextBox3.Text = "Дополнительно:\r\n    Сохранение результата в txt или pdf(на выбор);\r\n    База данн" +
-    "ых пользователей;\r\n    Ведение журналов действий и хранение в базах данных.";
+            this.metroTextBox3.Text = "Дополнительные функции:\r\n    1. Выбор типа файла для сохранения;\r\n    2. Система " +
+    "аккаунтов пользователей;\r\n    3. Ведение журналов действий.";
             this.metroTextBox3.UseSelectable = true;
             this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -186,12 +191,26 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // ButtonSaveChanges
+            // 
+            this.ButtonSaveChanges.BackColor = System.Drawing.Color.Gainsboro;
+            this.ButtonSaveChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ButtonSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonSaveChanges.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonSaveChanges.Location = new System.Drawing.Point(130, 370);
+            this.ButtonSaveChanges.Name = "ButtonSaveChanges";
+            this.ButtonSaveChanges.Size = new System.Drawing.Size(174, 29);
+            this.ButtonSaveChanges.TabIndex = 6;
+            this.ButtonSaveChanges.Text = "Понятно";
+            this.ButtonSaveChanges.UseVisualStyleBackColor = false;
+            this.ButtonSaveChanges.Click += new System.EventHandler(this.ButtonSaveChanges_Click);
+            // 
             // FormAboutProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(460, 405);
+            this.ClientSize = new System.Drawing.Size(460, 411);
             this.Controls.Add(this.htmlPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
@@ -214,5 +233,7 @@
         private MetroFramework.Controls.MetroTextBox metroTextBox2;
         private MetroFramework.Drawing.Html.HtmlPanel htmlPanel1;
         private MetroFramework.Controls.MetroTextBox metroTextBox3;
+        private Telerik.WinControls.Themes.FluentTheme fluentTheme1;
+        private System.Windows.Forms.Button ButtonSaveChanges;
     }
 }

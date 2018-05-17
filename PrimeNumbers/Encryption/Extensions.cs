@@ -9,6 +9,11 @@ namespace MetroFramework_test_at_a_new_project.Encryption
         {
         }
 
+        /// <summary>
+        /// Шифрует строку
+        /// </summary>
+        /// <param name="s">Строка для шифрования</param>
+        /// <returns>зашифрованная строка в виде массива байтов</returns>
         [NotNull]
         public static byte[] Encrypt([NotNull] this string s)
         {
@@ -16,6 +21,11 @@ namespace MetroFramework_test_at_a_new_project.Encryption
             return encryptor.Encrypt(s);
         }
 
+        /// <summary>
+        /// Шифрует строку
+        /// </summary>
+        /// <param name="s">Строка для шифрования</param>
+        /// <returns>зашифрованная строка</returns>
         public static string EncryptToBase64String([NotNull] this string s)
         {
             return s.Encrypt().ToBase64String();

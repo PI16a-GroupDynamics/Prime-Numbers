@@ -17,9 +17,9 @@ namespace MetroFramework_test_at_a_new_project
             MessageBox.Show(@"Просто закройте это окно.");
         }
 
-        private void htmlPanel1_Click(object sender, System.EventArgs e)
+        private void ButtonSaveChanges_Click(object sender, System.EventArgs e)
         {
-
+            Close();
         }
     }
 }

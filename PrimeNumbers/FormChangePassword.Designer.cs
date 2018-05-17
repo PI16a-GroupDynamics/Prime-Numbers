@@ -50,6 +50,7 @@
             // TbPassword
             // 
             this.TbPassword.Location = new System.Drawing.Point(156, 66);
+            this.TbPassword.MaxLength = 100;
             this.TbPassword.Name = "TbPassword";
             this.TbPassword.PasswordChar = '*';
             this.TbPassword.Size = new System.Drawing.Size(164, 20);
@@ -59,6 +60,7 @@
             // TbConfirmPassword
             // 
             this.TbConfirmPassword.Location = new System.Drawing.Point(156, 96);
+            this.TbConfirmPassword.MaxLength = 100;
             this.TbConfirmPassword.Name = "TbConfirmPassword";
             this.TbConfirmPassword.PasswordChar = '*';
             this.TbConfirmPassword.Size = new System.Drawing.Size(164, 20);
@@ -68,6 +70,7 @@
             // TbOldPassword
             // 
             this.TbOldPassword.Location = new System.Drawing.Point(156, 40);
+            this.TbOldPassword.MaxLength = 100;
             this.TbOldPassword.Name = "TbOldPassword";
             this.TbOldPassword.PasswordChar = '*';
             this.TbOldPassword.Size = new System.Drawing.Size(164, 20);
