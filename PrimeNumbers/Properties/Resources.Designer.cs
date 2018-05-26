@@ -63,6 +63,16 @@ namespace MetroFramework_test_at_a_new_project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _ {
+            get {
+                object obj = ResourceManager.GetObject("+", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _10494_771_lesson_1_t {
             get {
                 object obj = ResourceManager.GetObject("10494.771_lesson_1.t", resourceCulture);

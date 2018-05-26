@@ -54,7 +54,6 @@ namespace MetroFramework_test_at_a_new_project
             else
             {
                 Users.SetCurrentUser(signInForm.UserNameIfSuccess);
-                BoxCurrentUser.Text = Users.CurrentUserName;
                 IfAdmin();
             }
             TabControlMenu.SelectedIndex = 0;
@@ -67,7 +66,6 @@ namespace MetroFramework_test_at_a_new_project
             if (signInForm.UserNameIfSuccess != null)
             {
                 Users.SetCurrentUser(signInForm.UserNameIfSuccess);
-                BoxCurrentUser.Text = Users.CurrentUserName;
                 IfAdmin();
             }
         }
@@ -347,7 +345,9 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ButtonChangeUsername_Click(object sender, EventArgs e)
         {
-            BoxCurrentUser.Text = BoxCurrentUser.Text.Trim();
+            (new FormChangeUsername()).ShowDialog();
+            
+           /* BoxCurrentUser.Text = BoxCurrentUser.Text.Trim();
 
             if (BoxCurrentUser.ReadOnly)
             {
@@ -370,8 +370,8 @@ namespace MetroFramework_test_at_a_new_project
                 { // передумал изменять
                     return;
                 }
-
-                if (Users.SetNameUser(Users.CurrentUserName, BoxCurrentUser.Text))
+                */
+                /*if (Users.SetNameUser(Users.CurrentUserName, BoxCurrentUser.Text))
                 {
                     Users.CurrentUser.Name = BoxCurrentUser.Text;
 
@@ -383,7 +383,7 @@ namespace MetroFramework_test_at_a_new_project
                     MessageBox.Show(@"Это имя пользователя уже занято, повторите ввод", @"Ошибка");
                     BoxCurrentUser.Text = Users.CurrentUserName;
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -471,6 +471,7 @@ namespace MetroFramework_test_at_a_new_project
                 DialogResult.Yes)
             {
                 ActionsLog.Clear();
+                Users.Log.Clear();
                 MessageBox.Show("Журнал очищен");
             }
         }
@@ -496,7 +497,7 @@ namespace MetroFramework_test_at_a_new_project
 
         private void BoxCurrentUser_TextChanged(object sender, EventArgs e)
         {
-            LabelCurrentUser.Text = BoxCurrentUser.Text;
+            
         }
 
         private  void metroButton4_Click(object sender, EventArgs e)
@@ -536,6 +537,11 @@ namespace MetroFramework_test_at_a_new_project
             }
 
             Help.ShowHelp(this, helpPath);
+        }
+
+        private void metroButton1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

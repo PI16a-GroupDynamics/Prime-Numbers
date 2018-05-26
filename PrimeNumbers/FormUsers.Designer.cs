@@ -83,9 +83,10 @@
             // 
             this.ButtonSaveChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ButtonSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonSaveChanges.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.ButtonSaveChanges.Location = new System.Drawing.Point(348, 55);
             this.ButtonSaveChanges.Name = "ButtonSaveChanges";
-            this.ButtonSaveChanges.Size = new System.Drawing.Size(95, 44);
+            this.ButtonSaveChanges.Size = new System.Drawing.Size(107, 33);
             this.ButtonSaveChanges.TabIndex = 1;
             this.ButtonSaveChanges.Text = "Сохранить изменения";
             this.ButtonSaveChanges.UseVisualStyleBackColor = true;
@@ -95,9 +96,10 @@
             // 
             this.ButtonCancelChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ButtonCancelChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonCancelChanges.Location = new System.Drawing.Point(348, 228);
+            this.ButtonCancelChanges.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ButtonCancelChanges.Location = new System.Drawing.Point(348, 239);
             this.ButtonCancelChanges.Name = "ButtonCancelChanges";
-            this.ButtonCancelChanges.Size = new System.Drawing.Size(95, 44);
+            this.ButtonCancelChanges.Size = new System.Drawing.Size(107, 33);
             this.ButtonCancelChanges.TabIndex = 2;
             this.ButtonCancelChanges.Text = "Отменить изменения";
             this.ButtonCancelChanges.UseVisualStyleBackColor = true;

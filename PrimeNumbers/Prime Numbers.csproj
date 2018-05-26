@@ -137,6 +137,12 @@
     <Compile Include="FormChangePassword.Designer.cs">
       <DependentUpon>FormChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormChangeUsername.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChangeUsername.Designer.cs">
+      <DependentUpon>FormChangeUsername.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormResultLooksLike.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormChangePassword.resx">
       <DependentUpon>FormChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChangeUsername.resx">
+      <DependentUpon>FormChangeUsername.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormResultLooksLike.resx">
       <DependentUpon>FormResultLooksLike.cs</DependentUpon>
@@ -296,6 +305,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\+.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\question-mark.png" />
