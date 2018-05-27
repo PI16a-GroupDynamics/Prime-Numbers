@@ -50,7 +50,7 @@ namespace MetroFramework_test_at_a_new_project.Data
         /// Удаляет пользователя с указанным именем
         /// </summary>
         /// <param name="username">имя пользователя</param>
-        /// <returns>flag Contains</returns>
+        /// <returns>flag ContainsUser</returns>
         public static bool DeleteUser(string username)
         {
             int number;
@@ -106,7 +106,7 @@ namespace MetroFramework_test_at_a_new_project.Data
         /// </summary>
         /// <param name="oldUser">Запись для замены</param>
         /// <param name="newUser">Запись, которой заменить</param>
-        /// <returns></returns>
+        /// <returns>flag Success</returns>
         public static bool Replace(User oldUser, User newUser)
         {
             int number;

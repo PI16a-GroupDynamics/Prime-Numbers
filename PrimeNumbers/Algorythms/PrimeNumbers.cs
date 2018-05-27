@@ -5,6 +5,11 @@ namespace MetroFramework_test_at_a_new_project.Algorythms
 {
     public static class PrimeNumbers
     {
+        /// <summary>
+        /// Простое ли число
+        /// </summary>
+        /// <param name="n">число для проверки</param>
+        /// <returns>1 если простое, 0 есть нет</returns>
         public static int Is_prime(long n)
         {
             long i;
@@ -19,6 +24,9 @@ namespace MetroFramework_test_at_a_new_project.Algorythms
             return 1;
         }
 
+        /// <summary>
+        /// Возвращает следующее за n простое число
+        /// </summary>
         public static long Next_prime(long n)
         {
             do
@@ -29,7 +37,11 @@ namespace MetroFramework_test_at_a_new_project.Algorythms
             return n;
         }
 
-
+        /// <summary>
+        /// Генерирует первые k простых чисел в массив и возвращает этот массив
+        /// </summary>
+        /// <param name="k">сколько чисел генерировать</param>
+        /// <returns>массив первых k простых чисел</returns>
         [NotNull]
         public static long[] GenerateInt(int k)
         {

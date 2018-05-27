@@ -40,6 +40,12 @@ namespace MetroFramework_test_at_a_new_project.Printing
 
         public string DirectoryForResult { get; set; } = "";
 
+        /// <summary>
+        /// Сохраняет результат в текстовый файл
+        /// </summary>
+        /// <param name="progress">куда отправлять прогресс выполнения</param>
+        /// <param name="filePath">путь к файлу, куда сохранить</param>
+        /// <param name="isFullPath">если false, то путь к файлу считается локальным</param>
         public void SaveTextResultTo(IProgress<int> progress, string filePath = null, bool isFullPath = false)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -84,6 +90,12 @@ namespace MetroFramework_test_at_a_new_project.Printing
             }
         }
 
+        /// <summary>
+        /// Сохраняет результат в pdf файл
+        /// </summary>
+        /// <param name="progress">куда отправлять прогресс выполнения</param>
+        /// <param name="filePath">путь к файлу, куда сохранить</param>
+        /// <param name="isFullPath">если false, то путь к файлу считается локальным</param>
         public void SavePdfResultTo([CanBeNull] IProgress<int> progress, string filePath = null, bool isFullPath = false)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -142,6 +154,10 @@ namespace MetroFramework_test_at_a_new_project.Printing
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// "Установить путь, где будет сохраняться результат"
+        /// </summary>
+        /// <param name="directory">новый путь</param>
         public void SetDirectoryForResult(string directory)
         {
             DirectoryForResult = directory ?? throw new ArgumentNullException(nameof(directory));

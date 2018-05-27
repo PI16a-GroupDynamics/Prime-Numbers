@@ -54,6 +54,7 @@ namespace MetroFramework_test_at_a_new_project
             else
             {
                 Users.SetCurrentUser(signInForm.UserNameIfSuccess);
+                LabelUsername.Text = Users.CurrentUserName;
                 IfAdmin();
             }
             TabControlMenu.SelectedIndex = 0;
@@ -66,6 +67,7 @@ namespace MetroFramework_test_at_a_new_project
             if (signInForm.UserNameIfSuccess != null)
             {
                 Users.SetCurrentUser(signInForm.UserNameIfSuccess);
+                LabelUsername.Text = Users.CurrentUserName;
                 IfAdmin();
             }
         }
@@ -346,44 +348,9 @@ namespace MetroFramework_test_at_a_new_project
         private void ButtonChangeUsername_Click(object sender, EventArgs e)
         {
             (new FormChangeUsername()).ShowDialog();
+            LabelUsername.Text = Users.CurrentUserName;
             
-           /* BoxCurrentUser.Text = BoxCurrentUser.Text.Trim();
-
-            if (BoxCurrentUser.ReadOnly)
-            {
-                BoxCurrentUser.ReadOnly   = false;
-                BoxCurrentUser.Text       = Users.CurrentUser.Name;
-                ButtonChangeUsername.Text = @"Сохранить";
-            }
-            else
-            {
-                if (BoxCurrentUser.Text == string.Empty)
-                {
-                    MessageBox.Show(@"Имя пользователя не может быть пустым", @"Ошибка");
-                    return;
-                }
-
-                BoxCurrentUser.ReadOnly   = true;
-                ButtonChangeUsername.Text = @"Изменить";
-
-                if (Users.CurrentUserName == BoxCurrentUser.Text)
-                { // передумал изменять
-                    return;
-                }
-                */
-                /*if (Users.SetNameUser(Users.CurrentUserName, BoxCurrentUser.Text))
-                {
-                    Users.CurrentUser.Name = BoxCurrentUser.Text;
-
-                    //BoxCurrentUser.Text = Users.CurrentUserName;
-                    MessageBox.Show(@"Успешно");
-                }
-                else
-                {
-                    MessageBox.Show(@"Это имя пользователя уже занято, повторите ввод", @"Ошибка");
-                    BoxCurrentUser.Text = Users.CurrentUserName;
-                }
-            }*/
+           
         }
 
         /// <summary>

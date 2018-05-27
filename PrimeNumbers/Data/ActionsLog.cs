@@ -71,7 +71,9 @@ namespace MetroFramework_test_at_a_new_project.Data
                 }
             }
         }
-
+    /// <summary>
+    /// Класс, который представляет запись о действии над пользователем
+    /// </summary>
     [Serializable]
     public class ActionsLogRecord:LogRecord
     {
@@ -80,6 +82,7 @@ namespace MetroFramework_test_at_a_new_project.Data
         {
         }
 
+        // "Создать сообщение из значений"
         public static string CreateMessageFromValues(string currentUserName, int n, bool isCanceled)
         {
             return $@"Пользователь {currentUserName} генерировал {n} чисел; {(isCanceled?"Отменил операцию":"Успешно")}";

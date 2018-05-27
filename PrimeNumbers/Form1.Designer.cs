@@ -45,14 +45,14 @@ namespace MetroFramework_test_at_a_new_project
             this.ButtonChangeUsername = new MetroFramework.Controls.MetroButton();
             this.ButtonChangeUser = new MetroFramework.Controls.MetroButton();
             this.PanelResultSettings = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.CBoxTypeOfFile = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.PanelSaveResult = new MetroFramework.Controls.MetroPanel();
             this.ButtonResultLooksLike = new MetroFramework.Controls.MetroButton();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.BoxDirectoryForResult = new MetroFramework.Controls.MetroTextBox();
             this.ButtonChangeResultDir = new MetroFramework.Controls.MetroButton();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.CBoxTypeOfFile = new MetroFramework.Controls.MetroComboBox();
             this.btAbout = new MetroFramework.Controls.MetroButton();
             this.TabPageWork = new MetroFramework.Controls.MetroTabPage();
             this.ButtonCancel = new MetroFramework.Controls.MetroButton();
@@ -68,6 +68,7 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageNeedHelp = new MetroFramework.Controls.MetroTabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.LabelUsername = new MetroFramework.Controls.MetroLabel();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUserSettings.SuspendLayout();
@@ -157,6 +158,7 @@ namespace MetroFramework_test_at_a_new_project
             // PanelUserSettings
             // 
             this.PanelUserSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelUserSettings.Controls.Add(this.LabelUsername);
             this.PanelUserSettings.Controls.Add(this.metroLabel8);
             this.PanelUserSettings.Controls.Add(this.metroLabel6);
             this.PanelUserSettings.Controls.Add(this.PanelPassword);
@@ -261,18 +263,61 @@ namespace MetroFramework_test_at_a_new_project
             this.PanelResultSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelResultSettings.Controls.Add(this.metroLabel2);
             this.PanelResultSettings.Controls.Add(this.CBoxTypeOfFile);
-            this.PanelResultSettings.Controls.Add(this.PanelSaveResult);
             this.PanelResultSettings.Controls.Add(this.metroLabel3);
+            this.PanelResultSettings.Controls.Add(this.PanelSaveResult);
             this.PanelResultSettings.HorizontalScrollbarBarColor = true;
             this.PanelResultSettings.HorizontalScrollbarHighlightOnWheel = false;
             this.PanelResultSettings.HorizontalScrollbarSize = 10;
             this.PanelResultSettings.Location = new System.Drawing.Point(13, 3);
             this.PanelResultSettings.Name = "PanelResultSettings";
-            this.PanelResultSettings.Size = new System.Drawing.Size(363, 152);
+            this.PanelResultSettings.Size = new System.Drawing.Size(363, 164);
             this.PanelResultSettings.TabIndex = 15;
             this.PanelResultSettings.VerticalScrollbarBarColor = true;
             this.PanelResultSettings.VerticalScrollbarHighlightOnWheel = false;
             this.PanelResultSettings.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel2.Location = new System.Drawing.Point(169, 40);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(45, 25);
+            this.metroLabel2.TabIndex = 1;
+            this.metroLabel2.Text = "Тип:";
+            // 
+            // CBoxTypeOfFile
+            // 
+            this.CBoxTypeOfFile.AccessibleDescription = "TypeOfFileSelect";
+            this.CBoxTypeOfFile.DisplayFocus = true;
+            this.CBoxTypeOfFile.DropDownWidth = 150;
+            this.CBoxTypeOfFile.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.CBoxTypeOfFile.FormattingEnabled = true;
+            this.CBoxTypeOfFile.ItemHeight = 23;
+            this.CBoxTypeOfFile.Items.AddRange(new object[] {
+            "Не сохранять результат",
+            "Текстовый (.txt)",
+            "Документ PDF (.pdf)"});
+            this.CBoxTypeOfFile.Location = new System.Drawing.Point(220, 36);
+            this.CBoxTypeOfFile.Name = "CBoxTypeOfFile";
+            this.CBoxTypeOfFile.PromptText = "Тип файла";
+            this.CBoxTypeOfFile.Size = new System.Drawing.Size(136, 29);
+            this.CBoxTypeOfFile.TabIndex = 1;
+            this.CBoxTypeOfFile.UseSelectable = true;
+            this.CBoxTypeOfFile.SelectedIndexChanged += new System.EventHandler(this.CBoxTypeOfFile_SelectedIndexChanged);
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.metroLabel3.Location = new System.Drawing.Point(0, 0);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(145, 25);
+            this.metroLabel3.TabIndex = 19;
+            this.metroLabel3.Text = "Файл результата";
             // 
             // PanelSaveResult
             // 
@@ -284,9 +329,9 @@ namespace MetroFramework_test_at_a_new_project
             this.PanelSaveResult.HorizontalScrollbarBarColor = true;
             this.PanelSaveResult.HorizontalScrollbarHighlightOnWheel = false;
             this.PanelSaveResult.HorizontalScrollbarSize = 10;
-            this.PanelSaveResult.Location = new System.Drawing.Point(0, 40);
+            this.PanelSaveResult.Location = new System.Drawing.Point(0, 64);
             this.PanelSaveResult.Name = "PanelSaveResult";
-            this.PanelSaveResult.Size = new System.Drawing.Size(363, 99);
+            this.PanelSaveResult.Size = new System.Drawing.Size(363, 95);
             this.PanelSaveResult.TabIndex = 25;
             this.PanelSaveResult.VerticalScrollbarBarColor = true;
             this.PanelSaveResult.VerticalScrollbarHighlightOnWheel = false;
@@ -296,7 +341,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             this.ButtonResultLooksLike.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.ButtonResultLooksLike.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.ButtonResultLooksLike.Location = new System.Drawing.Point(6, 69);
+            this.ButtonResultLooksLike.Location = new System.Drawing.Point(6, 61);
             this.ButtonResultLooksLike.Name = "ButtonResultLooksLike";
             this.ButtonResultLooksLike.Size = new System.Drawing.Size(256, 23);
             this.ButtonResultLooksLike.TabIndex = 18;
@@ -308,7 +353,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel5.Location = new System.Drawing.Point(6, 18);
+            this.metroLabel5.Location = new System.Drawing.Point(6, 10);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(42, 19);
             this.metroLabel5.TabIndex = 16;
@@ -333,7 +378,7 @@ namespace MetroFramework_test_at_a_new_project
             this.BoxDirectoryForResult.CustomButton.UseVisualStyleBackColor = false;
             this.BoxDirectoryForResult.CustomButton.Visible = false;
             this.BoxDirectoryForResult.Lines = new string[0];
-            this.BoxDirectoryForResult.Location = new System.Drawing.Point(6, 40);
+            this.BoxDirectoryForResult.Location = new System.Drawing.Point(6, 32);
             this.BoxDirectoryForResult.MaxLength = 0;
             this.BoxDirectoryForResult.Name = "BoxDirectoryForResult";
             this.BoxDirectoryForResult.PasswordChar = '\0';
@@ -357,55 +402,13 @@ namespace MetroFramework_test_at_a_new_project
             // 
             this.ButtonChangeResultDir.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.ButtonChangeResultDir.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.ButtonChangeResultDir.Location = new System.Drawing.Point(268, 40);
+            this.ButtonChangeResultDir.Location = new System.Drawing.Point(268, 32);
             this.ButtonChangeResultDir.Name = "ButtonChangeResultDir";
             this.ButtonChangeResultDir.Size = new System.Drawing.Size(85, 23);
             this.ButtonChangeResultDir.TabIndex = 2;
             this.ButtonChangeResultDir.Text = "Изменить";
             this.ButtonChangeResultDir.UseSelectable = true;
             this.ButtonChangeResultDir.Click += new System.EventHandler(this.MetroButton1_Click);
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.metroLabel3.Location = new System.Drawing.Point(0, 0);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(145, 25);
-            this.metroLabel3.TabIndex = 19;
-            this.metroLabel3.Text = "Файл результата";
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(169, 40);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(35, 19);
-            this.metroLabel2.TabIndex = 1;
-            this.metroLabel2.Text = "Тип:";
-            // 
-            // CBoxTypeOfFile
-            // 
-            this.CBoxTypeOfFile.AccessibleDescription = "TypeOfFileSelect";
-            this.CBoxTypeOfFile.DisplayFocus = true;
-            this.CBoxTypeOfFile.DropDownWidth = 150;
-            this.CBoxTypeOfFile.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.CBoxTypeOfFile.FormattingEnabled = true;
-            this.CBoxTypeOfFile.ItemHeight = 23;
-            this.CBoxTypeOfFile.Items.AddRange(new object[] {
-            "Не сохранять результат",
-            "Текстовый (.txt)",
-            "Документ PDF (.pdf)"});
-            this.CBoxTypeOfFile.Location = new System.Drawing.Point(220, 36);
-            this.CBoxTypeOfFile.Name = "CBoxTypeOfFile";
-            this.CBoxTypeOfFile.PromptText = "Тип файла";
-            this.CBoxTypeOfFile.Size = new System.Drawing.Size(136, 29);
-            this.CBoxTypeOfFile.TabIndex = 1;
-            this.CBoxTypeOfFile.UseSelectable = true;
-            this.CBoxTypeOfFile.SelectedIndexChanged += new System.EventHandler(this.CBoxTypeOfFile_SelectedIndexChanged);
             // 
             // btAbout
             // 
@@ -608,6 +611,17 @@ namespace MetroFramework_test_at_a_new_project
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // LabelUsername
+            // 
+            this.LabelUsername.AutoSize = true;
+            this.LabelUsername.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.LabelUsername.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.LabelUsername.Location = new System.Drawing.Point(140, 0);
+            this.LabelUsername.MaximumSize = new System.Drawing.Size(200, 0);
+            this.LabelUsername.Name = "LabelUsername";
+            this.LabelUsername.Size = new System.Drawing.Size(0, 0);
+            this.LabelUsername.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -681,6 +695,7 @@ namespace MetroFramework_test_at_a_new_project
         private System.Windows.Forms.ToolTip toolTip1;
         private MetroFramework.Controls.MetroLabel metroLabel8;
         private MetroFramework.Controls.MetroLabel metroLabel7;
+        private MetroFramework.Controls.MetroLabel LabelUsername;
     }
 }
 
