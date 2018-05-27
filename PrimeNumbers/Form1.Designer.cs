@@ -37,6 +37,7 @@ namespace MetroFramework_test_at_a_new_project
             this.ButtonViewLog = new System.Windows.Forms.Button();
             this.TabPageSettings = new MetroFramework.Controls.MetroTabPage();
             this.PanelUserSettings = new MetroFramework.Controls.MetroPanel();
+            this.LabelUsername = new MetroFramework.Controls.MetroLabel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.PanelPassword = new MetroFramework.Controls.MetroPanel();
@@ -68,7 +69,6 @@ namespace MetroFramework_test_at_a_new_project
             this.TabPageNeedHelp = new MetroFramework.Controls.MetroTabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.LabelUsername = new MetroFramework.Controls.MetroLabel();
             this.TabPageAdmin.SuspendLayout();
             this.TabPageSettings.SuspendLayout();
             this.PanelUserSettings.SuspendLayout();
@@ -173,6 +173,17 @@ namespace MetroFramework_test_at_a_new_project
             this.PanelUserSettings.VerticalScrollbarBarColor = true;
             this.PanelUserSettings.VerticalScrollbarHighlightOnWheel = false;
             this.PanelUserSettings.VerticalScrollbarSize = 10;
+            // 
+            // LabelUsername
+            // 
+            this.LabelUsername.AutoSize = true;
+            this.LabelUsername.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.LabelUsername.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.LabelUsername.Location = new System.Drawing.Point(140, 0);
+            this.LabelUsername.MaximumSize = new System.Drawing.Size(200, 0);
+            this.LabelUsername.Name = "LabelUsername";
+            this.LabelUsername.Size = new System.Drawing.Size(0, 0);
+            this.LabelUsername.TabIndex = 27;
             // 
             // metroLabel8
             // 
@@ -341,7 +352,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             this.ButtonResultLooksLike.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.ButtonResultLooksLike.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.ButtonResultLooksLike.Location = new System.Drawing.Point(6, 61);
+            this.ButtonResultLooksLike.Location = new System.Drawing.Point(3, 69);
             this.ButtonResultLooksLike.Name = "ButtonResultLooksLike";
             this.ButtonResultLooksLike.Size = new System.Drawing.Size(256, 23);
             this.ButtonResultLooksLike.TabIndex = 18;
@@ -361,6 +372,7 @@ namespace MetroFramework_test_at_a_new_project
             // 
             // BoxDirectoryForResult
             // 
+            this.BoxDirectoryForResult.AllowDrop = true;
             // 
             // 
             // 
@@ -610,17 +622,6 @@ namespace MetroFramework_test_at_a_new_project
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // LabelUsername
-            // 
-            this.LabelUsername.AutoSize = true;
-            this.LabelUsername.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.LabelUsername.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.LabelUsername.Location = new System.Drawing.Point(140, 0);
-            this.LabelUsername.MaximumSize = new System.Drawing.Size(200, 0);
-            this.LabelUsername.Name = "LabelUsername";
-            this.LabelUsername.Size = new System.Drawing.Size(0, 0);
-            this.LabelUsername.TabIndex = 27;
             // 
             // Form1
             // 
