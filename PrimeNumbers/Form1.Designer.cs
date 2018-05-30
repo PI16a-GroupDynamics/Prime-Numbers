@@ -292,7 +292,7 @@ namespace MetroFramework_test_at_a_new_project
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(169, 40);
+            this.metroLabel2.Location = new System.Drawing.Point(100, 40);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(45, 25);
             this.metroLabel2.TabIndex = 1;
@@ -310,10 +310,10 @@ namespace MetroFramework_test_at_a_new_project
             "Не сохранять результат",
             "Текстовый (.txt)",
             "Документ PDF (.pdf)"});
-            this.CBoxTypeOfFile.Location = new System.Drawing.Point(220, 36);
+            this.CBoxTypeOfFile.Location = new System.Drawing.Point(151, 36);
             this.CBoxTypeOfFile.Name = "CBoxTypeOfFile";
             this.CBoxTypeOfFile.PromptText = "Тип файла";
-            this.CBoxTypeOfFile.Size = new System.Drawing.Size(136, 29);
+            this.CBoxTypeOfFile.Size = new System.Drawing.Size(205, 29);
             this.CBoxTypeOfFile.TabIndex = 1;
             this.CBoxTypeOfFile.UseSelectable = true;
             this.CBoxTypeOfFile.SelectedIndexChanged += new System.EventHandler(this.CBoxTypeOfFile_SelectedIndexChanged);

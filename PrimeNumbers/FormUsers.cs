@@ -135,6 +135,10 @@ namespace MetroFramework_test_at_a_new_project
                     users.Find(user => user.Name == TableUsers.Rows[i].Cells[0].Value.ToString());
                 
                 Extensions.BoolCustomTryParse(TableUsers.Rows[i].Cells["IsAdmin"].Value.ToString(), out var value);
+                if(controlUser is null)
+                {// Если этого пользователя уже удалили
+                    continue;
+                }
                 if (value.ToString() != controlUser.IsAdmin.ToString())
                 {
                     
