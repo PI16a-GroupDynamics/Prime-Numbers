@@ -315,6 +315,27 @@
   <ItemGroup>
     <None Include="Resources\question-mark.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\old-go-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\old-go-up1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\old-go-up2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\old-go-up %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\old-go-up %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow Right Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\загруженное.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

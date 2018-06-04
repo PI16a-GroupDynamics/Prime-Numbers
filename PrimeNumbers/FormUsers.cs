@@ -158,5 +158,10 @@ namespace MetroFramework_test_at_a_new_project
         {
             Close();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

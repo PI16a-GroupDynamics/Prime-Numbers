@@ -83,6 +83,16 @@ namespace MetroFramework_test_at_a_new_project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Arrow_Right_Green {
+            get {
+                object obj = ResourceManager.GetObject("Arrow Right Green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow1600_300x300 {
             get {
                 object obj = ResourceManager.GetObject("arrow1600-300x300", resourceCulture);
@@ -113,6 +123,56 @@ namespace MetroFramework_test_at_a_new_project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap old_go_up {
+            get {
+                object obj = ResourceManager.GetObject("old-go-up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap old_go_up__1_ {
+            get {
+                object obj = ResourceManager.GetObject("old-go-up (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap old_go_up__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("old-go-up (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap old_go_up1 {
+            get {
+                object obj = ResourceManager.GetObject("old-go-up1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap old_go_up2 {
+            get {
+                object obj = ResourceManager.GetObject("old-go-up2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap question_mark {
             get {
                 object obj = ResourceManager.GetObject("question-mark", resourceCulture);
@@ -126,6 +186,16 @@ namespace MetroFramework_test_at_a_new_project.Properties {
         internal static System.Drawing.Bitmap Red_Arrow {
             get {
                 object obj = ResourceManager.GetObject("Red Arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap загруженное {
+            get {
+                object obj = ResourceManager.GetObject("загруженное", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

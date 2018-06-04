@@ -35,8 +35,9 @@
             this.Passwords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ButtonSaveChanges = new System.Windows.Forms.Button();
             this.ButtonCancelChanges = new System.Windows.Forms.Button();
-            this.ButtonBack = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TableUsers
@@ -105,26 +106,24 @@
             this.ButtonCancelChanges.UseVisualStyleBackColor = true;
             this.ButtonCancelChanges.Click += new System.EventHandler(this.ButtonCancelChanges_Click);
             // 
-            // ButtonBack
+            // pictureBox1
             // 
-            this.ButtonBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ButtonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonBack.Image = global::MetroFramework_test_at_a_new_project.Properties.Resources.back1;
-            this.ButtonBack.Location = new System.Drawing.Point(12, 0);
-            this.ButtonBack.Name = "ButtonBack";
-            this.ButtonBack.Size = new System.Drawing.Size(65, 38);
-            this.ButtonBack.TabIndex = 23;
-            this.ButtonBack.Text = "Назад";
-            this.ButtonBack.UseVisualStyleBackColor = true;
-            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Image = global::MetroFramework_test_at_a_new_project.Properties.Resources.Arrow_Right_Green;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(57, 36);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // FormUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.ButtonBack;
             this.ClientSize = new System.Drawing.Size(467, 301);
-            this.Controls.Add(this.ButtonBack);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ButtonCancelChanges);
             this.Controls.Add(this.ButtonSaveChanges);
             this.Controls.Add(this.TableUsers);
@@ -136,6 +135,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormUsers_FormClosing);
             this.Load += new System.EventHandler(this.FormUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TableUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -145,9 +145,9 @@
         private System.Windows.Forms.DataGridView TableUsers;
         private System.Windows.Forms.Button ButtonSaveChanges;
         private System.Windows.Forms.Button ButtonCancelChanges;
-        private System.Windows.Forms.Button ButtonBack;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usernames;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsAdmin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Passwords;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

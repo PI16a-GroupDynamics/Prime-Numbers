@@ -31,6 +31,8 @@ namespace MetroFramework_test_at_a_new_project
             TabPageAdmin.Parent          = null;
             //MaximizeBox                  = false;
             //MinimizeBox                  = false;
+            
+            
         }
 
 
@@ -310,6 +312,7 @@ namespace MetroFramework_test_at_a_new_project
         private void ButtonPassword_Click(object sender, EventArgs e)
         {
             var form = new FormChangePassword();
+            form.StartPosition = FormStartPosition.CenterParent;
             form.ShowDialog();
         }
 
@@ -339,15 +342,24 @@ namespace MetroFramework_test_at_a_new_project
 
         private void ButtonUsers_Click([NotNull] object sender, [NotNull] EventArgs e)
         { // Т.к. юзеров, скорее всего, будет немного(50 - это уже много), то можно вывести все это в tableGrid. И еще сделать автоматический обработчик, что ячейка не может быть пустой. И первая ячейка(0,0) не изменяется, т.к. это admin.
-            
-                var userForm = new FormUsers();
-                userForm.Show();
-             // "Запустить и забыть"
+            var thisControl = sender as System.Windows.Forms.Control;
+            var userForm = new FormUsers();
+            var thisActualLocation = thisControl.PointToScreen(System.Drawing.Point.Empty);
+            userForm.Show();
+            userForm.Location = thisActualLocation;
+            userForm.Left = this.PointToScreen(new System.Drawing.Point(this.Width/2,0)).X;
+            var table = userForm.Controls.Find("TableUsers",true)[0];
+            userForm.Top -= table.Top + (userForm.Height - userForm.ClientSize.Height)-8;
+
+            // "Запустить и забыть"
         }
 
         private void ButtonChangeUsername_Click(object sender, EventArgs e)
         {
-            (new FormChangeUsername()).ShowDialog();
+            var form = new FormChangeUsername();
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog();
+            
             LabelUsername.Text = Users.CurrentUserName;
             
            
@@ -507,6 +519,16 @@ namespace MetroFramework_test_at_a_new_project
         }
 
         private void metroButton1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabPageAdmin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Paint(object sender, PaintEventArgs e)
         {
 
         }
